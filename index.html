@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우리 가족 나고야·게로 여행</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@600;800&display=swap" rel="stylesheet">
+<style>
+/* 겨울밤 쪽빛(藍) + 눈의 흰색 + 히다 겨자빛. 일본 역 표지·승차권에서 가져온 타이포 · 모바일 한 칼럼, 데스크톱 2칼럼 */
+:root{
+  --ai:#1b2a4a; --ai-2:#24375f; --ai-ink:#c9d3ea;
+  --snow:#f4f6f9; --paper:#ffffff; --sumi:#1d222b; --mute:#646d84; --line:#e1e5ee;
+  --hida:#d9a22b; --cedar:#2f6e57; --shu:#c4432e; --ticket:#e3efe6;
+  --f-body:'IBM Plex Sans KR',system-ui,-apple-system,'Apple SD Gothic Neo',sans-serif;
+  --f-mincho:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --wrap:1080px; --r:14px;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--f-body);background:var(--snow);color:var(--sumi);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{text-wrap:balance;line-height:1.25}
+a{color:inherit}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--hida);outline-offset:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+.num{font-variant-numeric:tabular-nums}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:20;background:rgba(27,42,74,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);color:#fff}
+.nav .wrap{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding-top:10px;padding-bottom:6px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;white-space:nowrap;padding:0 2px}
+.brand .mark{font-family:var(--f-mincho);font-weight:800;font-size:18px;color:var(--hida)}
+.nav nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:0 -4px}
+.nav nav::-webkit-scrollbar{display:none}
+.nav nav button{background:rgba(255,255,255,.07);border:0;color:#fff;font-size:14.5px;font-weight:500;padding:8px 4px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.nav nav button:hover,.nav nav button:active{background:rgba(255,255,255,.18)}
+
+/* HERO */
+.hero{position:relative;background:var(--ai);color:#fff;overflow:hidden}
+.hero canvas{position:absolute;inset:0;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:40px}
+.kanji{position:absolute;right:8px;top:18px;writing-mode:vertical-rl;font-family:var(--f-mincho);font-weight:800;font-size:clamp(54px,13vw,120px);line-height:1.05;letter-spacing:.06em;color:rgba(255,255,255,.055);user-select:none;pointer-events:none}
+.hero-text{position:relative;max-width:560px}
+.hero-date{font-size:14px;color:var(--ai-ink)}
+.hero h1{font-size:clamp(28px,7.4vw,52px);font-weight:700;letter-spacing:-.02em;margin:10px 0 14px}
+.hero h1 span{display:block;color:var(--hida)}
+.hero p{color:var(--ai-ink);font-size:15.5px;max-width:30em}
+.facts{display:grid;gap:7px;margin-top:2px}
+.facts div{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:baseline;font-size:15px}
+.facts dt{font-size:12.5px;color:var(--hida);font-weight:600}
+.facts dd{color:#e6ebf7}
+.stops{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.stop{display:flex;align-items:baseline;gap:6px;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px;font-size:13px}
+.stop b{font-family:var(--f-mincho);font-weight:800;font-size:15px}
+
+/* TICKET */
+.ticket{position:relative;align-self:end;background:var(--ticket);color:var(--sumi);border-radius:12px;padding:18px 20px 16px;box-shadow:0 18px 40px -18px rgba(0,0,0,.55);
+  background-image:repeating-linear-gradient(135deg,rgba(47,110,87,.06) 0 2px,transparent 2px 9px)}
+.ticket:before,.ticket:after{content:"";position:absolute;top:62%;width:18px;height:18px;border-radius:50%;background:var(--ai)}
+.ticket:before{left:-9px}.ticket:after{right:-9px}
+.t-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--cedar);font-weight:600}
+.t-head .jp{font-family:var(--f-mincho);font-weight:800;font-size:15px;letter-spacing:.2em}
+.t-route{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin:14px 0 10px}
+.t-city b{display:block;font-family:var(--f-mincho);font-weight:800;font-size:30px;line-height:1}
+.t-city small{font-size:12px;color:var(--mute)}
+.t-city.r{text-align:right}
+.t-line{position:relative;height:2px;background:repeating-linear-gradient(90deg,var(--cedar) 0 6px,transparent 6px 11px)}
+.t-line i{position:absolute;top:-11px;font-style:normal;font-size:18px;transition:left 1.4s cubic-bezier(.3,.7,.2,1)}
+.t-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px;color:var(--mute)}
+.t-meta b{display:block;color:var(--sumi);font-size:14px;font-weight:600}
+.t-split{border-top:2px dashed rgba(47,110,87,.35);margin:14px -20px 12px}
+.t-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.dday b{font-family:var(--f-mincho);font-weight:800;font-size:40px;line-height:1;color:var(--ai)}
+.dday small{display:block;font-size:12.5px;color:var(--mute);margin-top:4px}
+.pax{display:flex;gap:4px;align-items:flex-end}
+.pax figure{text-align:center;font-size:11px;color:var(--mute)}
+.pax svg{width:40px;height:40px;display:block}
+
+/* SECTIONS */
+.sec{padding:44px 0 8px;scroll-margin-top:100px}
+.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:18px}
+.sec-h h2{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.sec-h p{font-size:13.5px;color:var(--mute)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+
+/* LINE MAP strip */
+.line-map{overflow-x:auto;padding:20px 20px 16px;scrollbar-width:thin}
+.lm{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(118px,1fr);position:relative;min-width:640px}
+.lm:before{content:"";position:absolute;left:6%;right:6%;top:19px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ai) 0 18%,var(--shu) 18% 52%,var(--cedar) 52% 78%,var(--ai) 78%)}
+.lm-st{position:relative;text-align:center;padding:0 4px}
+.lm-st .dot{width:16px;height:16px;border-radius:50%;background:var(--paper);border:4px solid var(--ai);margin:13px auto 10px;position:relative}
+.lm-st.onsen .dot{border-color:var(--shu)}.lm-st.snow .dot{border-color:var(--cedar)}
+.lm-st b{display:block;font-family:var(--f-mincho);font-weight:800;font-size:19px;line-height:1.1}
+.lm-st span{display:block;font-size:13px;font-weight:600;margin-top:2px}
+.lm-st small{display:block;font-size:12px;color:var(--mute)}
+
+/* ITINERARY */
+.it{display:grid;grid-template-columns:1fr;gap:16px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.day{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 4px 9px;text-align:center;cursor:pointer;color:var(--sumi);transition:background .2s,color .2s}
+.day b{display:block;font-family:var(--f-mincho);font-weight:800;font-size:24px;line-height:1}
+.day span{display:block;font-size:12px;margin-top:4px;color:var(--mute)}
+.day em{display:none;font-style:normal;font-size:11.5px;color:var(--mute);margin-top:2px}
+.day.on{background:var(--ai);border-color:var(--ai);color:#fff}
+.day.on span,.day.on em{color:var(--ai-ink)}
+.day.today{box-shadow:inset 0 -3px 0 var(--hida)}
+.dayview{padding:22px 20px 10px}
+.dv-h{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.dv-h h3{font-size:21px;font-weight:700}
+.dv-h small{display:block;font-size:13px;color:var(--mute);margin-top:2px}
+.dv-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.routebtn{font-size:12.5px;font-weight:600;text-decoration:none;color:#fff;background:var(--ai);border-radius:999px;padding:5px 12px;white-space:nowrap}
+.kml{margin-top:16px;padding:18px 20px;display:flex;gap:16px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.kml h3{font-size:16px;font-weight:700}.kml p{font-size:13.5px;color:#454c5c;margin-top:4px;max-width:40em}
+.kml ol{font-size:13px;color:var(--mute);margin:8px 0 0 18px}
+.routebtn.big{font-size:14px;padding:9px 16px}
+.routebtn:hover{background:var(--ai-2)}
+.legend{display:flex;gap:12px;font-size:12px;color:var(--mute);flex-wrap:wrap}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.row{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);position:relative}
+.row:last-child{border-bottom:0}
+.row .tm{font-size:14px;font-weight:600;color:var(--sumi);padding-top:1px}
+.row .tm small{display:block;font-size:11.5px;font-weight:400;color:var(--mute);line-height:1.35;margin-top:2px}
+.row .bd{border-left:3px solid var(--line);padding-left:14px}
+.row.cat-move .bd{border-left-color:#7f93c4}.row.cat-stay .bd{border-left-color:var(--ai)}.row.cat-food .bd{border-left-color:var(--hida)}.row.cat-see .bd{border-left-color:var(--cedar)}
+.row .cat{font-size:11.5px;color:var(--mute);display:flex;gap:8px;align-items:center}
+.st{display:inline-flex;align-items:center;gap:4px}
+.st:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st.ok{color:var(--cedar)}.st.rec{color:#a77a14}.st.tbd{color:#9aa1b2}
+.row h4{font-size:16px;font-weight:600;margin-top:2px}
+.row p{font-size:14px;color:#454c5c;margin-top:3px}
+.route-pill{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:13px;color:#33456e;background:#eef2fa;border-radius:10px;padding:7px 10px;line-height:1.5}
+.route-pill:before{content:"";flex:0 0 auto;width:14px;height:14px;margin-top:3px;border-radius:3px;background:var(--ai);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 1h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2l1.5 2h-2L10 13H6l-1.5 2h-2L4 13a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 2v4h8V3H4zm1 6.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 1h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2l1.5 2h-2L10 13H6l-1.5 2h-2L4 13a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 2v4h8V3H4zm1 6.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E") center/contain no-repeat}
+.lk{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.lk a{font-size:12.5px;text-decoration:none;color:var(--ai-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;background:var(--paper)}
+.lk a:hover{border-color:var(--ai-2)}
+.row.now .tm{color:var(--shu)}
+.row.now .bd{border-left-color:var(--shu)}
+.nowtag{font-size:11px;color:#fff;background:var(--shu);border-radius:999px;padding:1px 8px}
+
+/* MAP */
+.mapgrid{display:grid;grid-template-columns:1fr;gap:16px}
+.mapbox{padding:12px}
+#map{width:100%;height:auto;display:block;border-radius:10px}
+.rt{transition:opacity .35s}.rt.dim{opacity:.12}.rt.dim .veh{display:none}
+.steam{animation:steam 2.4s ease-in-out infinite}
+@keyframes steam{0%{opacity:0;transform:translateY(4px)}50%{opacity:1}100%{opacity:0;transform:translateY(-4px)}}
+.legs{padding:8px}
+.leg{display:grid;grid-template-columns:10px 1fr;gap:12px;width:100%;text-align:left;background:none;border:0;border-radius:10px;padding:12px;cursor:pointer;color:var(--sumi)}
+.leg i{width:10px;border-radius:5px;background:var(--c)}
+.leg b{display:block;font-size:14.5px;font-weight:600}
+.leg span{display:block;font-size:13px;color:var(--mute);margin-top:2px}
+.leg:hover{background:var(--snow)}
+.leg.on{background:#eef2fa}
+
+/* BOOKINGS */
+.bk{display:grid;grid-template-columns:1fr;gap:12px}
+.pass{display:grid;grid-template-columns:1fr auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.pass .m{padding:16px 18px}
+.pass .side{background:var(--ai);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:12px 16px;min-width:88px;border-left:2px dashed rgba(255,255,255,.3)}
+.pass .side b{font-family:var(--f-mincho);font-weight:800;font-size:20px}
+.pass .side small{font-size:11.5px;color:var(--ai-ink)}
+.pass .lbl{font-size:12px;color:var(--mute)}
+.pass .rt2{display:flex;align-items:center;gap:12px;margin-top:6px}
+.pass .rt2 div b{display:block;font-size:22px;font-weight:700;line-height:1.1}
+.pass .rt2 div small{font-size:12px;color:var(--mute)}
+.pass .rt2 hr{flex:1;border:0;border-top:2px dotted #b9c1d4}
+.pass .rt2 .dur{font-size:11.5px;color:var(--mute);white-space:nowrap}
+.stay{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.stay .n{font-family:var(--f-mincho);font-weight:800;font-size:26px;color:var(--ai);line-height:1;width:34px;text-align:center}
+.stay.onsen .n{color:var(--shu)}
+.stay h3{font-size:16px;font-weight:600}
+.stay .where{font-size:12.5px;color:var(--mute)}
+.stay .ci{display:flex;gap:16px;margin-top:8px;font-size:13px}
+.stay .ci b{display:block;font-size:12px;color:var(--mute);font-weight:400}
+.bk-tour{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--cedar);border-radius:var(--r);padding:16px 18px}
+.bk-tour h3{font-size:16px;font-weight:600}
+.bk-tour p{font-size:13.5px;color:#454c5c;margin-top:4px}
+.bk-sub{font-size:13px;font-weight:600;color:var(--mute);margin:6px 2px -2px}
+
+
+/* SHOP */
+.taxbox{background:#fbf4e2;border:1px solid #ecd9a5;border-radius:var(--r);padding:16px 18px}
+.taxbox h3{font-size:15.5px;font-weight:700}
+.taxbox p{font-size:13.5px;color:#5a4a20;margin-top:4px;max-width:46em}
+.sh-tabs{display:flex;gap:6px;overflow-x:auto;margin:16px 0 12px;scrollbar-width:none}
+.sh-tabs::-webkit-scrollbar{display:none}
+.sh-tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-size:13.5px;cursor:pointer;color:var(--sumi)}
+.sh-tabs button small{color:var(--mute);margin-left:4px}
+.sh-tabs button.on{background:var(--ai);border-color:var(--ai);color:#fff}.sh-tabs button.on small{color:var(--ai-ink)}
+.sh-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.shop{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px}
+.shop .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.shop h4{font-size:15.5px;font-weight:600}
+.shop .hr{font-size:12px;color:var(--mute);white-space:nowrap}
+.shop .when{font-size:12px;color:var(--cedar);font-weight:600}
+.shop p{font-size:13.5px;color:#454c5c}
+.shop .kind{display:flex;gap:6px;flex-wrap:wrap}
+.shop .kind span{font-size:11.5px;background:var(--snow);border-radius:6px;padding:1px 7px;color:#4a5370}
+.sh-h{font-size:18px;font-weight:700;margin:30px 0 12px}
+.buy{display:grid;grid-template-columns:1fr;gap:12px}
+.bgrp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.bgrp h4{font-size:15px;font-weight:700;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.bgrp h4 small{font-size:12px;font-weight:400;color:var(--mute)}
+.bgrp ul{list-style:none;margin-top:8px;display:grid;gap:8px}
+.bgrp li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;font-size:14px}
+.bgrp li input{width:18px;height:18px;margin-top:2px;accent-color:var(--cedar)}
+.bgrp li small{display:block;font-size:12.5px;color:var(--mute)}
+.bgrp li.got span{text-decoration:line-through;color:var(--mute)}
+.insta{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.insta b{display:block;font-size:14.5px}.insta span{font-size:12.5px;color:var(--mute)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags a{font-size:13px;text-decoration:none;color:#9b2f6b;border:1px solid #f0d3e3;background:#fdf4f9;border-radius:999px;padding:4px 11px}
+@media (min-width:860px){.sh-grid{grid-template-columns:1fr 1fr}.buy{grid-template-columns:1fr 1fr}}
+/* ALBUM */
+.gp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.gp h3{font-size:17px;font-weight:700}
+.gp p{font-size:14px;color:#454c5c;margin-top:4px;max-width:36em}
+.gp-btn{display:inline-block;margin-top:14px;background:var(--ai);color:#fff;text-decoration:none;font-weight:600;font-size:14.5px;padding:10px 18px;border-radius:10px}
+.gp-btn:hover{background:var(--ai-2)}
+.gp-btn.off{background:#b7bfd0;pointer-events:none}
+.gp small{display:block;font-size:12.5px;color:var(--mute);margin-top:8px}
+.gp-how{list-style:none;display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px;counter-reset:s}
+.gp-how li{counter-increment:s;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px 12px 48px;position:relative;font-size:13px;color:var(--mute)}
+.gp-how li:before{content:counter(s);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--snow);color:var(--ai);font-family:var(--f-mincho);font-weight:800;display:grid;place-items:center;font-size:14px}
+.gp-how b{display:block;color:var(--sumi);font-size:14px;font-weight:600}
+@media (min-width:860px){.gp-how{grid-template-columns:repeat(3,1fr)}}
+
+.al-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.al-top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.al-note{font-size:13.5px;color:var(--mute);flex:1;min-width:180px}
+.al-up{background:var(--ai);color:#fff;font-weight:600;font-size:14.5px;padding:10px 16px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.al-up:hover{background:var(--ai-2)}
+.al-prog{margin-top:12px;height:24px;background:var(--snow);border-radius:8px;position:relative;overflow:hidden}
+.al-prog i{position:absolute;left:0;top:0;bottom:0;background:#cfe3d8;width:0;transition:width .3s}
+.al-prog span{position:relative;font-size:12.5px;line-height:24px;padding-left:10px}
+.al-tabs{display:flex;gap:6px;overflow-x:auto;margin-top:14px;scrollbar-width:none}
+.al-tabs::-webkit-scrollbar{display:none}
+.al-tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13.5px;cursor:pointer;color:var(--sumi)}
+.al-tabs button b{font-weight:400;font-size:12px;color:var(--mute);margin-left:4px}
+.al-tabs button.on{background:var(--ai);border-color:var(--ai);color:#fff}.al-tabs button.on b{color:var(--ai-ink)}
+.al-diary{margin-top:14px;border-left:3px solid var(--hida);padding:4px 0 4px 14px}
+.al-diary h4{font-size:16px;font-weight:700}
+.al-diary p{font-size:14.5px;margin-top:4px;white-space:pre-line;max-width:40em}
+.al-diary small{display:block;font-size:11.5px;color:var(--mute);margin-top:6px}
+.al-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.al-btn{border:1px solid var(--line);background:var(--paper);color:var(--sumi);font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:10px;cursor:pointer}
+.al-btn:hover{border-color:var(--ai-2)}
+.al-btn.ai{border-color:#e6cf93;background:#fbf4e2}
+.al-btn:disabled{opacity:.45;cursor:default}
+.al-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:14px}
+.al-day-h{grid-column:1/-1;font-size:14px;font-weight:700;margin:10px 2px 4px}
+.al-th{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;background:#e8ecf3;cursor:pointer}
+.al-th img,.al-th video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.al-th .vid{position:absolute;right:6px;bottom:5px;color:#fff;font-size:12px;text-shadow:0 1px 3px #000}
+.al-th .who{position:absolute;left:6px;top:5px;font-size:10.5px;color:#fff;background:rgba(27,42,74,.55);padding:0 6px;border-radius:6px}
+.al-empty{text-align:center;color:var(--mute);font-size:14px;padding:30px 0 16px;line-height:1.75}
+.lb,.ss{position:fixed;inset:0;background:rgba(12,18,32,.95);z-index:50;display:flex;align-items:center;justify-content:center}
+.lb[hidden],.ss[hidden]{display:none}
+.lb-media{max-width:100vw;max-height:82vh;display:flex;align-items:center;justify-content:center}
+.lb-media img,.lb-media video{max-width:100vw;max-height:82vh;object-fit:contain}
+.lb-x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;background:rgba(255,255,255,.14);color:#fff;border:0;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;z-index:3}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);color:#fff;border:0;width:40px;height:56px;font-size:30px;cursor:pointer;z-index:3}
+.lb-nav.l{left:4px;border-radius:0 12px 12px 0}.lb-nav.r{right:4px;border-radius:12px 0 0 12px}
+.lb-info{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#dfe5f2;font-size:13px}
+.lb-del{margin-left:10px;background:transparent;border:1px solid var(--shu);color:#ff9d8c;border-radius:10px;padding:2px 10px;font-size:12px;cursor:pointer}
+.ss-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s;overflow:hidden}
+.ss-layer.on{opacity:1}
+.ss-layer img{width:100%;height:100%;object-fit:contain}
+.ss-layer img.kb{animation:kb 5s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
+.ss-layer video{max-width:100%;max-height:100%}
+.ss-title{text-align:center;color:#fff;padding:20px}
+.ss-title .d{font-family:var(--f-mincho);font-weight:800;font-size:48px;color:var(--hida)}
+.ss-title .t{font-size:24px;font-weight:700;margin-top:6px}
+.ss-title .s{font-size:14.5px;opacity:.8;margin-top:10px;max-width:420px;white-space:pre-line}
+.ss-bar{position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.15);z-index:2}
+.ss-bar i{display:block;height:100%;background:var(--hida);width:0}
+.ss-pp{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:20px;padding:6px 16px;cursor:pointer;z-index:3}
+
+footer{padding:48px 0 60px;text-align:center;font-size:12.5px;color:var(--mute)}
+footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:15px;display:block;margin-bottom:4px}
+
+@media (min-width:860px){
+  .nav nav{grid-template-columns:repeat(5,minmax(0,120px))}
+  .hero .wrap{grid-template-columns:1.1fr .9fr;align-items:end;padding-top:64px;padding-bottom:64px}
+  .kanji{right:24px}
+  .it{grid-template-columns:220px 1fr;align-items:start}
+  .days{grid-template-columns:1fr;position:sticky;top:110px}
+  .day{display:grid;grid-template-columns:44px 1fr;text-align:left;align-items:center;padding:12px 14px;column-gap:8px}
+  .day b{grid-row:span 2;font-size:28px}
+  .day span{margin-top:0}
+  .day em{display:block}
+  .mapgrid{grid-template-columns:1.3fr 1fr;align-items:start}
+  .bk{grid-template-columns:1fr 1fr}
+  .bk-sub{grid-column:1/-1}
+  .al-grid{grid-template-columns:repeat(5,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="mark">冬</span>우리 가족 겨울여행</div>
+    <nav aria-label="섹션">
+      <button data-go="plan">일정</button><button data-go="route">동선</button><button data-go="book">예약</button><button data-go="shop">쇼핑</button><button data-go="album">앨범</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="snow"></canvas>
+  <div class="kanji" aria-hidden="true">白川郷<br>名古屋</div>
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="hero-date num">2026년 12월 18일 – 22일, 4박 5일</div>
+      <h1>나고야는 핑계고,<span>시라카와고에 눈 보러 갑니다</span></h1>
+      <dl class="facts">
+        <div><dt>테마</dt><dd>크리스마스 조명 · 온천 료칸 · 설경 · 쇼핑</dd></div>
+        <div><dt>이동</dt><dd>비행기 · 특급열차 · 버스투어</dd></div>
+      </dl>
+      <div class="stops">
+        <div class="stop"><b>名古屋</b>나고야 3박</div>
+        <div class="stop"><b>下呂</b>게로온천 1박</div>
+        <div class="stop"><b>白川郷</b>시라카와고 당일</div>
+      </div>
+    </div>
+
+    <div class="ticket" aria-label="가는 편 탑승 정보">
+      <div class="t-head"><span class="jp">乗車券</span><span>가는 날 · 에어로케이 RF342</span></div>
+      <div class="t-route">
+        <div class="t-city"><b>청주</b><small>CJJ</small></div>
+        <div class="t-line"><i id="plane" style="left:0">✈️</i></div>
+        <div class="t-city r"><b>名古屋</b><small>NGO 센트레아</small></div>
+      </div>
+      <div class="t-meta num">
+        <div>출발<b>12.18 금</b></div>
+        <div>시간<b>13:55 → 15:40</b></div>
+        <div>인원<b>성인 3</b></div>
+      </div>
+      <div class="t-split"></div>
+      <div class="t-bottom">
+        <div class="dday"><b id="ddayBig" class="num">D-?</b><small id="ddaySub">출발까지</small></div>
+        <div class="pax">
+          <figure><svg viewBox="0 0 80 80"><circle cx="40" cy="42" r="30" fill="#f6d2b0"/><path d="M12 36c2-18 16-26 28-26s26 8 28 26c-6-8-16-11-28-11S18 28 12 36z" fill="#2b2b33"/><circle cx="30" cy="44" r="3.2" fill="#2b2b33"/><circle cx="50" cy="44" r="3.2" fill="#2b2b33"/><path d="M31 56q9 7 18 0" stroke="#2b2b33" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="23" cy="52" r="4" fill="#f3a99b" opacity=".6"/><circle cx="57" cy="52" r="4" fill="#f3a99b" opacity=".6"/><rect x="18" y="4" width="44" height="10" rx="5" fill="#e2483d"/><circle cx="40" cy="3" r="4" fill="#fff"/></svg><figcaption>아빠</figcaption></figure>
+          <figure><svg viewBox="0 0 80 80"><path d="M10 50c-2-26 12-40 30-40s32 14 30 40c-4 10-10 14-14 14V36H24v28c-4 0-10-4-14-14z" fill="#5a3a2e"/><circle cx="40" cy="44" r="26" fill="#f8d9bd"/><path d="M14 40c4-16 14-24 26-24s22 8 26 24c-10-6-18-12-26-12S24 34 14 40z" fill="#5a3a2e"/><circle cx="31" cy="46" r="3" fill="#2b2b33"/><circle cx="49" cy="46" r="3" fill="#2b2b33"/><path d="M33 56q7 6 14 0" stroke="#2b2b33" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="25" cy="53" r="4" fill="#f3a99b" opacity=".7"/><circle cx="55" cy="53" r="4" fill="#f3a99b" opacity=".7"/><circle cx="62" cy="26" r="6" fill="#2f8f6b"/><circle cx="62" cy="26" r="2.5" fill="#f2b33d"/></svg><figcaption>엄마</figcaption></figure>
+          <figure><svg viewBox="0 0 80 80"><circle cx="16" cy="30" r="9" fill="#2b2b33"/><circle cx="64" cy="30" r="9" fill="#2b2b33"/><circle cx="40" cy="44" r="27" fill="#fbe0c6"/><path d="M13 42c2-18 14-28 27-28s25 10 27 28c-6-4-12-10-16-16-6 8-20 14-38 16z" fill="#2b2b33"/><circle cx="31" cy="47" r="3.2" fill="#2b2b33"/><circle cx="49" cy="47" r="3.2" fill="#2b2b33"/><circle cx="32" cy="46" r="1" fill="#fff"/><circle cx="50" cy="46" r="1" fill="#fff"/><path d="M34 57q6 5 12 0" stroke="#2b2b33" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="54" r="4" fill="#f59b9b" opacity=".7"/><circle cx="56" cy="54" r="4" fill="#f59b9b" opacity=".7"/><path d="M60 18l4 4 6-2-2 6 4 4-6 0-2 6-2-6-6 0 4-4z" fill="#f2b33d"/></svg><figcaption>딸</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="sec" id="line" style="padding-top:28px">
+    <div class="panel line-map">
+      <div class="lm">
+        <div class="lm-st"><div class="dot"></div><b>清州</b><span>청주 출발</span><small class="num">12.18 금</small></div>
+        <div class="lm-st"><div class="dot"></div><b>栄</b><span>나고야 사카에</span><small class="num">12.18 · 1박</small></div>
+        <div class="lm-st onsen"><div class="dot"></div><b>下呂</b><span>게로온천</span><small class="num">12.19 · 1박</small></div>
+        <div class="lm-st"><div class="dot"></div><b>久屋大通</b><span>나고야 히사야오도리</span><small class="num">12.20 · 2박</small></div>
+        <div class="lm-st snow"><div class="dot"></div><b>白川郷</b><span>시라카와고·다카야마</span><small class="num">12.21 당일</small></div>
+        <div class="lm-st"><div class="dot"></div><b>清州</b><span>청주 도착</span><small class="num">12.22 화</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="plan">
+    <div class="sec-h"><div><h2>날짜별 일정</h2><p>예약이 끝난 일정과 추천 일정을 구분해 두었어요</p></div></div>
+    <div class="it">
+      <div class="days" id="tabs"></div>
+      <div class="panel dayview" id="day"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="route">
+    <div class="sec-h"><div><h2>동선 지도</h2><p>구간을 누르면 지도에서 그날 경로만 보여요</p></div></div>
+    <div class="mapgrid">
+      <div class="panel mapbox"><svg id="map" viewBox="0 0 340 420" role="img" aria-label="나고야·게로·시라카와고 동선 지도">
+      <defs>
+        <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#eaf1f6"/><stop offset=".45" stop-color="#eef0e4"/><stop offset="1" stop-color="#f5eedb"/>
+        </linearGradient>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe0ee"/><stop offset="1" stop-color="#93c8e0"/></linearGradient>
+        <pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#000" opacity=".05"/></pattern>
+        <g id="peak"><path d="M-18 0 L0 -26 L18 0Z" fill="#9fb7a8"/><path d="M0 -26 L-7 -16 L-3 -18 L0 -14 L4 -18 L7 -16Z" fill="#fff"/><path d="M0 -26 L18 0 L6 0Z" fill="#000" opacity=".08"/></g>
+        <g id="tree"><path d="M-5 0 L0 -12 L5 0Z" fill="#6fa58a"/><path d="M-4 -5 L0 -15 L4 -5Z" fill="#82b89c"/></g>
+        <g id="house"><path d="M-9 0 V-7 H9 V0Z" fill="#8a5a3c"/><path d="M-12 -6 L0 -20 L12 -6Z" fill="#c9a26b"/><path d="M-12 -6 L0 -20 L0 -16 L-8 -6Z" fill="#fff" opacity=".9"/></g>
+      </defs>
+
+      <rect width="340" height="420" rx="16" fill="url(#land)"/>
+      <rect width="340" height="420" rx="16" fill="url(#dots)"/>
+
+      <!-- 바다: 이세만 · 미카와만 -->
+      <path d="M0 326 L40 318 Q80 312 104 322 Q118 328 124 334 L114 420 L16 420 Q0 420 0 404Z" fill="url(#sea)"/>
+      <path d="M128 402 Q165 390 205 400 Q230 408 240 420 L120 420Z" fill="url(#sea)"/>
+      <path d="M22 352 q6-4 12 0 t12 0 M50 382 q6-4 12 0 t12 0 M160 410 q6-4 12 0 t12 0" stroke="#fff" stroke-width="1.6" fill="none" opacity=".8"/>
+      <text x="46" y="404" font-family="IBM Plex Sans KR" font-weight="600" font-size="11" fill="#4d87a3">이세만</text>
+      <ellipse cx="104" cy="372" rx="10" ry="6" fill="#efe6d0" stroke="#c9b994"/>
+
+      <!-- 강 -->
+      <path d="M246 60 C236 110 230 140 224 156 C212 192 178 220 165 238 C140 262 104 276 76 318" stroke="#9ccde3" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+      <text x="196" y="208" font-family="IBM Plex Sans KR" font-size="9" fill="#5d9ab5" transform="rotate(-48 196 208)">히다강</text>
+
+      <!-- 산 -->
+      <use href="#peak" x="94" y="96" transform="scale(1)"/><use href="#peak" x="76" y="110"/><use href="#peak" x="112" y="112"/>
+      <text x="94" y="126" text-anchor="middle" font-family="IBM Plex Sans KR" font-size="9" fill="#6b8577">하쿠산</text>
+      <use href="#peak" x="300" y="60"/><use href="#peak" x="322" y="84"/><use href="#peak" x="284" y="96"/><use href="#peak" x="312" y="128"/>
+      <use href="#peak" x="290" y="170"/><use href="#peak" x="318" y="200"/><use href="#peak" x="260" y="236"/>
+      <text x="304" y="222" text-anchor="middle" font-family="IBM Plex Sans KR" font-size="9" fill="#6b8577">북알프스</text>
+      <use href="#peak" x="176" y="120"/><use href="#peak" x="160" y="200"/><use href="#peak" x="40" y="200"/><use href="#peak" x="58" y="168"/>
+      <use href="#tree" x="190" y="262"/><use href="#tree" x="198" y="268"/><use href="#tree" x="64" y="270"/><use href="#tree" x="72" y="276"/>
+      <use href="#tree" x="250" y="120"/><use href="#tree" x="258" y="126"/><use href="#tree" x="30" y="60"/><use href="#tree" x="38" y="66"/>
+      <use href="#tree" x="196" y="40"/><use href="#tree" x="204" y="46"/><use href="#tree" x="236" y="300"/><use href="#tree" x="244" y="306"/>
+
+      <!-- 경로 -->
+      <g class="rt" data-d="1">
+        <path id="p1" d="M-20 248 Q50 290 104 372 Q124 340 132 303" fill="none" stroke="#4b7bd6" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+        <text class="veh" font-size="17" text-anchor="middle" dy="6">✈️<animateMotion dur="5s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></text>
+      </g>
+      <g class="rt" data-d="2">
+        <path id="p2" d="M132 303 C150 280 158 252 165 238 C182 214 205 196 212 184 C220 170 222 164 224 156" fill="none" stroke="#e2483d" stroke-width="4" stroke-linecap="round"/>
+        <path d="M132 303 C150 280 158 252 165 238 C182 214 205 196 212 184 C220 170 222 164 224 156" fill="none" stroke="#fff" stroke-width="1.4" stroke-dasharray="4 5"/>
+        <text class="veh" font-size="17" text-anchor="middle" dy="6">🚄<animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;1;1;0;0" keyTimes="0;.42;.5;.92;1" calcMode="linear"><mpath href="#p2"/></animateMotion></text>
+      </g>
+      <g class="rt" data-d="4">
+        <path id="p4" d="M132 303 C114 286 96 266 92 246 C88 210 100 176 106 150 C112 112 120 76 132 52 C160 46 200 58 224 80 C214 110 190 140 170 170 C150 200 126 230 112 255 C106 276 118 294 132 303" fill="none" stroke="#2f8f6b" stroke-width="3.4" stroke-dasharray="9 5" stroke-linecap="round"/>
+        <text class="veh" font-size="17" text-anchor="middle" dy="6">🚌<animateMotion dur="9s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></text>
+      </g>
+      <g class="rt" data-d="5">
+        <path id="p5" d="M132 303 Q124 340 104 372 Q50 290 -20 248" fill="none" stroke="#8a63c9" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+        <text class="veh" font-size="17" text-anchor="middle" dy="6">✈️<animateMotion dur="5s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion></text>
+      </g>
+
+      <!-- 장소 -->
+      <g font-family="IBM Plex Sans KR" font-weight="600" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">
+        <g><use href="#house" x="126" y="52"/><use href="#house" x="140" y="56"/>
+          <text x="132" y="74" text-anchor="middle" font-size="14" fill="#2a2a35">시라카와고</text>
+          <text x="132" y="87" text-anchor="middle" font-size="10" fill="#2f8f6b" font-family="IBM Plex Sans KR">12/21 합장마을</text></g>
+        <g><circle cx="224" cy="80" r="6" fill="#2f8f6b" stroke="#fff" stroke-width="2.5"/>
+          <text x="234" y="78" font-size="14" fill="#2a2a35">다카야마</text>
+          <text x="234" y="91" font-size="10" fill="#2f8f6b" font-family="IBM Plex Sans KR">12/21 옛 거리</text></g>
+        <g><circle cx="224" cy="156" r="15" fill="#e2483d" stroke="#fff" stroke-width="3"/>
+          <text x="224" y="162" text-anchor="middle" font-size="15" stroke-width="0">♨️</text>
+          <path class="steam" d="M218 136 q-4-6 0-12 M224 134 q-4-6 0-12 M230 136 q-4-6 0-12" stroke="#c7d3dd" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <text x="244" y="156" font-size="15" fill="#2a2a35">게로온천</text>
+          <text x="244" y="169" font-size="10" fill="#e2483d" font-family="IBM Plex Sans KR">12/19 료칸 1박</text></g>
+        <g><circle cx="132" cy="303" r="17" fill="#16233f" stroke="#fff" stroke-width="3"/>
+          <text x="132" y="309" text-anchor="middle" font-size="16" stroke-width="0">🏯</text>
+          <text x="156" y="300" font-size="16" fill="#2a2a35">나고야</text>
+          <text x="156" y="314" font-size="10" fill="#16233f" font-family="IBM Plex Sans KR">사카에 1박 · 히사야오도리 2박</text></g>
+        <g><text x="104" y="377" text-anchor="middle" font-size="13" stroke-width="0">🛫</text>
+          <text x="124" y="380" font-size="12" fill="#2a2a35">센트레아 공항</text></g>
+        <g><text x="8" y="236" font-size="11" fill="#4b7bd6">← 청주</text></g>
+      </g>
+
+      <!-- 나침반 -->
+      <g transform="translate(306 384)"><circle r="16" fill="#fff" opacity=".85"/><path d="M0 -12 L4 0 L0 12 L-4 0Z" fill="#e2483d"/><path d="M0 0 L4 0 L0 12 L-4 0Z" fill="#16233f"/><text y="-18" text-anchor="middle" font-family="IBM Plex Sans KR" font-weight="600" font-size="10" fill="#16233f">N</text></g>
+      <g id="mapSnow"></g>
+    </svg></div>
+      <div class="panel legs" id="legs">
+        <button class="leg on" data-d="0" style="--c:#9aa1b2"><i></i><div><b>전체 경로</b><span>5일 동안의 이동을 한눈에</span></div></button>
+        <button class="leg" data-d="1" style="--c:#4b7bd6"><i></i><div><b>12.18 · 청주에서 나고야로</b><span>비행 1시간 45분 → 메이테츠로 사카에</span></div></button>
+        <button class="leg" data-d="2" style="--c:#e2483d"><i></i><div><b>12.19–20 · 게로온천 왕복</b><span>JR 특급 히다, 편도 약 1시간 40분</span></div></button>
+        <button class="leg" data-d="4" style="--c:#2f8f6b"><i></i><div><b>12.21 · 시라카와고·다카야마</b><span>미라이타워 앞 07:30 출발 버스투어</span></div></button>
+        <button class="leg" data-d="5" style="--c:#8a63c9"><i></i><div><b>12.22 · 집으로</b><span>센트레아 16:40 → 청주 18:45</span></div></button>
+      </div>
+    </div>
+    <div class="kml panel">
+      <div><h3>구글 지도에 모든 장소 한 번에 넣기</h3>
+      <p>일정 장소 20여 곳과 쇼핑 스폿 13곳을 날짜별 색깔 핀으로 정리한 파일이에요. 컴퓨터에서 구글 내 지도(My Maps)에 가져오면 휴대폰 구글맵 앱의 '저장됨 → 지도'에서도 볼 수 있어요.</p>
+      <ol><li>파일 받기 버튼으로 nagoya-trip.kml 저장</li><li>google.com/mymaps → 새 지도 만들기</li><li>레이어의 '가져오기'에서 파일 선택</li></ol></div>
+      <a class="routebtn big" href="nagoya-trip.kml" download>KML 파일 받기</a>
+    </div>
+  </section>
+
+  <section class="sec" id="book">
+    <div class="sec-h"><div><h2>예약 정보</h2><p>예약번호는 각자 예약 앱에서 확인하세요</p></div></div>
+    <div class="bk" id="bk"></div>
+  </section>
+
+
+  <section class="sec" id="shop">
+    <div class="sec-h"><div><h2>쇼핑 가이드</h2><p>동선 위에 있는 쇼핑 스폿과, 한국 여행자들이 많이 사오는 것들</p></div></div>
+    <div class="taxbox">
+      <h3>면세가 바뀌었어요 (2026년 11월부터)</h3>
+      <p>이제 면세점에서도 <b>세금 포함 가격으로 계산</b>하고, 출국할 때 공항 면세 키오스크에 여권을 대서 확인받은 뒤 나중에 소비세를 돌려받아요. 산 날부터 90일 안에 출국해야 하고, 일본에서 먹거나 쓴 과자·화장품은 환급이 안 돼요. 면세로 산 물건은 캐리어 대신 들고 타는 가방에 넣어두면 확인받기 편해요.</p>
+    </div>
+    <div class="sh-tabs" id="shTabs"></div>
+    <div class="sh-grid" id="shGrid"></div>
+
+    <h3 class="sh-h">한국 사람들이 많이 사오는 것</h3>
+    <div class="buy" id="buy"></div>
+    <div class="insta">
+      <div><b>인스타그램에서 더 보기</b><span>해시태그를 누르면 인스타그램 앱에서 최신 사진이 열려요</span></div>
+      <div class="tags" id="tags"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="album">
+    <div class="sec-h"><div><h2>가족 앨범</h2><p>셋이 찍은 사진과 영상을 한곳에 모아요</p></div></div>
+<div class="gp">
+      <div class="gp-ic" aria-hidden="true"><svg viewBox="0 0 48 48" width="44" height="44"><path d="M24 4a10 10 0 0 1 10 10v10H24z" fill="#ea4335"/><path d="M44 24a10 10 0 0 1-10 10H24V24z" fill="#4285f4"/><path d="M24 44a10 10 0 0 1-10-10V24h10z" fill="#34a853"/><path d="M4 24a10 10 0 0 1 10-10h10v10z" fill="#fbbc04"/></svg></div>
+      <div class="gp-body">
+        <h3>구글 포토 공유 앨범</h3>
+        <p>세 식구가 각자 폰의 구글 포토 앱에서 바로 사진·영상을 올려요. 사진은 찍은 날짜순으로 정리돼요.</p>
+        <a class="gp-btn" id="gpBtn" href="#" target="_blank" rel="noopener">앨범 열기</a>
+        <small id="gpNote"></small>
+      </div>
+    </div>
+    <ol class="gp-how">
+      <li><b>구글 포토 앱 설치</b>아이폰은 앱스토어, 갤럭시는 기본 설치돼 있어요</li>
+      <li><b>앨범 열기 버튼 누르기</b>공유 앨범에 참여해요</li>
+      <li><b>사진·영상 추가</b>앨범 안에서 ＋ 버튼으로 올려요</li>
+    </ol>
+  </section>
+
+</div>
+
+<footer><b>また来ようね</b>또 오자, 우리 가족 · 2026 겨울</footer>
+
+<script>
+const PLACES={"Cheongju International Airport": ["청주국제공항", 36.7219682, 127.4958842, "ChIJNfjsg5bZZDURrj2YRAJn0lw"], "Chubu Centrair International Airport": ["센트레아(중부국제공항)", 34.8573624, 136.8107557, "ChIJzynM7ZN9BGARJQAsbih9mEI"], "Vessel Inn Sakae Station Nagoya": ["베셀 인 사카에역 (숙소)", 35.171311, 136.9064127, "ChIJw4LCq9VwA2AR15wGfl6Bbho"], "Misokatsu Yabaton Yabacho Honten": ["미소카츠 야바톤 본점", 35.1616781, 136.9062361, "ChIJeUhI_NNxA2ARSBP5UM663A0"], "Oasis 21 Nagoya": ["오아시스21", 35.1711148, 136.9094757, "ChIJT5niKdRwA2AR1oO7t2LlvlQ"], "Komeda Coffee Sakae": ["코메다 커피 사카에1초메점", 35.1664521, 136.8949854, "ChIJvWLHWSh3A2ARYXVbzO66Ej8"], "Nagoya Station": ["나고야역", 35.170915, 136.8815369, "ChIJiYvXlOd2A2ARYxYm-Esg94E"], "Gero Station": ["게로역", 35.8053155, 137.2398018, "ChIJ8bm2v7jbAmAR590QQmSwjEA"], "Yuamiya Gero": ["족욕 유아미야", 35.8084696, 137.2428846, "ChIJrfpqxbnbAmARsNOYc0c2Fcs"], "Ooedo Onsen Monogatari Gero Bekkan": ["오에도온센 게로벳칸 (숙소)", 35.8103788, 137.2408412, "ChIJrzAByrvbAmARBcLbx20k1-U"], "Gero Onsen Gassho Village": ["게로온천 합장촌", 35.8083288, 137.2496949, "ChIJsVLue8rbAmARKqH1M8WxzhU"], "Irori Hida Yakiniku Gero": ["이로리 히다 야키니쿠 (히다규)", 35.8090319, 137.2439937, "ChIJ550JUgDbAmAR9S81HWuv298"], "Kuretake Inn Nagoya Hisayaodori": ["쿠레타케 인 히사야오도리 (숙소)", 35.1764419, 136.9085927, "ChIJ2QsimylxA2ARR7ghWzoQ0-s"], "Osu Kannon": ["오스칸논 · 오스 상점가", 35.1596892, 136.8994186, "ChIJr3HDSzJ3A2AR6Pctdr3J-yc"], "Atsuta Horaiken Matsuzakaya": ["아쓰타 호라이켄 마쓰자카야점 (히쓰마부시)", 35.164522, 136.907932, "ChIJp7G4Ac5wA2ARLrlWk69Xz80"], "Chubu Electric Power MIRAI TOWER": ["미라이타워 (투어 미팅 장소)", 35.1723452, 136.908338, "ChIJRQSoYtZwA2ARwpz475VYYeo"], "Shirakawa-go": ["시라카와고", 36.2550982, 136.9022991, "ChIJZS8K5LBx-F8R3iMSHZ_7Tis"], "Takayama Old Town": ["다카야마 산마치스지", 36.1413161, 137.2596227, "ChIJczG1tNu6AmARjrgU-Yh3zH8"], "Sekai no Yamachan Sakae": ["세카이노 야마짱 본점 (테바사키)", 35.1680054, 136.9134107, "ChIJp0yes9pwA2ARC4GsdK2ts1Y"], "Nagoya Castle": ["나고야성 혼마루어전", 35.1848636, 136.899927, "ChIJleKGf8t2A2ARY_ZkNA5RTo8"], "Meitetsu Nagoya Station": ["메이테츠 나고야역", 35.168696, 136.8841166, "ChIJuUO95N12A2ARcMouP7nf6sM"], "Don Quijote Sakae": ["돈키호테 사카에 본점", 35.1702098, 136.9063906, "ChIJg23hatRwA2ARD1FhEcQbp30"], "Matsuzakaya Nagoya": ["마쓰자카야 나고야점", 35.165279, 136.907927, "ChIJW1efAc5wA2ARSGMn7SZkzZ8"], "Mitsukoshi Sakae": ["미쓰코시 나고야 사카에점", 35.1683331, 136.9076855, "ChIJn3wLYtFwA2ARFw2jVUMr9Kc"], "LACHIC": ["라시크", 35.1674808, 136.9077603, "ChIJo_LRKtJwA2ARPzUCvNnXyTU"], "Sunshine Sakae": ["선샤인 사카에 (관람차)", 35.1694169, 136.9062811, "ChIJeTa5c9RwA2ARJ75Z_bDuZoY"], "Sakae Skyle": ["사카에 스카이르 (유니클로·다이소)", 35.1683756, 136.9063214, "ChIJgw4Rk9NwA2ARIb_klqD6zMc"], "Komehyo Nagoya": ["코메효 나고야 본점", 35.1593929, 136.902028, "ChIJownIQDN3A2ARAXxkzCaiWZA"], "JR Nagoya Takashimaya": ["JR 나고야 다카시마야", 35.170914, 136.88318, "ChIJ_zIUlSd3A2ARsDK_g3Ov14M"], "Hands Nagoya": ["핸즈 나고야", 35.170914, 136.88318, "ChIJI_dLked2A2ARdWDFWTnntxs"], "Meitetsu Department Store": ["메이테츠 백화점 본점", 35.1696089, 136.884084, "ChIJqf6PQTV3A2ARnLd7YBPzdcA"], "ESCA": ["에스카 지하상가", 35.1702144, 136.880332, "ChIJIcBuO-Z2A2ARqzM9NFSA_wA"], "Yamakawa Gero": ["야마카와 마네키네코 상점 (게로역 앞)", 35.8067723, 137.2399077, "ChIJAQDQIbnbAmARjTMZRG1OMV0"], "Miyagawa Morning Market": ["미야가와 아침시장", 36.144704, 137.2579466, "ChIJE-ywz9a6AmAR1uD5rAwvJkw"], "YB Friends Centrair": ["YB.Friend's (센트레아 공항)", 34.8585433, 136.8145422, "ChIJ2-9t_-x9BGARZ7F1SzYpYp0"]};
+const gm=q=>{const p=PLACES[q];return p?'https://www.google.com/maps/search/?api=1&query='+p[1]+','+p[2]+'&query_place_id='+p[3]:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q)};
+const dayRoute=d=>{const seen=[];d.items.forEach(it=>{const p=PLACES[it.q];if(p&&p[2]>130&&!seen.includes(it.q))seen.push(it.q)});
+  if(seen.length<2)return '';const pts=seen.map(k=>PLACES[k]);const ll=p=>p[1]+','+p[2];
+  const o=pts[0],de=pts[pts.length-1],w=pts.slice(1,-1).slice(0,8);
+  return 'https://www.google.com/maps/dir/?api=1&origin='+ll(o)+'&origin_place_id='+o[3]+'&destination='+ll(de)+'&destination_place_id='+de[3]+(w.length?'&waypoints='+encodeURIComponent(w.map(ll).join('|'))+'&waypoint_place_ids='+encodeURIComponent(w.map(p=>p[3]).join('|')):'')};
+const ph=k=>'https://search.naver.com/search.naver?where=image&query='+encodeURIComponent(k);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const days=[
+ {date:'2026-12-18',label:'1일차',dow:'금',title:'나고야 도착!',where:'청주 → 나고야 · 사카에',items:[
+  {s:'ok',ic:'✈️',t:'13:55 출발 → 15:40 도착',n:'청주 → 나고야(센트레아) · RF342',d:'에어로케이 · 비행 1시간 45분 · 성인 3',q:'Cheongju International Airport',ph:'청주공항 국제선',h:'13:55'},
+  {s:'rec',ic:'🚆',t:'16:30쯤',n:'공항 → 사카에',d:'입국심사 후 바로 이동',tr:'메이테츠 뮤스카이/특급 → 가나야마역 → 지하철 메이조선 → 사카에역 (약 40분, 830엔 · 지정석 +360엔) · 짐 많으면 센트레아 리무진 버스 "栄" 하차 (55분~, 2,000엔)',q:'Chubu Centrair International Airport',ph:'나고야 센트레아 공항',h:'16:30'},
+  {s:'ok',ic:'🏨',t:'17:30쯤 체크인',n:'Vessel Inn Sakae Station',d:'1박 · 객실 1개 (체크인 14:00부터)',q:'Vessel Inn Sakae Station Nagoya',ph:'베셀인 사카에역',h:'17:30'},
+  {s:'rec',ic:'🐷',t:'18:30',n:'첫 저녁은 미소카츠',d:'나고야 명물 된장 소스 돈가스 · 추천 가게: 야바톤 본점 (사카에에서 걸어서 10분, 줄 설 수 있어요)',tr:'사카에 일대 도보',q:'Misokatsu Yabaton Yabacho Honten',ph:'나고야 사카에 미소카츠',h:'18:30'},
+  {s:'rec',ic:'🌃',t:'19:30',n:'오아시스21 · 미라이타워 야경',d:'오아시스21 옥상 "물의 우주선" 위를 걸으며 미라이타워 보기 · 지하에 지브리 굿즈 매장도 있어요',tr:'사카에역에서 바로 연결 · 도보',q:'Oasis 21 Nagoya',ph:'오아시스21 미라이타워 야경',h:'19:30'},
+  {s:'rec',ic:'🛍️',t:'20:30',n:'돈키호테 사카에 본점',d:'24시간 영업 · 숙소 바로 옆 · 과자·화장품·기념품 · 지하엔 뽑기(가챠)와 인형뽑기',tr:'숙소에서 도보 1~2분 (사카에역 1번 출구 쪽)',q:'Don Quijote Sakae',ph:'돈키호테 사카에 본점',h:'20:30'}]},
+ {date:'2026-12-19',label:'2일차',dow:'토',title:'온천 마을로 칙칙폭폭',where:'나고야 → 게로온천',items:[
+  {s:'rec',ic:'☕',t:'08:30',n:'나고야식 모닝',d:'음료 시키면 토스트·삶은 달걀이 따라와요 (오구라 토스트!) · 추천 가게: 코메다 커피',q:'Komeda Coffee Sakae',ph:'코메다커피 모닝',h:'08:30'},
+  {s:'ok',ic:'👋',t:'10:30 (11:00까지)',n:'Vessel Inn Sakae Station 체크아웃',h:'10:30'},
+  {s:'rec',ic:'🚇',t:'10:40',n:'사카에 → 나고야역',tr:'지하철 히가시야마선 약 5분',q:'Nagoya Station',ph:'나고야역 에키벤',h:'10:40'},
+  {s:'rec',ic:'🍱',t:'11:00',n:'나고야역에서 에키벤(기차 도시락) 사기',ph:'나고야역 에키벤',q:'Nagoya Station',d:'기차에서 점심! 셋이 다른 걸로 골라 나눠 먹기',h:'11:00'},
+  {s:'rec',ic:'🚄',t:'11~12시대 열차',n:'JR 특급 히다 → 게로',q:'Gero Station',ph:'특급 히다 HC85 차창',d:'창밖 히다강 계곡 풍경 감상 · 셋이 나란히 앉으려면 지정석 추천',tr:'나고야 → 게로 약 1시간 40분 · 자유석 1인 4,170엔',h:'11:40'},
+  {s:'rec',ic:'🦶',t:'13:30',n:'게로 온천가 산책 · 족욕',d:'족욕하면서 온천달걀 올린 소프트아이스크림(온타마 소프트) · 개구리 조각 찾기 🐸',tr:'게로역에서 도보',q:'Yuamiya Gero',ph:'게로온천 유아미야 족욕',h:'13:30'},
+  {s:'ok',ic:'♨️',t:'15:00 체크인',n:'Ooedo Onsen Monogatari Gero Bekkan',d:'1박 · 올인클루시브 (저녁 음료 무제한 · 라운지 무료)',tr:'게로역에서 송영버스 5분 또는 도보 15분',q:'Ooedo Onsen Monogatari Gero Bekkan',ph:'오에도온센 게로벳칸',h:'15:00'},
+  {s:'rec',ic:'🍽️',t:'18:00',n:'저녁 뷔페 → 노천탕',ph:'오에도온센 게로벳칸 뷔페 노천탕',d:'밤 노천탕에서 별 보기',h:'18:00'}]},
+ {date:'2026-12-20',label:'3일차',dow:'일',title:'다시 나고야로',where:'게로온천 → 나고야 · 히사야오도리',items:[
+  {s:'rec',ic:'🌅',t:'07:00',n:'아침 온천 한 번 더',h:'07:00'},
+  {s:'ok',ic:'👋',t:'09:30 (11:00까지)',n:'Ooedo Onsen Monogatari Gero Bekkan 체크아웃',d:'짐은 프런트에 맡기거나 역 코인로커에',h:'09:30'},
+  {s:'rec',ic:'🛖',t:'10:00',n:'게로온천 갓쇼무라(합장촌)',d:'시라카와고에서 옮겨온 합장집 마을 · 도자기 그림 그리기 체험도 있어요',tr:'게로역 → 노히버스 합장촌선 5분 · 입촌료 어른 800엔 · 8:30~16:30',q:'Gero Onsen Gassho Village',ph:'게로온천 합장촌',h:'10:00'},
+  {s:'rec',ic:'🥩',t:'12:00',n:'점심은 히다규',d:'히다규 덮밥이나 꼬치로 가볍게 · 추천 가게: 이로리 히다 야키니쿠 (점심만 영업, 12석이라 일찍 가기)',q:'Irori Hida Yakiniku Gero',ph:'게로 히다규',h:'12:00'},
+  {s:'rec',ic:'🛍️',t:'12:50',n:'게로역 앞 기념품 쇼핑',d:'커다란 마네키네코가 있는 가게 · 게로 한정 과자, 히다규 카레, 한정 히다규 주먹밥',q:'Yamakawa Gero',ph:'게로 야마카와 마네키네코',h:'12:50'},
+  {s:'rec',ic:'🚄',t:'13시대 열차',n:'게로 → 나고야',q:'Nagoya Station',tr:'JR 특급 히다 약 1시간 40분',h:'13:10'},
+  {s:'rec',ic:'🚇',t:'15:00',n:'나고야역 → 히사야오도리',tr:'지하철 사쿠라도리선 3정거장',h:'15:00'},
+  {s:'ok',ic:'🏨',t:'15:30 체크인',n:'Kuretake Inn Nagoya Hisayaodori',d:'2박 · 객실 1개',q:'Kuretake Inn Nagoya Hisayaodori',ph:'쿠레타케인 히사야오도리',h:'15:30'},
+  {s:'rec',ic:'✨',t:'17:00',n:'오스 상점가 + 일루미네이션',d:'사카에에서 오스까지 샴페인골드 조명 거리 · 길거리 간식 투어 · 오스칸논 절',tr:'히사야오도리 → 지하철 메이조선 → 가미마에즈역',q:'Osu Kannon',ph:'오스상점가 일루미네이션',h:'17:00'},
+  {s:'rec',ic:'🍱',t:'19:00',n:'저녁은 히쓰마부시',d:'그냥 → 양념 얹어서 → 오차즈케, 세 가지 방법으로 먹기 · 추천 가게: 아쓰타 호라이켄 마쓰자카야점 (대기 번호표 먼저 받기)',q:'Atsuta Horaiken Matsuzakaya',ph:'나고야 히쓰마부시',h:'19:00'}]},
+ {date:'2026-12-21',label:'4일차',dow:'월',title:'눈의 마을 시라카와고 ⛄',where:'나고야 → 시라카와고 · 다카야마',items:[
+  {s:'ok',ic:'🚩',t:'07:10 ~ 07:25 미팅',n:'중부전력 미라이타워 1층 앞',d:'가이드가 아이트립 깃발을 들고 있어요',tr:'숙소에서 도보 · 6시 50분에 출발!',q:'Chubu Electric Power MIRAI TOWER',ph:'중부전력 미라이타워',h:'07:10'},
+  {s:'ok',ic:'🚌',t:'07:30 정시 출발',n:'시라카와고 · 히다 다카야마 버스투어',ph:'나고야 출발 시라카와고 다카야마 버스투어',d:'한국어 가이드 · 무료 사진 촬영 · 3명',h:'07:30'},
+  {s:'rec',ic:'🏔️',t:'낮',n:'시라카와고 합장마을',d:'눈 덮인 마을 가족사진 · 전망대 뷰 · 핫팩·방수 신발 필수',q:'Shirakawa-go',ph:'시라카와고 겨울 설경',h:'10:30'},
+  {s:'rec',ic:'🏮',t:'오후',n:'다카야마 옛 거리',d:'히다규 스시 · 미타라시 당고(간장 경단) 먹어보기',q:'Takayama Old Town',ph:'다카야마 옛거리',h:'14:00'},
+  {s:'tbd',ic:'🌙',t:'저녁',n:'나고야 복귀',d:'도착 시간 확인 예정',h:'19:00'},
+  {s:'rec',ic:'🍗',t:'복귀 후',n:'저녁은 테바사키(닭날개)',d:'후추 듬뿍 나고야식 닭날개 · 추천 가게: 세카이노 야마짱 본점 · 내일 일찍 나가니까 짐 미리 싸기',q:'Sekai no Yamachan Sakae',ph:'나고야 테바사키',h:'19:30'}]},
+ {date:'2026-12-22',label:'5일차',dow:'화',title:'집으로',where:'나고야 → 청주',items:[
+  {s:'ok',ic:'👋',t:'08:30 (10:00까지)',n:'Kuretake Inn Nagoya Hisayaodori 체크아웃',d:'짐은 숙소에 맡기기 (가능 여부 체크인 때 확인)',h:'08:30'},
+  {s:'rec',ic:'🏯',t:'09:00',n:'나고야성 · 혼마루어전',d:'천수각은 공사로 못 들어가지만 금박 장식 혼마루어전이 볼거리 · 금 샤치호코 앞 사진',tr:'히사야오도리 → 지하철 메이조선 → 시야쿠쇼역 · 9:00~16:30',q:'Nagoya Castle',ph:'나고야성 혼마루어전',h:'09:00'},
+  {s:'rec',ic:'🧳',t:'11:15',n:'숙소에서 짐 찾기',h:'11:15'},
+  {s:'rec',ic:'🎁',t:'11:45',n:'나고야역 점심 · 기념품 쇼핑',d:'키시멘 한 그릇 → JR 다카시마야 지하 식품관에서 나고야 과자(유이로·에비센베이) → 시간 남으면 핸즈(문구·잡화)',tr:'히사야오도리 → 사쿠라도리선 → 나고야역',q:'JR Nagoya Takashimaya',ph:'나고야역 에키벤',h:'11:45'},
+  {s:'rec',ic:'🚆',t:'13:40',n:'메이테츠 나고야역 → 공항',d:'출발 2시간 전 공항 도착',tr:'뮤스카이 최단 28분 · 890엔 + 지정석 요금',q:'Meitetsu Nagoya Station',ph:'메이테츠 뮤스카이',h:'13:40'},
+  {s:'rec',ic:'🧸',t:'14:30',n:'공항 캐릭터 굿즈 구경',d:"YB.Friend's · 지브리·산리오·도라에몽 굿즈와 가챠 · 4층 푸드코트 쪽",q:'YB Friends Centrair',ph:'센트레아 공항 YB Friends',h:'14:30'},
+  {s:'rec',ic:'🧾',t:'출국 전',n:'면세 환급 받기',d:'면세로 산 물건이 있으면 출국심사 전 면세 키오스크에 여권을 대고 확인받기',h:'15:00'},
+  {s:'ok',ic:'✈️',t:'16:40 출발 → 18:45 도착',n:'나고야(센트레아) → 청주 · RF341',d:'에어로케이 · 비행 2시간 5분 · 성인 3',h:'16:40'}]}
+];
+
+/* 내비게이션 */
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'}));
+
+/* 오늘 기준 & D-day */
+const now=new Date();
+const kst=new Date(now.getTime()+(now.getTimezoneOffset()+540)*60000);
+const todayStr=kst.getFullYear()+'-'+String(kst.getMonth()+1).padStart(2,'0')+'-'+String(kst.getDate()).padStart(2,'0');
+const start=new Date('2026-12-18T00:00:00+09:00'),end=new Date('2026-12-23T00:00:00+09:00');
+const big=document.getElementById('ddayBig'),sub=document.getElementById('ddaySub');let ratio;
+if(now<start){const dd=Math.ceil((start-now)/864e5);big.textContent='D-'+dd;sub.textContent='출발까지 '+dd+'일 남았어요';ratio=Math.max(.04,1-dd/40)}
+else if(now<end){const n=Math.floor((now-start)/864e5)+1;big.textContent=n+'일차';sub.textContent='지금 여행 중이에요';ratio=1}
+else{big.textContent='다녀왔어요';sub.textContent='또 가자, 우리 가족';ratio=1}
+requestAnimationFrame(()=>setTimeout(()=>{document.getElementById('plane').style.left='calc('+(ratio*100)+'% - '+(ratio*18)+'px)'},300));
+
+/* 일정 */
+const catOf=ic=>/✈️|🚆|🚄|🚇|🚌|🚩/.test(ic)?['move','이동']:/🏨|👋|♨️|🧳|🧾/.test(ic)?['stay','숙소']:/🐷|☕|🍱|🥩|🍗|🍽️|🎁|🏪|🛍️|🧸/.test(ic)?['food','먹거리·쇼핑']:['see','구경'];
+const stl={ok:'예약 확정',rec:'추천',tbd:'미정'};
+const tabsEl=document.getElementById('tabs'),dayEl=document.getElementById('day');
+let cur=Math.max(0,days.findIndex(d=>d.date===todayStr));
+function renderDay(i){
+  cur=i;[...tabsEl.children].forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i)});
+  const d=days[i];let nowIdx=-1;
+  if(d.date===todayStr){const hm=String(kst.getHours()).padStart(2,'0')+':'+String(kst.getMinutes()).padStart(2,'0');d.items.forEach((it,k)=>{if(it.h&&it.h<=hm)nowIdx=k})}
+  let h=`<div class="dv-h"><div><h3>${esc(d.title)}</h3><small>${esc(d.where)}</small></div>
+    <div class="dv-r"><div class="legend"><span><i style="background:var(--cedar)"></i>확정</span><span><i style="background:#a77a14"></i>추천</span><span><i style="background:#9aa1b2"></i>미정</span></div>${dayRoute(d)?`<a class="routebtn" href="${dayRoute(d)}" target="_blank" rel="noopener">이날 동선 구글맵으로 보기</a>`:''}</div></div>`;
+  d.items.forEach((it,k)=>{
+    const c=catOf(it.ic);const tm=(it.h||'').trim();
+    const sub=it.t&&it.t!==tm?esc(it.t.replace(tm,'').trim().replace(/^출발\s*→\s*/,'→ ')):'';
+    h+=`<div class="row cat-${c[0]}${k===nowIdx?' now':''}">
+      <div class="tm num">${tm||'—'}${sub?`<small>${sub}</small>`:''}</div>
+      <div class="bd">
+        <div class="cat"><span>${c[1]}</span><span class="st ${it.s}">${stl[it.s]}</span>${k===nowIdx?'<span class="nowtag">지금</span>':''}</div>
+        <h4>${esc(it.n)}</h4>
+        ${it.d?`<p>${esc(it.d)}</p>`:''}
+        ${it.tr?`<div class="route-pill">${esc(it.tr)}</div>`:''}
+        ${(it.ph||it.q)?`<div class="lk">${it.ph?`<a href="${ph(it.ph)}" target="_blank" rel="noopener">사진 보기</a>`:''}${it.q?`<a href="${gm(it.q)}" target="_blank" rel="noopener">지도 보기</a>`:''}</div>`:''}
+      </div></div>`;
+  });
+  dayEl.innerHTML=h;
+}
+days.forEach((d,i)=>{const b=document.createElement('button');b.className='day'+(d.date===todayStr?' today':'');
+  b.innerHTML=`<b class="num">${d.date.slice(8)}</b><span>${d.dow}요일 · ${d.label}</span><em>${esc(d.where)}</em>`;
+  b.onclick=()=>renderDay(i);tabsEl.appendChild(b)});
+renderDay(cur);
+
+/* 동선 지도 */
+const legs=document.getElementById('legs');
+legs.onclick=e=>{const b=e.target.closest('.leg');if(!b)return;const d=b.dataset.d;
+  [...legs.children].forEach(c=>c.classList.toggle('on',c===b));
+  document.querySelectorAll('.rt').forEach(g=>g.classList.toggle('dim',d!=='0'&&g.dataset.d!==d))};
+(function(){const g=document.getElementById('mapSnow'),ns='http://www.w3.org/2000/svg';if(!g)return;
+  for(let i=0;i<26;i++){const c=document.createElementNS(ns,'circle');const dur=6+Math.random()*6;
+    c.setAttribute('cx',Math.random()*340);c.setAttribute('r',.8+Math.random()*1.6);c.setAttribute('fill','#fff');c.setAttribute('opacity','.9');
+    const a=document.createElementNS(ns,'animate');a.setAttribute('attributeName','cy');a.setAttribute('from',-10);a.setAttribute('to',230);
+    a.setAttribute('dur',dur+'s');a.setAttribute('begin',(-Math.random()*dur)+'s');a.setAttribute('repeatCount','indefinite');c.appendChild(a);g.appendChild(c)}})();
+
+/* 예약 */
+const flights=[['가는 날','12.18 금','청주','CJJ','13:55','나고야','NGO','15:40','1시간 45분','RF342'],['오는 날','12.22 화','나고야','NGO','16:40','청주','CJJ','18:45','2시간 5분','RF341']];
+const stays=[
+ {n:'Vessel Inn Sakae Station',w:'나고야 사카에',a:'12.18 금 14:00',b:'12.19 토 11:00',k:'1박',q:'Vessel Inn Sakae Station Nagoya',p:'베셀인 사카에역'},
+ {n:'Ooedo Onsen Monogatari Gero Bekkan',w:'게로온천 · 올인클루시브',a:'12.19 토 15:00',b:'12.20 일 11:00',k:'1박',q:'Ooedo Onsen Monogatari Gero Bekkan',p:'오에도온센 게로벳칸',onsen:1},
+ {n:'Kuretake Inn Nagoya Hisayaodori',w:'나고야 히사야오도리',a:'12.20 일 15:00',b:'12.22 화 10:00',k:'2박',q:'Kuretake Inn Nagoya Hisayaodori',p:'쿠레타케인 히사야오도리'}];
+document.getElementById('bk').innerHTML=
+ '<div class="bk-sub">항공 · 에어로케이 · 성인 3</div>'+
+ flights.map(f=>`<div class="pass"><div class="m"><div class="lbl">${f[0]} · ${f[1]}</div><div class="rt2 num">
+   <div><b>${f[4]}</b><small>${f[2]} ${f[3]}</small></div><hr><span class="dur">${f[8]}</span><hr><div style="text-align:right"><b>${f[7]}</b><small>${f[5]} ${f[6]}</small></div></div></div>
+   <div class="side"><small>편명</small><b>${f[9]}</b></div></div>`).join('')+
+ '<div class="bk-sub">숙소 · 4박</div>'+
+ stays.map((s,i)=>`<div class="stay${s.onsen?' onsen':''}"><div class="n num">${i+1}</div><div><div class="where">${s.w} · ${s.k}</div><h3>${s.n}</h3>
+   <div class="ci num"><div><b>체크인</b>${s.a}</div><div><b>체크아웃</b>${s.b}</div></div>
+   <div class="lk"><a href="${ph(s.p)}" target="_blank" rel="noopener">사진 보기</a><a href="${gm(s.q)}" target="_blank" rel="noopener">지도 보기</a></div></div></div>`).join('')+
+ `<div class="bk-sub">투어</div><div class="bk-tour" style="grid-column:1/-1"><h3>시라카와고 · 히다 다카야마 버스투어</h3>
+   <p class="num">12.21 월 · 중부전력 미라이타워 1층 앞 07:10–07:25 미팅, 07:30 정시 출발 · 한국어 가이드 · 3명</p>
+   <div class="lk"><a href="${gm('Chubu Electric Power MIRAI TOWER')}" target="_blank" rel="noopener">미팅 장소 지도</a></div></div>`;
+
+
+/* 구글 포토 공유 앨범 링크: 앨범을 만든 뒤 아래 따옴표 안에 링크를 붙여넣으세요 */
+const ALBUM_URL='';
+(function(){const b=document.getElementById('gpBtn'),n=document.getElementById('gpNote');
+  if(ALBUM_URL){b.href=ALBUM_URL}else{b.classList.add('off');b.textContent='앨범 준비 중';n.textContent='여행 전에 앨범 링크가 연결될 거예요'}})();
+
+
+/* 쇼핑 */
+const SHOPS=[
+ {a:'sakae',n:'돈키호테 사카에 본점',q:'Don Quijote Sakae',hr:'24시간',w:'1일차 밤 · 숙소 바로 옆',k:['과자','화장품','의약품','가챠'],d:'층층이 과자·화장품·의약품·기념품. 지하엔 가챠와 인형뽑기. 밤늦게 가도 열려 있어요.'},
+ {a:'sakae',n:'사카에 스카이르 (유니클로 5층 · 다이소 7층)',q:'Sakae Skyle',hr:'10:00–20:00',w:'숙소에서 도보 5분',k:['옷','생활잡화'],d:'겨울 옷이 부족하면 유니클로 히트텍·패딩, 다이소는 한 층 전체라 구경할 게 많아요.'},
+ {a:'sakae',n:'마쓰자카야 나고야점',q:'Matsuzakaya Nagoya',hr:'10:00–20:00',w:'3일차 저녁 히쓰마부시와 같은 건물',k:['백화점','식품관','캐릭터'],d:'400년 넘은 백화점. 본관 지하 식품 층에 나고야 명과가 모여 있고, 아이들이 좋아하는 포켓몬 매장도 있어요.'},
+ {a:'sakae',n:'미쓰코시 나고야 사카에점',q:'Mitsukoshi Sakae',hr:'10:00–20:00',w:'사카에역 지하로 연결',k:['백화점','화장품','식품관'],d:'화장품·명품과 지하 식품관. 옆 라시크와 지하로 이어져요.'},
+ {a:'sakae',n:'라시크',q:'LACHIC',hr:'11:00–21:00',w:'미쓰코시 옆',k:['패션','맛집'],d:'20–40대 패션 브랜드 위주. 7·8층은 식당가라 저녁 먹기에도 좋아요.'},
+ {a:'sakae',n:'선샤인 사카에 (관람차)',q:'Sunshine Sakae',hr:'07:00–24:00',w:'돈키호테 바로 옆',k:['관람차','오락실'],d:'건물에 관람차가 붙어 있어요. 한 바퀴 15분 정도로 밤에 타면 사카에 야경이 보여요.'},
+ {a:'sakae',n:'오아시스21 지브리 굿즈 매장',q:'Oasis 21 Nagoya',hr:'매장별 상이',w:'1일차 저녁 야경 코스',k:['캐릭터','지브리'],d:'오아시스21 지하 상가에 지브리 굿즈 매장이 있어요. 야경 보러 간 김에 들르기 좋아요.'},
+ {a:'osu',n:'오스 상점가 · 오스칸논',q:'Osu Kannon',hr:'가게별 상이',w:'3일차 저녁',k:['길거리 간식','잡화','우이로'],d:'길거리 간식과 잡화점이 가득한 상점가. 우이로 전문점 같은 나고야 명과 가게도 모여 있어요.'},
+ {a:'osu',n:'코메효 나고야 본점',q:'Komehyo Nagoya',hr:'10:30–19:00',w:'오스칸논 근처',k:['중고 명품','시계','악기'],d:'일본 최대급 중고 명품 매장. 가방·시계·기타까지, 구경만 해도 재미있어요.'},
+ {a:'meieki',n:'JR 나고야 다카시마야',q:'JR Nagoya Takashimaya',hr:'10:00–20:00',w:'5일차 점심 전후',k:['백화점','식품관','기념품'],d:'나고야역 바로 위 백화점. 지하 식품관에서 나고야 기념 과자를 한 번에 살 수 있어요.'},
+ {a:'meieki',n:'핸즈 나고야',q:'Hands Nagoya',hr:'10:00–20:00',w:'다카시마야와 같은 건물',k:['문구','잡화','여행용품'],d:'문구·다이어리 꾸미기·잡화가 여러 층에. 문구 쇼핑하기 좋은 곳이에요.'},
+ {a:'meieki',n:'메이테츠 백화점 본점',q:'Meitetsu Department Store',hr:'10:00–20:00',w:'공항 가는 메이테츠역 위',k:['백화점','기념품'],d:'공항 열차 타기 직전에 들르기 좋은 위치. 면세 카운터가 있어요.'},
+ {a:'meieki',n:'에스카 지하상가',q:'ESCA',hr:'10:00–20:30',w:'나고야역 서쪽 지하',k:['유니클로','드러그스토어','식당'],d:'유니클로와 드러그스토어(마쓰모토키요시), 식당이 모인 지하상가. 비·눈 오는 날 편해요.'},
+ {a:'gero',n:'야마카와 마네키네코 상점',q:'Yamakawa Gero',hr:'09:00–17:30',w:'3일차 · 게로역 바로 앞',k:['게로 기념품','히다규'],d:'커다란 마네키네코가 있는 가게. 게로 한정 과자와 히다규 카레, 이 가게에서만 파는 히다규 주먹밥.'},
+ {a:'gero',n:'족욕 유아미야',q:'Yuamiya Gero',hr:'09:30–18:00',w:'2일차 오후',k:['디저트','기념품'],d:'따뜻한 푸딩과 온천달걀 소프트. 가게 안에서 게로 기념품도 팔아요.'},
+ {a:'gero',n:'다카야마 산마치스지',q:'Takayama Old Town',hr:'가게별 상이',w:'4일차 투어',k:['전통 거리','기념품'],d:'옛 거리 상점에서 히다 공예품과 과자. 미야가와 아침시장은 정오에 닫아서 투어 시간과 안 맞을 수 있어요.'},
+ {a:'air',n:"YB.Friend's (센트레아 4층)",q:'YB Friends Centrair',hr:'09:00–21:00',w:'5일차 출국 전',k:['캐릭터','가챠'],d:'지브리·산리오·도라에몽 굿즈와 가챠. 출국심사 전 구역이라 면세가 안 될 수 있어요.'},
+];
+const AREAS=[['all','전체'],['sakae','사카에 · 숙소 주변'],['osu','오스'],['meieki','나고야역'],['gero','게로·다카야마'],['air','공항']];
+const BUY=[
+ {t:'나고야 기념 과자',s:'다카시마야 지하 · 역 기념품점 · 공항',i:[['유카리 새우 센베이','나고야를 대표하는 새우 전병, 회사·지인 선물용'],['우이로바','막대 아이스바 모양 우이로. 5가지 맛, 상온 보관 30일이라 가져오기 좋아요'],['피요린','병아리 모양 푸딩. 냉장이라 현지에서 먹기'],['데바사키·미소카츠 맛 과자','나고야 음식 맛 스낵, 반 친구 선물용으로 인기']]},
+ {t:'돈키호테 단골템',s:'돈키호테 · 드러그스토어',i:[['소화제 (카베진 등)','한국 여행자들이 박스째 사오는 대표 아이템'],['동전 파스 (로이히 츠보코)','부모님 선물 1순위'],['휴족시간','걷기 많은 여행 중 밤에 바로 쓰기'],['니베아 복숭아 립밤','작고 저렴해서 친구 선물용']]},
+ {t:'과자·간식',s:'돈키호테 · 편의점 · 슈퍼',i:[['킷캣 일본 한정 맛','말차·지역 한정 맛'],['곤약젤리','가볍고 나눠주기 좋아요'],['자가리코','컵 감자스낵, 일본 한정 맛'],['편의점 디저트','롤케이크·푸딩은 숙소에서 바로 먹기']]},
+ {t:'게로·히다 기념품',s:'게로역 앞 · 다카야마 옛 거리',i:[['게로게로 만주','개구리 모양 게로 명물 만주'],['히다규 카레 (레토르트)','집에서 데워 먹는 히다규 카레'],['사루보보 인형','다카야마의 빨간 얼굴 없는 부적 인형'],['온천 입욕제','게로 온천을 집에서']]},
+];
+const TAGS=['나고야쇼핑','나고야맛집','나고야여행','게로온천','시라카와고','다카야마','돈키호테쇼핑리스트'];
+(function(){
+  const tabs=document.getElementById('shTabs'),grid=document.getElementById('shGrid');let cur='all';
+  function draw(){
+    tabs.innerHTML=AREAS.map(a=>`<button data-a="${a[0]}" class="${cur===a[0]?'on':''}">${a[1]}<small>${a[0]==='all'?SHOPS.length:SHOPS.filter(x=>x.a===a[0]).length}</small></button>`).join('');
+    grid.innerHTML=SHOPS.filter(x=>cur==='all'||x.a===cur).map(x=>`<div class="shop"><div class="top"><h4>${esc(x.n)}</h4><span class="hr num">${x.hr}</span></div>
+      <div class="when">${esc(x.w)}</div><p>${esc(x.d)}</p><div class="kind">${x.k.map(k=>`<span>${k}</span>`).join('')}</div>
+      <div class="lk"><a href="${ph(x.n.replace(/\(.*?\)/g,''))}" target="_blank" rel="noopener">사진 보기</a><a href="${gm(x.q)}" target="_blank" rel="noopener">지도 보기</a></div></div>`).join('');
+  }
+  tabs.onclick=e=>{const b=e.target.closest('button');if(b){cur=b.dataset.a;draw()}};draw();
+  let got=[];try{got=JSON.parse(localStorage.getItem('ngy_buy')||'[]')}catch(e){}
+  const buy=document.getElementById('buy');
+  function drawBuy(){buy.innerHTML=BUY.map((g,gi)=>`<div class="bgrp"><h4>${g.t}<small>${g.s}</small></h4><ul>${g.i.map((it,ii)=>{const id=gi+'-'+ii,on=got.includes(id);
+    return `<li class="${on?'got':''}"><input type="checkbox" id="b${id}" data-id="${id}" ${on?'checked':''}><label for="b${id}"><span>${it[0]}</span><small>${it[1]}</small></label></li>`}).join('')}</ul></div>`).join('')}
+  drawBuy();
+  buy.onchange=e=>{const id=e.target.dataset.id;got=e.target.checked?[...got,id]:got.filter(x=>x!==id);try{localStorage.setItem('ngy_buy',JSON.stringify(got))}catch(err){}drawBuy()};
+  document.getElementById('tags').innerHTML=TAGS.map(t=>`<a href="https://www.instagram.com/explore/tags/${encodeURIComponent(t)}/" target="_blank" rel="noopener">#${t}</a>`).join('');
+})();
+
+/* 히어로 눈 */
+(function(){const cv=document.getElementById('snow'),cx=cv.getContext('2d'),hero=cv.parentElement;let W,H,fl=[];
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  function rs(){W=cv.width=hero.clientWidth;H=cv.height=hero.clientHeight}rs();addEventListener('resize',rs);
+  for(let i=0;i<70;i++)fl.push({x:Math.random()*W,y:Math.random()*H,r:.6+Math.random()*2,s:.25+Math.random()*.7,w:Math.random()*6});
+  (function loop(){cx.clearRect(0,0,W,H);cx.fillStyle='rgba(255,255,255,.8)';
+    fl.forEach(f=>{f.y+=f.s;f.w+=.01;f.x+=Math.sin(f.w)*.35;if(f.y>H){f.y=-4;f.x=Math.random()*W}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()});
+    requestAnimationFrame(loop)})()})();
+</script>
+</body>
+</html>

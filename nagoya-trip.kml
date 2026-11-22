@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>나고야는 핑계고, 시라카와고에 눈 보러 갑니다</name>
+<Style id="d1"><IconStyle><color>ffd67b4b</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="d2"><IconStyle><color>ff3d48e2</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="d3"><IconStyle><color>ff2ba2d9</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="d4"><IconStyle><color>ff6b8f2f</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Style id="d5"><IconStyle><color>ffc9638a</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href></Icon></IconStyle></Style>
+<Folder><name>12/18 금 · 1일차</name>
+<Placemark><name>1. 센트레아(중부국제공항)</name><description>12/18 금 · 1일차</description><styleUrl>#d1</styleUrl><Point><coordinates>136.8107557,34.8573624,0</coordinates></Point></Placemark>
+<Placemark><name>2. 베셀 인 사카에역 (숙소)</name><description>12/18 금 · 1일차</description><styleUrl>#d1</styleUrl><Point><coordinates>136.9064127,35.171311,0</coordinates></Point></Placemark>
+<Placemark><name>3. 미소카츠 야바톤 본점</name><description>12/18 금 · 1일차</description><styleUrl>#d1</styleUrl><Point><coordinates>136.9062361,35.1616781,0</coordinates></Point></Placemark>
+<Placemark><name>4. 오아시스21</name><description>12/18 금 · 1일차</description><styleUrl>#d1</styleUrl><Point><coordinates>136.9094757,35.1711148,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>12/19 토 · 2일차</name>
+<Placemark><name>1. 코메다 커피 사카에1초메점</name><description>12/19 토 · 2일차</description><styleUrl>#d2</styleUrl><Point><coordinates>136.8949854,35.1664521,0</coordinates></Point></Placemark>
+<Placemark><name>2. 나고야역</name><description>12/19 토 · 2일차</description><styleUrl>#d2</styleUrl><Point><coordinates>136.8815369,35.170915,0</coordinates></Point></Placemark>
+<Placemark><name>3. 게로역</name><description>12/19 토 · 2일차</description><styleUrl>#d2</styleUrl><Point><coordinates>137.2398018,35.8053155,0</coordinates></Point></Placemark>
+<Placemark><name>4. 족욕 유아미야</name><description>12/19 토 · 2일차</description><styleUrl>#d2</styleUrl><Point><coordinates>137.2428846,35.8084696,0</coordinates></Point></Placemark>
+<Placemark><name>5. 오에도온센 게로벳칸 (숙소)</name><description>12/19 토 · 2일차</description><styleUrl>#d2</styleUrl><Point><coordinates>137.2408412,35.8103788,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>12/20 일 · 3일차</name>
+<Placemark><name>1. 게로온천 합장촌</name><description>12/20 일 · 3일차</description><styleUrl>#d3</styleUrl><Point><coordinates>137.2496949,35.8083288,0</coordinates></Point></Placemark>
+<Placemark><name>2. 이로리 히다 야키니쿠 (히다규)</name><description>12/20 일 · 3일차</description><styleUrl>#d3</styleUrl><Point><coordinates>137.2439937,35.8090319,0</coordinates></Point></Placemark>
+<Placemark><name>3. 쿠레타케 인 히사야오도리 (숙소)</name><description>12/20 일 · 3일차</description><styleUrl>#d3</styleUrl><Point><coordinates>136.9085927,35.1764419,0</coordinates></Point></Placemark>
+<Placemark><name>4. 오스칸논 · 오스 상점가</name><description>12/20 일 · 3일차</description><styleUrl>#d3</styleUrl><Point><coordinates>136.8994186,35.1596892,0</coordinates></Point></Placemark>
+<Placemark><name>5. 아쓰타 호라이켄 마쓰자카야점 (히쓰마부시)</name><description>12/20 일 · 3일차</description><styleUrl>#d3</styleUrl><Point><coordinates>136.907932,35.164522,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>12/21 월 · 4일차</name>
+<Placemark><name>1. 미라이타워 (투어 미팅 장소)</name><description>12/21 월 · 4일차</description><styleUrl>#d4</styleUrl><Point><coordinates>136.908338,35.1723452,0</coordinates></Point></Placemark>
+<Placemark><name>2. 시라카와고</name><description>12/21 월 · 4일차</description><styleUrl>#d4</styleUrl><Point><coordinates>136.9022991,36.2550982,0</coordinates></Point></Placemark>
+<Placemark><name>3. 다카야마 산마치스지</name><description>12/21 월 · 4일차</description><styleUrl>#d4</styleUrl><Point><coordinates>137.2596227,36.1413161,0</coordinates></Point></Placemark>
+<Placemark><name>4. 세카이노 야마짱 본점 (테바사키)</name><description>12/21 월 · 4일차</description><styleUrl>#d4</styleUrl><Point><coordinates>136.9134107,35.1680054,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>12/22 화 · 5일차</name>
+<Placemark><name>1. 나고야성 혼마루어전</name><description>12/22 화 · 5일차</description><styleUrl>#d5</styleUrl><Point><coordinates>136.899927,35.1848636,0</coordinates></Point></Placemark>
+<Placemark><name>2. 메이테츠 나고야역</name><description>12/22 화 · 5일차</description><styleUrl>#d5</styleUrl><Point><coordinates>136.8841166,35.168696,0</coordinates></Point></Placemark>
+<Placemark><name>3. 센트레아(중부국제공항)</name><description>12/22 화 · 5일차</description><styleUrl>#d5</styleUrl><Point><coordinates>136.8107557,34.8573624,0</coordinates></Point></Placemark>
+<Placemark><name>4. 청주국제공항</name><description>12/22 화 · 5일차</description><styleUrl>#d5</styleUrl><Point><coordinates>127.4958842,36.7219682,0</coordinates></Point></Placemark>
+</Folder>
+<Style id="shop"><IconStyle><color>ffb36b9b</color><scale>1.0</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/wht-diamond.png</href></Icon></IconStyle></Style>
+<Folder><name>쇼핑</name>
+<Placemark><name>돈키호테 사카에 본점</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.9063906,35.1702098,0</coordinates></Point></Placemark>
+<Placemark><name>사카에 스카이르 (유니클로·다이소)</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.9063214,35.1683756,0</coordinates></Point></Placemark>
+<Placemark><name>마쓰자카야 나고야점</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.907927,35.165279,0</coordinates></Point></Placemark>
+<Placemark><name>미쓰코시 나고야 사카에점</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.9076855,35.1683331,0</coordinates></Point></Placemark>
+<Placemark><name>라시크</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.9077603,35.1674808,0</coordinates></Point></Placemark>
+<Placemark><name>선샤인 사카에 (관람차)</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.9062811,35.1694169,0</coordinates></Point></Placemark>
+<Placemark><name>코메효 나고야 본점</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.902028,35.1593929,0</coordinates></Point></Placemark>
+<Placemark><name>JR 나고야 다카시마야</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.88318,35.170914,0</coordinates></Point></Placemark>
+<Placemark><name>핸즈 나고야</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.88318,35.170914,0</coordinates></Point></Placemark>
+<Placemark><name>메이테츠 백화점 본점</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.884084,35.1696089,0</coordinates></Point></Placemark>
+<Placemark><name>에스카 지하상가</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.880332,35.1702144,0</coordinates></Point></Placemark>
+<Placemark><name>야마카와 마네키네코 상점 (게로역 앞)</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>137.2399077,35.8067723,0</coordinates></Point></Placemark>
+<Placemark><name>YB.Friend&#x27;s (센트레아 공항)</name><description>쇼핑</description><styleUrl>#shop</styleUrl><Point><coordinates>136.8145422,34.8585433,0</coordinates></Point></Placemark>
+</Folder></Document></kml>
