@@ -219,6 +219,29 @@ button{font-family:inherit}
 .tags{display:flex;gap:6px;flex-wrap:wrap}
 .tags a{font-size:13px;text-decoration:none;color:#9b2f6b;border:1px solid #f0d3e3;background:#fdf4f9;border-radius:999px;padding:4px 11px}
 @media (min-width:860px){.sh-grid{grid-template-columns:1fr 1fr}.buy{grid-template-columns:1fr 1fr}}
+
+/* PHOTO GALLERY */
+.gal{margin-top:12px}
+.gal-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:600;color:var(--ai-2);margin-bottom:6px}
+.gal-h small{font-weight:400;color:var(--mute);font-size:11.5px}
+.gal-strip{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-right:-20px;padding-right:20px}
+.gal-strip::-webkit-scrollbar{display:none}
+.gal-it{flex:0 0 78%;max-width:340px;aspect-ratio:4/3;border:0;padding:0;border-radius:10px;overflow:hidden;background:#e8ecf3;scroll-snap-align:start;position:relative;cursor:pointer}
+.gal-it img,.gal-it video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.gal-it .play{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:30px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.day .pc{display:block;font-style:normal;font-size:11px;color:var(--hida);margin-top:3px}
+.day.on .pc{color:var(--hida)}
+#unsorted{margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+#unsorted h3{font-size:15px;font-weight:700;margin-bottom:8px}
+.vw{position:fixed;inset:0;z-index:60;background:#0c1220}
+.vw[hidden]{display:none}
+.vw-strip{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.vw-strip::-webkit-scrollbar{display:none}
+.vw-sl{flex:0 0 100%;height:100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center}
+.vw-sl img,.vw-sl video{max-width:100%;max-height:100%;object-fit:contain}
+.vw-x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:17px;cursor:pointer}
+.vw-c{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#dfe5f2;font-size:13px;pointer-events:none}
+@media (min-width:860px){.gal-it{flex-basis:46%}}
 /* ALBUM */
 .gp{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
 .gp h3{font-size:17px;font-weight:700}
@@ -523,6 +546,7 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
       <li><b>앨범 열기 버튼 누르기</b>공유 앨범에 참여해요</li>
       <li><b>사진·영상 추가</b>앨범 안에서 ＋ 버튼으로 올려요</li>
     </ol>
+    <div id="unsorted" hidden></div>
   </section>
 
 </div>
@@ -620,10 +644,11 @@ function renderDay(i){
         <h4>${esc(it.n)}</h4>
         ${it.d?`<p>${esc(it.d)}</p>`:''}
         ${it.tr?`<div class="route-pill">${esc(it.tr)}</div>`:''}
-        ${(it.ph||it.q)?`<div class="lk">${it.ph?`<a href="${ph(it.ph)}" target="_blank" rel="noopener">사진 보기</a>`:''}${it.q?`<a href="${gm(it.q)}" target="_blank" rel="noopener">지도 보기</a>`:''}</div>`:''}
+        ${(it.ph||it.q)?`<div class="lk">${it.ph?`<a href="${ph(it.ph)}" target="_blank" rel="noopener">블로그 사진</a>`:''}${it.q?`<a href="${gm(it.q)}" target="_blank" rel="noopener">지도 보기</a>`:''}</div>`:''}
       </div></div>`;
   });
   dayEl.innerHTML=h;
+  if(typeof fillGal==='function')fillGal(i);
 }
 days.forEach((d,i)=>{const b=document.createElement('button');b.className='day'+(d.date===todayStr?' today':'');
   b.innerHTML=`<b class="num">${d.date.slice(8)}</b><span>${d.dow}요일 · ${d.label}</span><em>${esc(d.where)}</em>`;
@@ -655,7 +680,7 @@ document.getElementById('bk').innerHTML=
  '<div class="bk-sub">숙소 · 4박</div>'+
  stays.map((s,i)=>`<div class="stay${s.onsen?' onsen':''}"><div class="n num">${i+1}</div><div><div class="where">${s.w} · ${s.k}</div><h3>${s.n}</h3>
    <div class="ci num"><div><b>체크인</b>${s.a}</div><div><b>체크아웃</b>${s.b}</div></div>
-   <div class="lk"><a href="${ph(s.p)}" target="_blank" rel="noopener">사진 보기</a><a href="${gm(s.q)}" target="_blank" rel="noopener">지도 보기</a></div></div></div>`).join('')+
+   <div class="lk"><a href="${ph(s.p)}" target="_blank" rel="noopener">블로그 사진</a><a href="${gm(s.q)}" target="_blank" rel="noopener">지도 보기</a></div></div></div>`).join('')+
  `<div class="bk-sub">투어</div><div class="bk-tour" style="grid-column:1/-1"><h3>시라카와고 · 히다 다카야마 버스투어</h3>
    <p class="num">12.21 월 · 중부전력 미라이타워 1층 앞 07:10–07:25 미팅, 07:30 정시 출발 · 한국어 가이드 · 3명</p>
    <div class="lk"><a href="${gm('Chubu Electric Power MIRAI TOWER')}" target="_blank" rel="noopener">미팅 장소 지도</a></div></div>`;
@@ -701,7 +726,7 @@ const TAGS=['나고야쇼핑','나고야맛집','나고야여행','게로온천'
     tabs.innerHTML=AREAS.map(a=>`<button data-a="${a[0]}" class="${cur===a[0]?'on':''}">${a[1]}<small>${a[0]==='all'?SHOPS.length:SHOPS.filter(x=>x.a===a[0]).length}</small></button>`).join('');
     grid.innerHTML=SHOPS.filter(x=>cur==='all'||x.a===cur).map(x=>`<div class="shop"><div class="top"><h4>${esc(x.n)}</h4><span class="hr num">${x.hr}</span></div>
       <div class="when">${esc(x.w)}</div><p>${esc(x.d)}</p><div class="kind">${x.k.map(k=>`<span>${k}</span>`).join('')}</div>
-      <div class="lk"><a href="${ph(x.n.replace(/\(.*?\)/g,''))}" target="_blank" rel="noopener">사진 보기</a><a href="${gm(x.q)}" target="_blank" rel="noopener">지도 보기</a></div></div>`).join('');
+      <div class="lk"><a href="${ph(x.n.replace(/\(.*?\)/g,''))}" target="_blank" rel="noopener">블로그 사진</a><a href="${gm(x.q)}" target="_blank" rel="noopener">지도 보기</a></div></div>`).join('');
   }
   tabs.onclick=e=>{const b=e.target.closest('button');if(b){cur=b.dataset.a;draw()}};draw();
   let got=[];try{got=JSON.parse(localStorage.getItem('ngy_buy')||'[]')}catch(e){}
@@ -721,6 +746,94 @@ const TAGS=['나고야쇼핑','나고야맛집','나고야여행','게로온천'
   (function loop(){cx.clearRect(0,0,W,H);cx.fillStyle='rgba(255,255,255,.8)';
     fl.forEach(f=>{f.y+=f.s;f.w+=.01;f.x+=Math.sin(f.w)*.35;if(f.y>H){f.y=-4;f.x=Math.random()*W}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()});
     requestAnimationFrame(loop)})()})();
+</script>
+<script>
+/* ================= 일정별 사진 ================= */
+const PHOTO_REPO='msjju22-cmyk/Nagoya';
+let PHOTOS=[];            // {src,thumb,type,t,lat,lng,item:'d-k'|null}
+function parseExif(buf){
+  const out={};try{const v=new DataView(buf);if(v.getUint16(0)!==0xFFD8)return out;let o=2;
+    while(o<v.byteLength-4){const mk=v.getUint16(o),len=v.getUint16(o+2);
+      if(mk===0xFFE1&&v.getUint32(o+4)===0x45786966){const t=o+10,le=v.getUint16(t)===0x4949;
+        const g16=p=>v.getUint16(p,le),g32=p=>v.getUint32(p,le);
+        const tags=ifd=>{const m={},n=g16(t+ifd);for(let i=0;i<n;i++){const e=t+ifd+2+i*12;m[g16(e)]=e}return m};
+        const str=e=>{const c=g32(e+4),off=c>4?t+g32(e+8):e+8;let s='';for(let i=0;i<c;i++){const ch=v.getUint8(off+i);if(ch)s+=String.fromCharCode(ch)}return s};
+        const rat=(off,i)=>g32(off+i*8)/(g32(off+i*8+4)||1);
+        const i0=tags(g32(t+4));let dt=null;
+        if(i0[0x8769]){const ex=tags(g32(i0[0x8769]+8));if(ex[0x9003])dt=str(ex[0x9003])}
+        if(!dt&&i0[0x0132])dt=str(i0[0x0132]);
+        const m=dt&&dt.match(/(\d{4}):(\d\d):(\d\d) (\d\d):(\d\d):(\d\d)/);
+        if(m)out.t=Date.UTC(+m[1],+m[2]-1,+m[3],+m[4]-9,+m[5],+m[6]);
+        if(i0[0x8825]){const gp=tags(g32(i0[0x8825]+8));
+          if(gp[2]&&gp[4]){const la=t+g32(gp[2]+8),lo=t+g32(gp[4]+8);
+            let lat=rat(la,0)+rat(la,1)/60+rat(la,2)/3600,lng=rat(lo,0)+rat(lo,1)/60+rat(lo,2)/3600;
+            if(gp[1]&&String.fromCharCode(v.getUint8(gp[1]+8))==='S')lat=-lat;
+            if(gp[3]&&String.fromCharCode(v.getUint8(gp[3]+8))==='W')lng=-lng;
+            if(lat&&lng){out.lat=lat;out.lng=lng}}}
+        return out}
+      if((mk&0xFF00)!==0xFF00)break;o+=2+len}}catch(e){}return out;
+}
+const distKm=(a,b,c,d)=>{const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return Math.sqrt(x*x+y*y)*6371};
+function matchItem(p){
+  if(!p.t)return null;
+  const d=new Date(p.t+9*3600e3),date=d.toISOString().slice(0,10),hm=d.toISOString().slice(11,16);
+  const di=days.findIndex(x=>x.date===date);if(di<0)return null;
+  const items=days[di].items;
+  if(p.lat){let best=null,bd=1.2;items.forEach((it,k)=>{const pl=PLACES[it.q];if(!pl)return;const dk=distKm(p.lat,p.lng,pl[1],pl[2]);if(dk<bd){bd=dk;best=k}});if(best!=null)return di+'-'+best}
+  let pick=null;items.forEach((it,k)=>{if(it.h&&it.h<=hm)pick=k});
+  if(pick==null)pick=items.findIndex(it=>it.h);
+  return pick==null||pick<0?null:di+'-'+pick;
+}
+function galHTML(list,key){
+  return `<div class="gal-h"><span>📷 사진 ${list.length}</span><small>옆으로 넘겨 보세요</small></div>
+  <div class="gal-strip">${list.map((p,i)=>`<button class="gal-it" data-key="${key}" data-i="${i}" aria-label="사진 크게 보기">${p.type==='video'
+    ?`<video src="${p.src}#t=0.3" muted playsinline preload="metadata"></video><span class="play">▶</span>`
+    :`<img src="${p.thumb||p.src}" loading="lazy" alt="">`}</button>`).join('')}</div>`;
+}
+function byKey(key){return PHOTOS.filter(p=>p.item===key).sort((a,b)=>(a.t||0)-(b.t||0))}
+function fillGal(di){
+  document.querySelectorAll('#day .row').forEach((row,k)=>{
+    const key=di+'-'+k,list=byKey(key);let g=row.querySelector('.gal');
+    if(!list.length){if(g)g.remove();return}
+    if(!g){g=document.createElement('div');g.className='gal';row.querySelector('.bd').appendChild(g)}
+    g.innerHTML=galHTML(list,key);
+  });
+  document.querySelectorAll('#tabs .day').forEach((b,i)=>{const n=PHOTOS.filter(p=>p.item&&p.item.startsWith(i+'-')).length;
+    let c=b.querySelector('.pc');if(n){if(!c){c=document.createElement('i');c.className='pc';b.appendChild(c)}c.textContent='📷'+n}else if(c)c.remove()});
+  const un=PHOTOS.filter(p=>!p.item),box=document.getElementById('unsorted');
+  if(box){box.hidden=!un.length;if(un.length)box.innerHTML='<h3>날짜를 알 수 없는 사진</h3>'+galHTML(un,'none')}
+}
+/* 전체화면 슬라이드 */
+const vw=document.createElement('div');vw.className='vw';vw.hidden=true;
+vw.innerHTML='<div class="vw-strip" id="vwS"></div><button class="vw-x" aria-label="닫기">✕</button><div class="vw-c" id="vwC"></div>';
+document.body.appendChild(vw);
+const vwS=vw.querySelector('#vwS'),vwC=vw.querySelector('#vwC');let vwList=[];
+function openVw(list,i){vwList=list;vwS.innerHTML=list.map(p=>`<div class="vw-sl">${p.type==='video'?`<video src="${p.src}" controls playsinline preload="metadata"></video>`:`<img src="${p.src}" alt="">`}</div>`).join('');
+  vw.hidden=false;document.body.style.overflow='hidden';requestAnimationFrame(()=>{vwS.scrollLeft=i*vwS.clientWidth;upd()})}
+function upd(){const i=Math.round(vwS.scrollLeft/vwS.clientWidth);const p=vwList[i];if(!p)return;
+  let s=(i+1)+' / '+vwList.length;if(p.t){const d=new Date(p.t+9*3600e3);s+=' · '+(d.getUTCMonth()+1)+'/'+d.getUTCDate()+' '+String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')}vwC.textContent=s;
+  vwS.querySelectorAll('video').forEach((v,j)=>{if(j!==i)v.pause()})}
+vwS.addEventListener('scroll',()=>{clearTimeout(vwS._t);vwS._t=setTimeout(upd,80)},{passive:true});
+function closeVw(){vw.hidden=true;document.body.style.overflow='';vwS.innerHTML=''}
+vw.querySelector('.vw-x').onclick=closeVw;
+document.addEventListener('keydown',e=>{if(vw.hidden)return;if(e.key==='Escape')closeVw();if(e.key==='ArrowRight')vwS.scrollBy({left:vwS.clientWidth,behavior:'smooth'});if(e.key==='ArrowLeft')vwS.scrollBy({left:-vwS.clientWidth,behavior:'smooth'})});
+document.addEventListener('click',e=>{const b=e.target.closest('.gal-it');if(!b)return;const key=b.dataset.key;openVw(key==='none'?PHOTOS.filter(p=>!p.item):byKey(key),+b.dataset.i)});
+/* 사진 불러오기: photos.json(정리된 사진) + photos 폴더에 직접 올린 사진 */
+(async()=>{
+  const known=new Set();
+  try{const r=await fetch('photos.json',{cache:'no-cache'});if(r.ok){const j=await r.json();
+    j.forEach(p=>{known.add(p.src);if(p.thumb)known.add(p.thumb);PHOTOS.push({src:p.src,thumb:p.thumb,type:p.type||'image',t:p.t,lat:p.lat,lng:p.lng,item:p.item||null})})}}catch(e){}
+  try{const r=await fetch('https://api.github.com/repos/'+PHOTO_REPO+'/contents/photos');
+    if(r.ok){const files=await r.json();
+      for(const f of files){if(f.type!=='file')continue;const path='photos/'+f.name;if(known.has(path)||/(^|\/)thumbs?\//.test(path)||f.name.startsWith('t_'))continue;
+        const ext=f.name.split('.').pop().toLowerCase();
+        if(['jpg','jpeg'].includes(ext)){try{const b=await fetch(path).then(x=>x.arrayBuffer());const ex=parseExif(b);PHOTOS.push({src:path,type:'image',...ex})}catch(e){}}
+        else if(['png','webp','gif'].includes(ext))PHOTOS.push({src:path,type:'image'});
+        else if(['mp4','mov','webm','m4v'].includes(ext))PHOTOS.push({src:path,type:'video'});
+      }}}catch(e){}
+  PHOTOS.forEach(p=>{if(!p.item)p.item=matchItem(p)});
+  fillGal(cur);
+})();
 </script>
 </body>
 </html>
