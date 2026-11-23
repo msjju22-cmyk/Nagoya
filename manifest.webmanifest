@@ -1,0 +1,2 @@
+{"name":"나고야는 핑계고, 시라카와고에 눈 보러 갑니다","short_name":"나고야 여행","start_url":"./","scope":"./","display":"standalone","background_color":"#1b2a4a","theme_color":"#1b2a4a","lang":"ko",
+"icons":[{"src":"icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icon-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}

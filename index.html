@@ -5,6 +5,12 @@
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1b2a4a">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="나고야 여행">
 <title>우리 가족 나고야·게로 여행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +41,7 @@ button{font-family:inherit}
 .nav .wrap{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding-top:10px;padding-bottom:6px}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;white-space:nowrap;padding:0 2px}
 .brand .mark{font-family:var(--f-mincho);font-weight:800;font-size:18px;color:var(--hida)}
-.nav nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:0 -4px}
+.nav nav{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:0 -4px}
 .nav nav::-webkit-scrollbar{display:none}
 .nav nav button{background:rgba(255,255,255,.07);border:0;color:#fff;font-size:14.5px;font-weight:500;padding:8px 4px;border-radius:8px;cursor:pointer;white-space:nowrap}
 .nav nav button:hover,.nav nav button:active{background:rgba(255,255,255,.18)}
@@ -186,6 +192,55 @@ button{font-family:inherit}
 .bk-sub{font-size:13px;font-weight:600;color:var(--mute);margin:6px 2px -2px}
 
 
+/* TOOLS */
+.tool{padding:18px 20px;margin-bottom:14px}
+.tool-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.tool-h h3{font-size:17px;font-weight:700}
+.tool-s{font-size:12.5px;color:var(--mute)}
+.tool-note{font-size:12.5px;color:var(--mute);margin-top:10px}
+.wx-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.wx{background:var(--snow);border-radius:12px;padding:10px 4px;text-align:center}
+.wx .d{font-size:12px;font-weight:600}
+.wx .pl{font-size:11px;color:var(--mute);margin-top:1px;line-height:1.25;word-break:keep-all}
+.wx .ic{font-size:26px;margin:6px 0 2px;line-height:1.1}
+.wx .wlb{font-size:11px;color:#4a5370;min-height:15px}
+.wx .tp{font-size:14px;font-weight:700;margin-top:4px}
+.wx .tp small{font-weight:400;color:var(--mute)}
+.wx .pr{font-size:11px;color:#3d6fb5;margin-top:2px;min-height:15px}
+.wx.snow{background:#eaf1fb}
+.fx-row{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch}
+.fx-in,.fx-out{background:var(--snow);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.fx-in span,.fx-out span{font-size:12px;color:var(--mute)}
+.fx-in input{font:inherit;font-size:22px;font-weight:700;border:0;background:transparent;width:100%;color:var(--sumi);padding:0}
+.fx-in input:focus{outline:none}
+.fx-in:focus-within{box-shadow:inset 0 0 0 2px var(--hida)}
+.fx-out b{font-size:22px;font-weight:700;color:var(--ai)}
+.fx-sw{border:0;background:var(--ai);color:#fff;border-radius:12px;width:44px;font-size:18px;cursor:pointer}
+.fx-q{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.fx-q button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer;color:var(--sumi)}
+.fx-q button b{font-weight:600}
+.jp-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:10px}
+.jp-tabs::-webkit-scrollbar{display:none}
+.jp-tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13.5px;cursor:pointer;color:var(--sumi)}
+.jp-tabs button.on{background:var(--ai);border-color:var(--ai);color:#fff}
+.jp-list{display:grid;gap:8px}
+.jp{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;background:var(--snow);border-radius:12px;padding:10px 12px}
+.jp .tx{cursor:pointer;border:0;background:none;text-align:left;padding:0;color:inherit;font:inherit}
+.jp .ko{font-size:13px;color:var(--mute)}
+.jp .ja{font-size:17px;font-weight:600;margin-top:1px}
+.jp .rd{font-size:12.5px;color:#3d6fb5}
+.jp.speaking{box-shadow:inset 0 0 0 2px var(--hida)}
+.jp .big{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:6px 10px;font-size:12.5px;cursor:pointer;color:var(--sumi)}
+.jpbig{position:fixed;inset:0;z-index:70;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;cursor:pointer}
+.jpbig[hidden]{display:none}
+.jpbig b{font-size:clamp(34px,10vw,64px);line-height:1.3;color:var(--sumi)}
+.jpbig span{margin-top:18px;font-size:14px;color:var(--mute)}
+.pwa-how{display:grid;gap:8px;font-size:13.5px}
+.pwa-how div{background:var(--snow);border-radius:10px;padding:10px 12px}
+.pwa-how div>b:first-child{display:block;font-size:13px;color:var(--mute);font-weight:600;margin-bottom:2px}
+.pwa-how .ic{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:0 6px}
+#pwaBtn{margin-top:10px}
+@media (max-width:420px){.wx .ic{font-size:22px}.wx .tp{font-size:13px}}
 /* SHOP */
 .taxbox{background:#fbf4e2;border:1px solid #ecd9a5;border-radius:var(--r);padding:16px 18px}
 .taxbox h3{font-size:15.5px;font-weight:700}
@@ -325,7 +380,7 @@ footer{padding:48px 0 60px;text-align:center;font-size:12.5px;color:var(--mute)}
 footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:15px;display:block;margin-bottom:4px}
 
 @media (min-width:860px){
-  .nav nav{grid-template-columns:repeat(5,minmax(0,120px))}
+  .nav nav{grid-template-columns:repeat(6,minmax(0,110px))}
   .hero .wrap{grid-template-columns:1.1fr .9fr;align-items:end;padding-top:64px;padding-bottom:64px}
   .kanji{right:24px}
   .it{grid-template-columns:220px 1fr;align-items:start}
@@ -348,7 +403,7 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
   <div class="wrap">
     <div class="brand"><span class="mark">冬</span>우리 가족 겨울여행</div>
     <nav aria-label="섹션">
-      <button data-go="plan">일정</button><button data-go="route">동선</button><button data-go="book">예약</button><button data-go="shop">쇼핑</button><button data-go="album">앨범</button>
+      <button data-go="plan">일정</button><button data-go="route">동선</button><button data-go="book">예약</button><button data-go="tools">도구</button><button data-go="shop">쇼핑</button><button data-go="album">앨범</button>
     </nav>
   </div>
 </header>
@@ -525,6 +580,42 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
     <div class="bk" id="bk"></div>
   </section>
 
+
+
+  <section class="sec" id="tools">
+    <div class="sec-h"><div><h2>여행 도구</h2><p>여행 중에 폰으로 바로 쓰는 것들</p></div></div>
+
+    <div class="tool panel" id="wx">
+      <div class="tool-h"><h3>날짜별 날씨</h3><span id="wxMode" class="tool-s">불러오는 중…</span></div>
+      <div class="wx-grid" id="wxGrid"></div>
+    </div>
+
+    <div class="tool panel" id="fx">
+      <div class="tool-h"><h3>엔 ↔ 원 계산기</h3><span id="fxRate" class="tool-s">환율 불러오는 중…</span></div>
+      <div class="fx-row">
+        <label class="fx-in"><span id="fxFromL">엔 ¥</span><input id="fxIn" type="number" inputmode="decimal" placeholder="1000" value="1000"></label>
+        <button class="fx-sw" id="fxSw" aria-label="방향 바꾸기">⇄</button>
+        <div class="fx-out"><span id="fxToL">원 ₩</span><b id="fxOut" class="num">–</b></div>
+      </div>
+      <div class="fx-q" id="fxQ"></div>
+    </div>
+
+    <div class="tool panel" id="jp">
+      <div class="tool-h"><h3>일본어 한마디</h3><span class="tool-s">누르면 일본어로 읽어줘요 · 크게 버튼은 점원에게 보여주기</span></div>
+      <div class="jp-tabs" id="jpTabs"></div>
+      <div class="jp-list" id="jpList"></div>
+    </div>
+
+    <div class="tool panel" id="pwa">
+      <div class="tool-h"><h3>홈 화면에 추가하기</h3><span class="tool-s" id="pwaSt">한 번 열어둔 내용은 인터넷이 없어도 보여요</span></div>
+      <div class="pwa-how">
+        <div><b>아이폰 (사파리)</b>아래쪽 공유 버튼 <span class="ic">⬆︎</span> → <b>홈 화면에 추가</b></div>
+        <div><b>갤럭시 (크롬·삼성 인터넷)</b>오른쪽 위 메뉴 <span class="ic">⋮</span> → <b>홈 화면에 추가</b> 또는 <b>앱 설치</b></div>
+      </div>
+      <button class="lk-btn" id="pwaBtn" hidden>앱으로 설치하기</button>
+      <p class="tool-note">출발 전에 와이파이에서 한 번 일정·사진을 쭉 열어두면, 시라카와고처럼 데이터가 약한 곳에서도 볼 수 있어요.</p>
+    </div>
+  </section>
 
   <section class="sec" id="shop">
     <div class="sec-h"><div><h2>쇼핑 가이드</h2><p>동선 위에 있는 쇼핑 스폿과, 한국 여행자들이 많이 사오는 것들</p></div></div>
@@ -890,6 +981,102 @@ function loginUI(pk){
   if(saved){try{await loadPhotos(saved);return}catch(e){}}
   loginUI(pk);
 })();
+</script>
+<script>
+/* ================= 여행 도구 ================= */
+const ls={get(k,d){try{const v=localStorage.getItem('ngy_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('ngy_'+k,JSON.stringify(v))}catch(e){}}};
+
+/* --- 날씨 (Open-Meteo, 키 없이 사용) --- */
+const WX_PLAN=[
+ {date:'2026-12-18',pl:'나고야',lat:35.17,lng:136.91},
+ {date:'2026-12-19',pl:'게로',lat:35.81,lng:137.24},
+ {date:'2026-12-20',pl:'나고야',lat:35.17,lng:136.91},
+ {date:'2026-12-21',pl:'시라카와고',lat:36.26,lng:136.90},
+ {date:'2026-12-22',pl:'나고야',lat:35.17,lng:136.91}];
+const WMO=c=>c===0?['☀️','맑음']:c<=2?['🌤️','구름 조금']:c===3?['☁️','흐림']:c<=48?['🌫️','안개']:c<=57?['🌦️','이슬비']:c<=67?['🌧️','비']:c<=77?['❄️','눈']:c<=82?['🌧️','소나기']:c<=86?['🌨️','눈 소나기']:['⛈️','뇌우'];
+async function wxFetch(url){const r=await fetch(url);if(!r.ok)throw 0;return r.json()}
+async function loadWx(){
+  const grid=document.getElementById('wxGrid'),mode=document.getElementById('wxMode');
+  const now=Date.now(),first=new Date('2026-12-18T00:00:00+09:00').getTime(),last=new Date('2026-12-22T23:59:00+09:00').getTime();
+  const forecast=first-now<15*864e5&&now<last;
+  const groups={};WX_PLAN.forEach(w=>{const k=w.lat+','+w.lng;(groups[k]=groups[k]||[]).push(w)});
+  const out={};let ok=false;
+  for(const k in groups){const w=groups[k][0];
+    const url=forecast
+      ?`https://api.open-meteo.com/v1/forecast?latitude=${w.lat}&longitude=${w.lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,snowfall_sum&timezone=Asia%2FTokyo&start_date=2026-12-18&end_date=2026-12-22`
+      :`https://archive-api.open-meteo.com/v1/archive?latitude=${w.lat}&longitude=${w.lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum&timezone=Asia%2FTokyo&start_date=2025-12-18&end_date=2025-12-22`;
+    try{const j=await wxFetch(url);j.daily.time.forEach((t,i)=>{const d=(forecast?t:t.replace('2025','2026'));out[k+'|'+d]={c:j.daily.weather_code[i],hi:j.daily.temperature_2m_max[i],lo:j.daily.temperature_2m_min[i],pp:j.daily.precipitation_probability_max?.[i],pr:j.daily.precipitation_sum?.[i],sn:j.daily.snowfall_sum?.[i]}});ok=true}catch(e){}}
+  let saved=ls.get('wx',null);
+  if(ok){saved={out,forecast,at:Date.now()};ls.set('wx',saved)}
+  if(!saved){mode.textContent='날씨를 불러오지 못했어요. 인터넷 연결 후 다시 열어주세요.';return}
+  const at=new Date(saved.at);
+  mode.textContent=(saved.forecast?'일기예보':'작년 같은 날 실제 날씨 · 예보는 출발 2주 전부터 자동으로 바뀌어요')+(ok?'':' · '+(at.getMonth()+1)+'/'+at.getDate()+' 저장본');
+  grid.innerHTML=WX_PLAN.map(w=>{const x=saved.out[w.lat+','+w.lng+'|'+w.date];const dw='일월화수목금토'[new Date(w.date+'T03:00:00Z').getUTCDay()];
+    if(!x)return `<div class="wx"><div class="d">${w.date.slice(5).replace('-','/')}</div><div class="pl">${w.pl}</div><div class="ic">–</div></div>`;
+    const m=WMO(x.c),snow=x.sn>0.2;
+    const extra=saved.forecast?(x.pp!=null?`강수 ${x.pp}%`:''):(snow?`눈 ${Math.round(x.sn)}cm`:x.pr>0.5?`비 ${Math.round(x.pr)}mm`:'');
+    return `<div class="wx${snow||x.c>=71&&x.c<=86?' snow':''}"><div class="d">${w.date.slice(5).replace('-','/')} ${dw}</div><div class="pl">${w.pl}</div>
+      <div class="ic">${m[0]}</div><div class="wlb">${m[1]}</div><div class="tp num">${Math.round(x.hi)}°<small> / ${Math.round(x.lo)}°</small></div><div class="pr">${extra}</div></div>`}).join('');
+}
+loadWx();
+
+/* --- 환율 계산기 --- */
+let fxRate=null,fxDir='jk';
+async function loadFx(){
+  const st=document.getElementById('fxRate');
+  try{const j=await fetch('https://api.frankfurter.dev/v1/latest?from=JPY&to=KRW').then(r=>{if(!r.ok)throw 0;return r.json()});fxRate={r:j.rates.KRW,d:j.date}}
+  catch(e){try{const j=await fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json());if(j.rates&&j.rates.KRW)fxRate={r:j.rates.KRW,d:(j.time_last_update_utc||'').slice(5,16)}}catch(err){}}
+  if(fxRate)ls.set('fx',fxRate);else fxRate=ls.get('fx',null);
+  st.textContent=fxRate?`100엔 = ${(fxRate.r*100).toLocaleString('ko-KR',{maximumFractionDigits:0})}원 · ${fxRate.d} 기준`:'환율을 불러오지 못했어요';
+  calcFx();
+}
+function calcFx(){
+  const v=parseFloat(document.getElementById('fxIn').value)||0,o=document.getElementById('fxOut');
+  if(!fxRate){o.textContent='–';return}
+  o.textContent=fxDir==='jk'?Math.round(v*fxRate.r).toLocaleString('ko-KR')+'원':Math.round(v/fxRate.r).toLocaleString('ja-JP')+'엔';
+}
+function drawFxQ(){const q=fxDir==='jk'?[100,500,1000,3000,5000,10000]:[1000,5000,10000,30000,50000,100000];
+  document.getElementById('fxQ').innerHTML=q.map(n=>`<button data-v="${n}"><b>${n.toLocaleString()}</b>${fxDir==='jk'?'엔':'원'}</button>`).join('')}
+document.getElementById('fxIn').addEventListener('input',calcFx);
+document.getElementById('fxQ').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.getElementById('fxIn').value=b.dataset.v;calcFx()};
+document.getElementById('fxSw').onclick=()=>{fxDir=fxDir==='jk'?'kj':'jk';
+  document.getElementById('fxFromL').textContent=fxDir==='jk'?'엔 ¥':'원 ₩';document.getElementById('fxToL').textContent=fxDir==='jk'?'원 ₩':'엔 ¥';
+  document.getElementById('fxIn').value=fxDir==='jk'?1000:10000;drawFxQ();calcFx()};
+drawFxQ();loadFx();
+
+/* --- 일본어 한마디 --- */
+const JP={
+ '기본':[['안녕하세요','こんにちは','곤니치와'],['감사합니다','ありがとうございます','아리가토- 고자이마스'],['저기요 / 실례합니다','すみません','스미마셍'],['괜찮아요','大丈夫です','다이죠-부데스'],['한국에서 왔어요','韓国から来ました','칸코쿠카라 키마시타'],['일본어를 잘 못해요','日本語が分かりません','니혼고가 와카리마셍']],
+ '식당':[['세 명이에요','三人です','산닌데스'],['이거 주세요','これをください','코레오 쿠다사이'],['추천 메뉴는 뭐예요?','おすすめは何ですか','오스스메와 난데스카'],['한국어 메뉴 있나요?','韓国語のメニューはありますか','칸코쿠고노 메뉴-와 아리마스카'],['맛있어요!','おいしいです','오이시-데스'],['계산해 주세요','お会計お願いします','오카이케- 오네가이시마스']],
+ '온천·숙소':[['체크인 부탁해요','チェックインお願いします','첵쿠인 오네가이시마스'],['짐 맡아주실 수 있나요?','荷物を預かってもらえますか','니모츠오 아즈캇테 모라에마스카'],['대욕장은 어디예요?','大浴場はどこですか','다이요쿠죠-와 도코데스카'],['몇 시까지 들어갈 수 있나요?','何時まで入れますか','난지마데 하이레마스카'],['수건 하나 더 주실 수 있나요?','タオルをもう一枚いただけますか','타오루오 모- 이치마이 이타다케마스카']],
+ '쇼핑':[['얼마예요?','いくらですか','이쿠라데스카'],['면세 되나요?','免税できますか','멘제- 데키마스카'],['카드 되나요?','カードで払えますか','카-도데 하라에마스카'],['봉투는 필요 없어요','袋は要りません','후쿠로와 이리마셍'],['다른 색 있어요?','違う色はありますか','치가우 이로와 아리마스카'],['입어봐도 돼요?','試着してもいいですか','시챠쿠시테모 이-데스카']],
+ '교통':[['여기 가고 싶어요 (지도 보여주며)','ここに行きたいです','코코니 이키타이데스'],['이 열차 게로 가나요?','この電車は下呂に行きますか','코노 덴샤와 게로니 이키마스카'],['지정석 세 장 주세요','指定席を三枚ください','시테-세키오 산마이 쿠다사이'],['몇 번 승강장이에요?','何番線ですか','난반센데스카'],['화장실 어디예요?','トイレはどこですか','토이레와 도코데스카']],
+ '긴급':[['도와주세요!','助けてください','타스케테 쿠다사이'],['구급차를 불러주세요','救急車を呼んでください','큐-큐-샤오 욘데 쿠다사이'],['길을 잃었어요','道に迷いました','미치니 마요이마시타'],['가족과 떨어졌어요','家族とはぐれました','카조쿠토 하구레마시타'],['몸이 안 좋아요','具合が悪いです','구아이가 와루이데스']]};
+let jpCat='기본',jaVoice=null;
+function pickVoice(){try{const vs=speechSynthesis.getVoices();jaVoice=vs.find(v=>/ja[-_]JP/i.test(v.lang))||null}catch(e){}}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(t,el){
+  if(!('speechSynthesis' in window))return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.85;if(jaVoice)u.voice=jaVoice;
+    document.querySelectorAll('.jp.speaking').forEach(x=>x.classList.remove('speaking'));el&&el.classList.add('speaking');
+    u.onend=()=>el&&el.classList.remove('speaking');speechSynthesis.speak(u)}catch(e){}
+}
+const jpBig=document.createElement('div');jpBig.className='jpbig';jpBig.hidden=true;jpBig.innerHTML='<b></b><span>화면을 누르면 닫혀요</span>';document.body.appendChild(jpBig);
+jpBig.onclick=()=>{jpBig.hidden=true};
+function drawJp(){
+  document.getElementById('jpTabs').innerHTML=Object.keys(JP).map(k=>`<button class="${k===jpCat?'on':''}" data-c="${k}">${k}</button>`).join('');
+  document.getElementById('jpList').innerHTML=JP[jpCat].map((p,i)=>`<div class="jp" data-i="${i}"><button class="tx" aria-label="${p[1]} 듣기"><div class="ko">${p[0]}</div><div class="ja" lang="ja">${p[1]}</div><div class="rd">${p[2]}</div></button><button class="big">크게</button></div>`).join('');
+}
+document.getElementById('jpTabs').onclick=e=>{const b=e.target.closest('button');if(b){jpCat=b.dataset.c;drawJp()}};
+document.getElementById('jpList').onclick=e=>{const row=e.target.closest('.jp');if(!row)return;const p=JP[jpCat][+row.dataset.i];
+  if(e.target.closest('.big')){jpBig.querySelector('b').textContent=p[1];jpBig.hidden=false;speak(p[1])}else speak(p[1],row)};
+drawJp();
+
+/* --- 홈 화면 앱 + 오프라인 --- */
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(()=>{const s=document.getElementById('pwaSt');if(s)s.textContent='오프라인 준비 완료 · 한 번 열어둔 내용은 인터넷 없이도 보여요'}).catch(()=>{})}
+let deferredPrompt=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('pwaBtn').hidden=false});
+document.getElementById('pwaBtn').onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice.catch(()=>{});deferredPrompt=null;document.getElementById('pwaBtn').hidden=true};
 </script>
 </body>
 </html>
