@@ -175,6 +175,20 @@ button{font-family:inherit}
 .leg:hover{background:var(--snow)}
 .leg.on{background:#eef2fa}
 
+.gmap{margin-top:16px;padding:16px}
+.gm-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+.gm-h h3{font-size:16px;font-weight:700}
+.gm-open{font-size:12.5px;color:var(--ai-2);text-decoration:none;white-space:nowrap}
+.gm-days,.gm-pl{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.gm-days::-webkit-scrollbar,.gm-pl::-webkit-scrollbar{display:none}
+.gm-days button,.gm-pl button{flex:0 0 auto;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--sumi)}
+.gm-days button.on{background:var(--ai);border-color:var(--ai);color:#fff}
+.gm-pl{margin-top:10px}
+.gm-pl button.on{border-color:var(--ai);color:var(--ai);font-weight:600}
+.gm-pl button i{font-style:normal;color:var(--mute);margin-right:4px;font-size:12px}
+.gm-frame{position:relative;margin-top:10px;border-radius:12px;overflow:hidden;background:#e8ecf3;aspect-ratio:4/3}
+.gm-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (min-width:860px){.gm-frame{aspect-ratio:16/8}}
 /* BOOKINGS */
 .bk{display:grid;grid-template-columns:1fr;gap:12px}
 .pass{display:grid;grid-template-columns:1fr auto;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -498,7 +512,7 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
   </section>
 
   <section class="sec" id="route">
-    <div class="sec-h"><div><h2>동선 지도</h2><p>구간을 누르면 지도에서 그날 경로만 보여요</p></div></div>
+    <div class="sec-h"><div><h2>동선 지도</h2><p>그림 지도로 전체 흐름을, 아래 구글 지도로 실제 위치를 확인해요</p></div></div>
     <div class="mapgrid">
       <div class="panel mapbox"><svg id="map" viewBox="0 0 340 420" role="img" aria-label="나고야·게로·시라카와고 동선 지도">
       <defs>
@@ -589,6 +603,13 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
         <button class="leg" data-d="4" style="--c:#2f8f6b"><i></i><div><b>12.21 · 시라카와고·다카야마</b><span>미라이타워 앞 07:30 출발 버스투어</span></div></button>
         <button class="leg" data-d="5" style="--c:#8a63c9"><i></i><div><b>12.22 · 집으로</b><span>센트레아 16:40 → 청주 18:45</span></div></button>
       </div>
+    </div>
+
+    <div class="panel gmap" id="gmap">
+      <div class="gm-h"><h3>구글 지도로 보기</h3><a id="gmOpen" class="gm-open" target="_blank" rel="noopener">구글맵 앱에서 열기</a></div>
+      <div class="gm-days" id="gmDays"></div>
+      <div class="gm-frame"><iframe id="gmF" title="구글 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <div class="gm-pl" id="gmPl"></div>
     </div>
     <details class="kml panel">
       <summary><span>구글 지도에 모든 장소 한 번에 넣기</span><i>자세히</i></summary>
@@ -798,6 +819,30 @@ legs.onclick=e=>{const b=e.target.closest('.leg');if(!b)return;const d=b.dataset
     c.setAttribute('cx',Math.random()*340);c.setAttribute('r',.8+Math.random()*1.6);c.setAttribute('fill','#fff');c.setAttribute('opacity','.9');
     const a=document.createElementNS(ns,'animate');a.setAttribute('attributeName','cy');a.setAttribute('from',-10);a.setAttribute('to',230);
     a.setAttribute('dur',dur+'s');a.setAttribute('begin',(-Math.random()*dur)+'s');a.setAttribute('repeatCount','indefinite');c.appendChild(a);g.appendChild(c)}})();
+
+
+/* 구글 지도 직접 보기 (키 없이 쓰는 기본 임베드) */
+(function(){
+  const box=document.getElementById('gmap');if(!box)return;
+  const f=document.getElementById('gmF'),dEl=document.getElementById('gmDays'),pEl=document.getElementById('gmPl'),op=document.getElementById('gmOpen');
+  let di=Math.max(0,days.findIndex(d=>d.date===todayStr)),sel=-1;
+  const placesOf=d=>{const seen=[];d.items.forEach(it=>{const pl=PLACES[it.q];if(pl&&pl[2]>130&&!seen.some(x=>x.q===it.q))seen.push({q:it.q,p:pl})});return seen};
+  const ll=p=>p[1]+','+p[2];
+  function show(){
+    const d=days[di],pls=placesOf(d);
+    dEl.innerHTML=days.map((x,i)=>`<button class="${i===di?'on':''}" data-i="${i}">${x.date.slice(5).replace('-','/')} ${x.label}</button>`).join('');
+    pEl.innerHTML=`<button class="${sel<0?'on':''}" data-s="-1">이날 동선 전체</button>`+pls.map((x,i)=>`<button class="${sel===i?'on':''}" data-s="${i}"><i>${i+1}</i>${esc(x.p[0])}</button>`).join('');
+    let src,open;
+    if(sel<0&&pls.length>1){
+      src='https://maps.google.com/maps?hl=ko&saddr='+ll(pls[0].p)+'&daddr='+pls.slice(1).map(x=>ll(x.p)).join('+to:')+'&output=embed';
+      open=dayRoute(d);
+    }else{const x=pls[Math.max(0,sel)];src='https://maps.google.com/maps?hl=ko&q='+ll(x.p)+'&z=16&output=embed';open=gm(x.q)}
+    f.src=src;op.href=open;
+  }
+  dEl.onclick=e=>{const b=e.target.closest('button');if(!b)return;di=+b.dataset.i;sel=-1;show()};
+  pEl.onclick=e=>{const b=e.target.closest('button');if(!b)return;sel=+b.dataset.s;show()};
+  show();
+})();
 
 /* 예약 */
 const flights=[['가는 날','12.18 금','청주','CJJ','13:55','나고야','NGO','15:40','1시간 45분','RF342'],['오는 날','12.22 화','나고야','NGO','16:40','청주','CJJ','18:45','2시간 5분','RF341']];
