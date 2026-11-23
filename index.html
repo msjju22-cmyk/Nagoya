@@ -220,6 +220,19 @@ button{font-family:inherit}
 .tags a{font-size:13px;text-decoration:none;color:#9b2f6b;border:1px solid #f0d3e3;background:#fdf4f9;border-radius:999px;padding:4px 11px}
 @media (min-width:860px){.sh-grid{grid-template-columns:1fr 1fr}.buy{grid-template-columns:1fr 1fr}}
 
+
+.lock{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--hida);border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.lk-row{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.lk-row b{display:block;font-size:15px}.lk-row span{display:block;font-size:13px;color:var(--mute);margin-top:2px;max-width:40em}
+.lk-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.lk-form input{flex:1 1 180px;font:inherit;font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--snow)}
+.lk-btn{border:0;background:var(--ai);color:#fff;font-weight:600;font-size:14px;padding:9px 16px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.lk-btn.ghost{background:var(--paper);color:var(--ai-2);border:1px solid var(--line)}
+.lk-msg{font-size:13px;color:var(--mute);margin-top:8px}
+.lk-msg p{color:var(--sumi);margin-bottom:8px}
+.lk-msg textarea{width:100%;height:90px;font-size:11px;font-family:ui-monospace,monospace;border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;word-break:break-all}
+.gal-it .vbg{position:absolute;inset:0;background:#2a3550}
+.gal-it.err:after,.vw-sl.err:after{content:"불러오지 못했어요";position:absolute;inset:0;display:grid;place-items:center;font-size:12px;color:var(--mute)}
 /* PHOTO GALLERY */
 .gal{margin-top:12px}
 .gal-h{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:600;color:var(--ai-2);margin-bottom:6px}
@@ -531,7 +544,8 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
   </section>
 
   <section class="sec" id="album">
-    <div class="sec-h"><div><h2>가족 앨범</h2><p>셋이 찍은 사진과 영상을 한곳에 모아요</p></div></div>
+    <div class="sec-h"><div><h2>가족 앨범</h2><p>여행 사진은 일정 칸마다 붙어 있어요</p></div></div>
+    <div class="lock" id="lock" hidden></div>
 <div class="gp">
       <div class="gp-ic" aria-hidden="true"><svg viewBox="0 0 48 48" width="44" height="44"><path d="M24 4a10 10 0 0 1 10 10v10H24z" fill="#ea4335"/><path d="M44 24a10 10 0 0 1-10 10H24V24z" fill="#4285f4"/><path d="M24 44a10 10 0 0 1-10-10V24h10z" fill="#34a853"/><path d="M4 24a10 10 0 0 1 10-10h10v10z" fill="#fbbc04"/></svg></div>
       <div class="gp-body">
@@ -748,31 +762,22 @@ const TAGS=['나고야쇼핑','나고야맛집','나고야여행','게로온천'
     requestAnimationFrame(loop)})()})();
 </script>
 <script>
-/* ================= 일정별 사진 ================= */
-const PHOTO_REPO='msjju22-cmyk/Nagoya';
-let PHOTOS=[];            // {src,thumb,type,t,lat,lng,item:'d-k'|null}
-function parseExif(buf){
-  const out={};try{const v=new DataView(buf);if(v.getUint16(0)!==0xFFD8)return out;let o=2;
-    while(o<v.byteLength-4){const mk=v.getUint16(o),len=v.getUint16(o+2);
-      if(mk===0xFFE1&&v.getUint32(o+4)===0x45786966){const t=o+10,le=v.getUint16(t)===0x4949;
-        const g16=p=>v.getUint16(p,le),g32=p=>v.getUint32(p,le);
-        const tags=ifd=>{const m={},n=g16(t+ifd);for(let i=0;i<n;i++){const e=t+ifd+2+i*12;m[g16(e)]=e}return m};
-        const str=e=>{const c=g32(e+4),off=c>4?t+g32(e+8):e+8;let s='';for(let i=0;i<c;i++){const ch=v.getUint8(off+i);if(ch)s+=String.fromCharCode(ch)}return s};
-        const rat=(off,i)=>g32(off+i*8)/(g32(off+i*8+4)||1);
-        const i0=tags(g32(t+4));let dt=null;
-        if(i0[0x8769]){const ex=tags(g32(i0[0x8769]+8));if(ex[0x9003])dt=str(ex[0x9003])}
-        if(!dt&&i0[0x0132])dt=str(i0[0x0132]);
-        const m=dt&&dt.match(/(\d{4}):(\d\d):(\d\d) (\d\d):(\d\d):(\d\d)/);
-        if(m)out.t=Date.UTC(+m[1],+m[2]-1,+m[3],+m[4]-9,+m[5],+m[6]);
-        if(i0[0x8825]){const gp=tags(g32(i0[0x8825]+8));
-          if(gp[2]&&gp[4]){const la=t+g32(gp[2]+8),lo=t+g32(gp[4]+8);
-            let lat=rat(la,0)+rat(la,1)/60+rat(la,2)/3600,lng=rat(lo,0)+rat(lo,1)/60+rat(lo,2)/3600;
-            if(gp[1]&&String.fromCharCode(v.getUint8(gp[1]+8))==='S')lat=-lat;
-            if(gp[3]&&String.fromCharCode(v.getUint8(gp[3]+8))==='W')lng=-lng;
-            if(lat&&lng){out.lat=lat;out.lng=lng}}}
-        return out}
-      if((mk&0xFF00)!==0xFF00)break;o+=2+len}}catch(e){}return out;
-}
+/* ================= 일정별 사진 (비밀번호로 잠김) =================
+   photokey.json  : 비밀번호로 감싼 개인키 + 공개키 (사진 잠금 설정 때 만든 것)
+   media/index.json : 사진 묶음 파일 목록
+   media/b*.json  : 묶음마다 공개키로 잠근 사진 목록(촬영시각·위치·파일별 키 포함)
+   media/*.bin    : 암호화된 사진·영상 (앞 12바이트 IV + AES-GCM 암호문) */
+let PHOTOS=[];
+const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));
+const unb64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const ITER=310000;
+async function pwKey(pw,salt){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:ITER,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+/* 기기에 열쇠 보관 (꺼낼 수 없는 형태로 IndexedDB에) */
+function idb(){return new Promise((res,rej)=>{const r=indexedDB.open('ngy-photo',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function idbGet(){try{const d=await idb();return await new Promise(r=>{const q=d.transaction('k').objectStore('k').get('priv');q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)})}catch(e){return null}}
+async function idbSet(v){try{const d=await idb();await new Promise(r=>{const t=d.transaction('k','readwrite');v?t.objectStore('k').put(v,'priv'):t.objectStore('k').delete('priv');t.oncomplete=r;t.onerror=r})}catch(e){}}
+
 const distKm=(a,b,c,d)=>{const r=Math.PI/180,x=(d-b)*r*Math.cos((a+c)/2*r),y=(c-a)*r;return Math.sqrt(x*x+y*y)*6371};
 function matchItem(p){
   if(!p.t)return null;
@@ -784,11 +789,23 @@ function matchItem(p){
   if(pick==null)pick=items.findIndex(it=>it.h);
   return pick==null||pick<0?null:di+'-'+pick;
 }
+/* 암호화된 파일 → 화면용 주소 (필요할 때만 풀기) */
+const urlCache={};
+async function mediaUrl(p,thumb){
+  const f=thumb&&p.tf?p.tf:p.f,k=thumb&&p.tf?p.tk:p.k;if(urlCache[f])return urlCache[f];
+  urlCache[f]=(async()=>{const buf=new Uint8Array(await fetch(f).then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()}));
+    const key=await crypto.subtle.importKey('raw',unb64(k),'AES-GCM',false,['decrypt']);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:buf.slice(0,12)},key,buf.slice(12));
+    return URL.createObjectURL(new Blob([plain],{type:p.mime||(p.type==='video'?'video/mp4':'image/jpeg')}))})();
+  return urlCache[f];
+}
+function lazyFill(root){root.querySelectorAll('[data-pi]').forEach(el=>{if(el._done)return;el._done=1;const p=PHOTOS[+el.dataset.pi];
+  mediaUrl(p,el.dataset.th==='1').then(u=>{el.src=u}).catch(()=>{el.closest('.gal-it,.vw-sl')?.classList.add('err')})})}
 function galHTML(list,key){
   return `<div class="gal-h"><span>📷 사진 ${list.length}</span><small>옆으로 넘겨 보세요</small></div>
   <div class="gal-strip">${list.map((p,i)=>`<button class="gal-it" data-key="${key}" data-i="${i}" aria-label="사진 크게 보기">${p.type==='video'
-    ?`<video src="${p.src}#t=0.3" muted playsinline preload="metadata"></video><span class="play">▶</span>`
-    :`<img src="${p.thumb||p.src}" loading="lazy" alt="">`}</button>`).join('')}</div>`;
+    ?(p.tf?`<img data-pi="${PHOTOS.indexOf(p)}" data-th="1" alt="">`:`<span class="vbg"></span>`)+`<span class="play">▶</span>`
+    :`<img data-pi="${PHOTOS.indexOf(p)}" data-th="1" alt="">`}</button>`).join('')}</div>`;
 }
 function byKey(key){return PHOTOS.filter(p=>p.item===key).sort((a,b)=>(a.t||0)-(b.t||0))}
 function fillGal(di){
@@ -796,43 +813,82 @@ function fillGal(di){
     const key=di+'-'+k,list=byKey(key);let g=row.querySelector('.gal');
     if(!list.length){if(g)g.remove();return}
     if(!g){g=document.createElement('div');g.className='gal';row.querySelector('.bd').appendChild(g)}
-    g.innerHTML=galHTML(list,key);
+    g.innerHTML=galHTML(list,key);lazyFill(g);
   });
   document.querySelectorAll('#tabs .day').forEach((b,i)=>{const n=PHOTOS.filter(p=>p.item&&p.item.startsWith(i+'-')).length;
     let c=b.querySelector('.pc');if(n){if(!c){c=document.createElement('i');c.className='pc';b.appendChild(c)}c.textContent='📷'+n}else if(c)c.remove()});
   const un=PHOTOS.filter(p=>!p.item),box=document.getElementById('unsorted');
-  if(box){box.hidden=!un.length;if(un.length)box.innerHTML='<h3>날짜를 알 수 없는 사진</h3>'+galHTML(un,'none')}
+  if(box){box.hidden=!un.length;if(un.length){box.innerHTML='<h3>날짜를 알 수 없는 사진</h3>'+galHTML(un,'none');lazyFill(box)}}
 }
 /* 전체화면 슬라이드 */
 const vw=document.createElement('div');vw.className='vw';vw.hidden=true;
-vw.innerHTML='<div class="vw-strip" id="vwS"></div><button class="vw-x" aria-label="닫기">✕</button><div class="vw-c" id="vwC"></div>';
+vw.innerHTML='<div class="vw-strip"></div><button class="vw-x" aria-label="닫기">✕</button><div class="vw-c"></div>';
 document.body.appendChild(vw);
-const vwS=vw.querySelector('#vwS'),vwC=vw.querySelector('#vwC');let vwList=[];
-function openVw(list,i){vwList=list;vwS.innerHTML=list.map(p=>`<div class="vw-sl">${p.type==='video'?`<video src="${p.src}" controls playsinline preload="metadata"></video>`:`<img src="${p.src}" alt="">`}</div>`).join('');
+const vwS=vw.querySelector('.vw-strip'),vwC=vw.querySelector('.vw-c');let vwList=[];
+function openVw(list,i){vwList=list;vwS.innerHTML=list.map(p=>`<div class="vw-sl">${p.type==='video'?`<video data-pi="${PHOTOS.indexOf(p)}" controls playsinline></video>`:`<img data-pi="${PHOTOS.indexOf(p)}" alt="">`}</div>`).join('');
   vw.hidden=false;document.body.style.overflow='hidden';requestAnimationFrame(()=>{vwS.scrollLeft=i*vwS.clientWidth;upd()})}
 function upd(){const i=Math.round(vwS.scrollLeft/vwS.clientWidth);const p=vwList[i];if(!p)return;
+  [i-1,i,i+1].forEach(j=>{const s=vwS.children[j];if(s)lazyFill(s)});
   let s=(i+1)+' / '+vwList.length;if(p.t){const d=new Date(p.t+9*3600e3);s+=' · '+(d.getUTCMonth()+1)+'/'+d.getUTCDate()+' '+String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0')}vwC.textContent=s;
-  vwS.querySelectorAll('video').forEach((v,j)=>{if(j!==i)v.pause()})}
+  vwS.querySelectorAll('video').forEach((v,j)=>{if(v.parentElement!==vwS.children[i])v.pause()})}
 vwS.addEventListener('scroll',()=>{clearTimeout(vwS._t);vwS._t=setTimeout(upd,80)},{passive:true});
 function closeVw(){vw.hidden=true;document.body.style.overflow='';vwS.innerHTML=''}
 vw.querySelector('.vw-x').onclick=closeVw;
 document.addEventListener('keydown',e=>{if(vw.hidden)return;if(e.key==='Escape')closeVw();if(e.key==='ArrowRight')vwS.scrollBy({left:vwS.clientWidth,behavior:'smooth'});if(e.key==='ArrowLeft')vwS.scrollBy({left:-vwS.clientWidth,behavior:'smooth'})});
 document.addEventListener('click',e=>{const b=e.target.closest('.gal-it');if(!b)return;const key=b.dataset.key;openVw(key==='none'?PHOTOS.filter(p=>!p.item):byKey(key),+b.dataset.i)});
-/* 사진 불러오기: photos.json(정리된 사진) + photos 폴더에 직접 올린 사진 */
-(async()=>{
-  const known=new Set();
-  try{const r=await fetch('photos.json',{cache:'no-cache'});if(r.ok){const j=await r.json();
-    j.forEach(p=>{known.add(p.src);if(p.thumb)known.add(p.thumb);PHOTOS.push({src:p.src,thumb:p.thumb,type:p.type||'image',t:p.t,lat:p.lat,lng:p.lng,item:p.item||null})})}}catch(e){}
-  try{const r=await fetch('https://api.github.com/repos/'+PHOTO_REPO+'/contents/photos');
-    if(r.ok){const files=await r.json();
-      for(const f of files){if(f.type!=='file')continue;const path='photos/'+f.name;if(known.has(path)||/(^|\/)thumbs?\//.test(path)||f.name.startsWith('t_'))continue;
-        const ext=f.name.split('.').pop().toLowerCase();
-        if(['jpg','jpeg'].includes(ext)){try{const b=await fetch(path).then(x=>x.arrayBuffer());const ex=parseExif(b);PHOTOS.push({src:path,type:'image',...ex})}catch(e){}}
-        else if(['png','webp','gif'].includes(ext))PHOTOS.push({src:path,type:'image'});
-        else if(['mp4','mov','webm','m4v'].includes(ext))PHOTOS.push({src:path,type:'video'});
-      }}}catch(e){}
-  PHOTOS.forEach(p=>{if(!p.item)p.item=matchItem(p)});
+
+/* 잠금 상자 UI */
+const lockBox=document.getElementById('lock');
+function lockUI(html){if(lockBox){lockBox.innerHTML=html;lockBox.hidden=false}}
+async function loadPhotos(priv){
+  let idx;try{idx=await fetch('media/index.json',{cache:'no-cache'}).then(r=>r.ok?r.json():[])}catch(e){idx=[]}
+  PHOTOS=[];
+  for(const b of idx){try{const j=await fetch('media/'+b,{cache:'no-cache'}).then(r=>r.json());
+    const ck=await crypto.subtle.decrypt({name:'RSA-OAEP'},priv,unb64(j.wk));
+    const key=await crypto.subtle.importKey('raw',ck,'AES-GCM',false,['decrypt']);
+    const list=JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(j.iv)},key,unb64(j.ct))));
+    list.forEach(p=>PHOTOS.push(p))}catch(e){}}
+  PHOTOS.forEach(p=>{p.item=matchItem(p)});
   fillGal(cur);
+  lockUI(`<div class="lk-row"><div><b>🔓 우리 사진이 열려 있어요</b><span>${PHOTOS.length?`사진·영상 ${PHOTOS.length}개가 일정 칸에 붙어 있어요`:'아직 올린 사진이 없어요'}</span></div><button class="lk-btn ghost" id="lkOut">이 기기에서 잠그기</button></div>`);
+  document.getElementById('lkOut').onclick=async()=>{await idbSet(null);location.reload()};
+}
+async function unlockWith(pw,pk){
+  const aes=await pwKey(pw,unb64(pk.salt));
+  const raw=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(pk.iv)},aes,unb64(pk.wrapped));
+  return crypto.subtle.importKey('pkcs8',raw,{name:'RSA-OAEP',hash:'SHA-256'},false,['decrypt']);
+}
+function setupUI(){
+  lockUI(`<div class="lk-row"><div><b>🔐 사진 잠금 설정 (처음 한 번만)</b><span>가족 비밀번호를 정하면 사진이 이 비밀번호로만 열려요</span></div></div>
+  <form class="lk-form" id="setF"><input type="password" id="lkP1" placeholder="새 비밀번호 (10자 이상 추천)" autocomplete="new-password" required minlength="8">
+  <input type="password" id="lkP2" placeholder="한 번 더 입력" autocomplete="new-password" required><button class="lk-btn">열쇠 만들기</button></form><div id="setOut" class="lk-msg"></div>`);
+  document.getElementById('setF').onsubmit=async e=>{e.preventDefault();const p1=document.getElementById('lkP1').value,p2=document.getElementById('lkP2').value,out=document.getElementById('setOut');
+    if(p1!==p2){out.textContent='두 비밀번호가 달라요. 다시 입력해 주세요.';return}
+    out.textContent='열쇠를 만드는 중…';
+    const kp=await crypto.subtle.generateKey({name:'RSA-OAEP',modulusLength:2048,publicExponent:new Uint8Array([1,0,1]),hash:'SHA-256'},true,['encrypt','decrypt']);
+    const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+    const aes=await pwKey(p1,salt);
+    const wrapped=await crypto.subtle.encrypt({name:'AES-GCM',iv},aes,await crypto.subtle.exportKey('pkcs8',kp.privateKey));
+    const code=JSON.stringify({v:1,iter:ITER,salt:b64(salt),iv:b64(iv),wrapped:b64(wrapped),pub:b64(await crypto.subtle.exportKey('spki',kp.publicKey))});
+    out.innerHTML=`<p>열쇠 코드가 만들어졌어요. 아래 버튼으로 복사해서 Claude 대화에 붙여넣어 주세요. 이 코드는 비밀번호 없이는 쓸 수 없어서 보내도 안전해요.</p><textarea readonly id="codeT"></textarea><button class="lk-btn" id="cpy">코드 복사</button>`;
+    const ta=document.getElementById('codeT');ta.value=code;
+    document.getElementById('cpy').onclick=async()=>{try{await navigator.clipboard.writeText(code);document.getElementById('cpy').textContent='복사됨 ✓'}catch(err){ta.select();document.execCommand&&document.execCommand('copy')}};
+  };
+}
+function loginUI(pk){
+  lockUI(`<div class="lk-row"><div><b>🔒 우리 사진은 잠겨 있어요</b><span>가족 비밀번호를 넣으면 일정 칸마다 사진이 나타나요. 한 번 넣으면 이 기기에서는 다시 묻지 않아요.</span></div></div>
+  <form class="lk-form" id="inF"><input type="password" id="lkPw" placeholder="가족 비밀번호" autocomplete="current-password" required><button class="lk-btn">사진 열기</button></form><div id="inOut" class="lk-msg"></div>`);
+  document.getElementById('inF').onsubmit=async e=>{e.preventDefault();const out=document.getElementById('inOut');out.textContent='확인하는 중…';
+    try{const priv=await unlockWith(document.getElementById('lkPw').value,pk);await idbSet(priv);out.textContent='';loadPhotos(priv)}
+    catch(err){out.textContent='비밀번호가 맞지 않아요. 다시 입력해 주세요.'}};
+}
+(async()=>{
+  if(!window.crypto||!crypto.subtle){lockUI('<div class="lk-row"><div><b>이 브라우저에서는 사진을 열 수 없어요</b><span>사파리나 크롬 최신 버전으로 열어주세요</span></div></div>');return}
+  let pk=null;try{const r=await fetch('photokey.json',{cache:'no-cache'});if(r.ok)pk=await r.json()}catch(e){}
+  if(!pk){setupUI();return}
+  const saved=await idbGet();
+  if(saved){try{await loadPhotos(saved);return}catch(e){}}
+  loginUI(pk);
 })();
 </script>
 </body>
