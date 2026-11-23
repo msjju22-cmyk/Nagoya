@@ -110,7 +110,9 @@ button{font-family:inherit}
 .days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .day{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 4px 9px;text-align:center;cursor:pointer;color:var(--sumi);transition:background .2s,color .2s}
 .day b{display:block;font-family:var(--f-mincho);font-weight:800;font-size:24px;line-height:1}
-.day span{display:block;font-size:12px;margin-top:4px;color:var(--mute)}
+.day span{display:block;font-size:12px;margin-top:4px;color:var(--mute);white-space:nowrap}
+.day .dl{margin-top:1px;font-size:11.5px}
+.day .dl2{display:none;font-style:normal}
 .day em{display:none;font-style:normal;font-size:11.5px;color:var(--mute);margin-top:2px}
 .day.on{background:var(--ai);border-color:var(--ai);color:#fff}
 .day.on span,.day.on em{color:var(--ai-ink)}
@@ -121,9 +123,16 @@ button{font-family:inherit}
 .dv-h small{display:block;font-size:13px;color:var(--mute);margin-top:2px}
 .dv-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .routebtn{font-size:12.5px;font-weight:600;text-decoration:none;color:#fff;background:var(--ai);border-radius:999px;padding:5px 12px;white-space:nowrap}
-.kml{margin-top:16px;padding:18px 20px;display:flex;gap:16px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
-.kml h3{font-size:16px;font-weight:700}.kml p{font-size:13.5px;color:#454c5c;margin-top:4px;max-width:40em}
-.kml ol{font-size:13px;color:var(--mute);margin:8px 0 0 18px}
+.kml{margin-top:16px;padding:0}
+.kml summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;cursor:pointer;font-size:15px;font-weight:700}
+.kml summary::-webkit-details-marker{display:none}
+.kml summary i{font-style:normal;font-size:12.5px;font-weight:500;color:var(--ai-2);white-space:nowrap}
+.kml summary i:after{content:" ▾"}
+.kml[open] summary i:after{content:" ▴"}
+.kml-b{padding:0 18px 16px}
+.kml-b .routebtn{display:inline-block;margin-top:12px}
+.kml-b p{font-size:13.5px;color:#454c5c;max-width:40em}
+.kml-b ol{font-size:13px;color:var(--mute);margin:8px 0 0 18px}
 .routebtn.big{font-size:14px;padding:9px 16px}
 .routebtn:hover{background:var(--ai-2)}
 .legend{display:flex;gap:12px;font-size:12px;color:var(--mute);flex-wrap:wrap}
@@ -252,7 +261,6 @@ button{font-family:inherit}
 .pwa-how div{background:var(--snow);border-radius:10px;padding:10px 12px}
 .pwa-how div>b:first-child{display:block;font-size:13px;color:var(--mute);font-weight:600;margin-bottom:2px}
 .pwa-how .ic{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:0 6px}
-#pwaBtn{margin-top:10px}
 @media (max-width:420px){.wx .ic{font-size:22px}.wx .tp{font-size:13px}}
 /* SHOP */
 .taxbox{background:#fbf4e2;border:1px solid #ecd9a5;border-radius:var(--r);padding:16px 18px}
@@ -401,6 +409,8 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
   .day{display:grid;grid-template-columns:44px 1fr;text-align:left;align-items:center;padding:12px 14px;column-gap:8px}
   .day b{grid-row:span 2;font-size:28px}
   .day span{margin-top:0}
+  .day .dl{display:none}
+  .day .dl2{display:inline}
   .day em{display:block}
   .mapgrid{grid-template-columns:1.3fr 1fr;align-items:start}
   .bk{grid-template-columns:1fr 1fr}
@@ -580,12 +590,14 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
         <button class="leg" data-d="5" style="--c:#8a63c9"><i></i><div><b>12.22 · 집으로</b><span>센트레아 16:40 → 청주 18:45</span></div></button>
       </div>
     </div>
-    <div class="kml panel">
-      <div><h3>구글 지도에 모든 장소 한 번에 넣기</h3>
-      <p>일정 장소 20여 곳과 쇼핑 스폿 13곳을 날짜별 색깔 핀으로 정리한 파일이에요. 컴퓨터에서 구글 내 지도(My Maps)에 가져오면 휴대폰 구글맵 앱의 '저장됨 → 지도'에서도 볼 수 있어요.</p>
-      <ol><li>파일 받기 버튼으로 nagoya-trip.kml 저장</li><li>google.com/mymaps → 새 지도 만들기</li><li>레이어의 '가져오기'에서 파일 선택</li></ol></div>
-      <a class="routebtn big" href="nagoya-trip.kml" download>KML 파일 받기</a>
-    </div>
+    <details class="kml panel">
+      <summary><span>구글 지도에 모든 장소 한 번에 넣기</span><i>자세히</i></summary>
+      <div class="kml-b">
+        <p>일정 장소 20여 곳과 쇼핑 스폿 13곳을 날짜별 색깔 핀으로 정리한 파일이에요. 컴퓨터에서 구글 내 지도(My Maps)에 가져오면 휴대폰 구글맵 앱의 '저장됨 → 지도'에서도 볼 수 있어요.</p>
+        <ol><li>파일 받기 버튼으로 nagoya-trip.kml 저장</li><li>google.com/mymaps → 새 지도 만들기</li><li>레이어의 '가져오기'에서 파일 선택</li></ol>
+        <a class="routebtn big" href="nagoya-trip.kml" download>KML 파일 받기</a>
+      </div>
+    </details>
   </section>
 
   <section class="sec" id="book">
@@ -628,9 +640,7 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
       <div class="tool-h"><h3>홈 화면에 추가하기</h3><span class="tool-s" id="pwaSt">한 번 열어둔 내용은 인터넷이 없어도 보여요</span></div>
       <div class="pwa-how">
         <div><b>아이폰 (사파리)</b>아래쪽 공유 버튼 <span class="ic">⬆︎</span> → <b>홈 화면에 추가</b></div>
-        <div><b>갤럭시 (크롬·삼성 인터넷)</b>오른쪽 위 메뉴 <span class="ic">⋮</span> → <b>홈 화면에 추가</b> 또는 <b>앱 설치</b></div>
       </div>
-      <button class="lk-btn" id="pwaBtn" hidden>앱으로 설치하기</button>
       <p class="tool-note">출발 전에 와이파이에서 한 번 일정·사진을 쭉 열어두면, 시라카와고처럼 데이터가 약한 곳에서도 볼 수 있어요.</p>
     </div>
   </section>
@@ -774,7 +784,7 @@ function renderDay(i){
   if(typeof fillGal==='function')fillGal(i);
 }
 days.forEach((d,i)=>{const b=document.createElement('button');b.className='day'+(d.date===todayStr?' today':'');
-  b.innerHTML=`<b class="num">${d.date.slice(8)}</b><span>${d.dow}요일 · ${d.label}</span><em>${esc(d.where)}</em>`;
+  b.innerHTML=`<b class="num">${d.date.slice(8)}</b><span>${d.dow}요일<i class="dl2"> · ${d.label}</i></span><span class="dl">${d.label}</span><em>${esc(d.where)}</em>`;
   b.onclick=()=>renderDay(i);tabsEl.appendChild(b)});
 renderDay(cur);
 
@@ -1125,9 +1135,6 @@ document.getElementById('trF').onsubmit=async e=>{
 
 /* --- 홈 화면 앱 + 오프라인 --- */
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(()=>{const s=document.getElementById('pwaSt');if(s)s.textContent='오프라인 준비 완료 · 한 번 열어둔 내용은 인터넷 없이도 보여요'}).catch(()=>{})}
-let deferredPrompt=null;
-addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('pwaBtn').hidden=false});
-document.getElementById('pwaBtn').onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice.catch(()=>{});deferredPrompt=null;document.getElementById('pwaBtn').hidden=true};
 </script>
 </body>
 </html>
