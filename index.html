@@ -116,6 +116,12 @@ button{font-family:inherit}
 .day em{display:none;font-style:normal;font-size:11.5px;color:var(--mute);margin-top:2px}
 .day.on{background:var(--ai);border-color:var(--ai);color:#fff}
 .day.on span,.day.on em{color:var(--ai-ink)}
+.day .tw{display:flex;align-items:center;justify-content:center;gap:2px;margin-top:6px;padding-top:6px;border-top:1px solid var(--line);font-size:12px;white-space:nowrap}
+.day .tw i{font-style:normal;font-size:15px;margin-right:1px}
+.day .tw b{display:inline;font-family:var(--f-body);font-weight:700;font-size:12.5px;line-height:1;grid-row:auto}
+.day .tw small{color:var(--mute);font-size:11.5px}
+.day.on .tw{border-top-color:rgba(255,255,255,.18)}
+.day.on .tw small{color:var(--ai-ink)}
 .day.today{box-shadow:inset 0 -3px 0 var(--hida)}
 .dayview{padding:22px 20px 10px}
 .dv-h{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--line)}
@@ -428,6 +434,7 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
   .day span{margin-top:0}
   .day .dl{display:none}
   .day .dl2{display:inline}
+  .day .tw{grid-column:2;justify-content:flex-start;border-top:0;padding-top:0;margin-top:4px}
   .day em{display:block}
   .mapgrid{grid-template-columns:1.3fr 1fr;align-items:start}
   .bk{grid-template-columns:1fr 1fr}
@@ -633,11 +640,6 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
 
   <section class="sec" id="tools">
     <div class="sec-h"><div><h2>여행 도구</h2><p>여행 중에 폰으로 바로 쓰는 것들</p></div></div>
-
-    <div class="tool panel" id="wx">
-      <div class="tool-h"><h3>날짜별 날씨</h3><span id="wxMode" class="tool-s">불러오는 중…</span></div>
-      <div class="wx-grid" id="wxGrid"></div>
-    </div>
 
     <div class="tool panel" id="fx">
       <div class="tool-h"><h3>엔 ↔ 원 계산기</h3><span id="fxRate" class="tool-s">환율 불러오는 중…</span></div>
@@ -1072,7 +1074,6 @@ const WX_PLAN=[
 const WMO=c=>c===0?['☀️','맑음']:c<=2?['🌤️','구름 조금']:c===3?['☁️','흐림']:c<=48?['🌫️','안개']:c<=57?['🌦️','이슬비']:c<=67?['🌧️','비']:c<=77?['❄️','눈']:c<=82?['🌧️','소나기']:c<=86?['🌨️','눈 소나기']:['⛈️','뇌우'];
 async function wxFetch(url){const r=await fetch(url);if(!r.ok)throw 0;return r.json()}
 async function loadWx(){
-  const grid=document.getElementById('wxGrid'),mode=document.getElementById('wxMode');
   const now=Date.now(),first=new Date('2026-12-18T00:00:00+09:00').getTime(),last=new Date('2026-12-22T23:59:00+09:00').getTime();
   const forecast=first-now<15*864e5&&now<last;
   const groups={};WX_PLAN.forEach(w=>{const k=w.lat+','+w.lng;(groups[k]=groups[k]||[]).push(w)});
@@ -1084,15 +1085,11 @@ async function loadWx(){
     try{const j=await wxFetch(url);j.daily.time.forEach((t,i)=>{const d=(forecast?t:t.replace('2025','2026'));out[k+'|'+d]={c:j.daily.weather_code[i],hi:j.daily.temperature_2m_max[i],lo:j.daily.temperature_2m_min[i],pp:j.daily.precipitation_probability_max?.[i],pr:j.daily.precipitation_sum?.[i],sn:j.daily.snowfall_sum?.[i]}});ok=true}catch(e){}}
   let saved=ls.get('wx',null);
   if(ok){saved={out,forecast,at:Date.now()};ls.set('wx',saved)}
-  if(!saved){mode.textContent='날씨를 불러오지 못했어요. 인터넷 연결 후 다시 열어주세요.';return}
-  const at=new Date(saved.at);
-  mode.textContent=(saved.forecast?'일기예보':'작년 같은 날 실제 날씨 · 예보는 출발 2주 전부터 자동으로 바뀌어요')+(ok?'':' · '+(at.getMonth()+1)+'/'+at.getDate()+' 저장본');
-  grid.innerHTML=WX_PLAN.map(w=>{const x=saved.out[w.lat+','+w.lng+'|'+w.date];const dw='일월화수목금토'[new Date(w.date+'T03:00:00Z').getUTCDay()];
-    if(!x)return `<div class="wx"><div class="d">${w.date.slice(5).replace('-','/')}</div><div class="pl">${w.pl}</div><div class="ic">–</div></div>`;
-    const m=WMO(x.c),snow=x.sn>0.2;
-    const extra=saved.forecast?(x.pp!=null?`강수 ${x.pp}%`:''):(snow?`눈 ${Math.round(x.sn)}cm`:x.pr>0.5?`비 ${Math.round(x.pr)}mm`:'');
-    return `<div class="wx${snow||x.c>=71&&x.c<=86?' snow':''}"><div class="d">${w.date.slice(5).replace('-','/')} ${dw}</div><div class="pl">${w.pl}</div>
-      <div class="ic">${m[0]}</div><div class="wlb">${m[1]}</div><div class="tp num">${Math.round(x.hi)}°<small> / ${Math.round(x.lo)}°</small></div><div class="pr">${extra}</div></div>`}).join('');
+  if(!saved)return;
+  document.querySelectorAll('#tabs .day').forEach((b,i)=>{const w=WX_PLAN[i];if(!w)return;const x=saved.out[w.lat+','+w.lng+'|'+w.date];
+    let t=b.querySelector('.tw');if(!x){if(t)t.remove();return}
+    if(!t){t=document.createElement('span');t.className='tw';b.appendChild(t)}
+    const m=WMO(x.c);t.title=w.pl+' · '+m[1];t.innerHTML=`<i>${m[0]}</i><b class="num">${Math.round(x.hi)}°</b><small class="num">/${Math.round(x.lo)}°</small>`});
 }
 loadWx();
 
@@ -1108,7 +1105,7 @@ function wxIcon(di,k){
   const hr=+it.h.slice(0,2),night=hr>=18||hr<6;let ic=WMO(x.c)[0];if(night&&x.c<=1)ic='🌙';else if(night&&x.c===2)ic='☁️';
   return `<span class="wxi" title="${WMO(x.c)[1]}"><b>${ic}</b>${Math.round(x.t)}°</span>`;
 }
-function wxNote(){return WXH?`<span class="wxnote">${WXH.forecast?'날씨 아이콘: 일기예보':'날씨 아이콘: 작년 같은 날 기준 · 2주 전부터 예보'}</span>`:''}
+function wxNote(){return WXH?`<span class="wxnote">${WXH.forecast?'날씨: 일기예보':'날씨: 작년 같은 날 기준 · 출발 2주 전부터 예보로 바뀌어요'}</span>`:''}
 (async()=>{
   const now=Date.now(),first=new Date('2026-12-18T00:00:00+09:00').getTime(),last=new Date('2026-12-22T23:59:00+09:00').getTime();
   const forecast=first-now<15*864e5&&now<last;
