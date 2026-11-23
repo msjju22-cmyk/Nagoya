@@ -137,7 +137,7 @@ button{font-family:inherit}
 .routebtn:hover{background:var(--ai-2)}
 .legend{display:flex;gap:12px;font-size:12px;color:var(--mute);flex-wrap:wrap}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
-.row{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);position:relative}
+.row{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);position:relative}
 .row:last-child{border-bottom:0}
 .row .tm{font-size:14px;font-weight:600;color:var(--sumi);padding-top:1px}
 .row .tm small{display:block;font-size:11.5px;font-weight:400;color:var(--mute);line-height:1.35;margin-top:2px}
@@ -160,6 +160,9 @@ button{font-family:inherit}
 .row.now .bd{border-left-color:var(--shu)}
 .nowtag{font-size:11px;color:#fff;background:var(--shu);border-radius:999px;padding:1px 8px}
 
+.wxi{display:flex;align-items:center;gap:3px;margin-top:5px;font-size:12px;font-weight:500;color:var(--mute)}
+.wxi b{font-size:16px;font-weight:400;line-height:1}
+.wxnote{display:block;font-size:11.5px;color:var(--mute);margin-top:3px}
 /* MAP */
 .mapgrid{display:grid;grid-template-columns:1fr;gap:16px}
 .mapbox{padding:12px}
@@ -786,13 +789,13 @@ function renderDay(i){
   cur=i;[...tabsEl.children].forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i)});
   const d=days[i];let nowIdx=-1;
   if(d.date===todayStr){const hm=String(kst.getHours()).padStart(2,'0')+':'+String(kst.getMinutes()).padStart(2,'0');d.items.forEach((it,k)=>{if(it.h&&it.h<=hm)nowIdx=k})}
-  let h=`<div class="dv-h"><div><h3>${esc(d.title)}</h3><small>${esc(d.where)}</small></div>
+  let h=`<div class="dv-h"><div><h3>${esc(d.title)}</h3><small>${esc(d.where)}</small>${typeof wxNote==='function'?wxNote():''}</div>
     <div class="dv-r"><div class="legend"><span><i style="background:var(--cedar)"></i>확정</span><span><i style="background:#a77a14"></i>추천</span><span><i style="background:#9aa1b2"></i>미정</span></div>${dayRoute(d)?`<a class="routebtn" href="${dayRoute(d)}" target="_blank" rel="noopener">이날 동선 구글맵으로 보기</a>`:''}</div></div>`;
   d.items.forEach((it,k)=>{
     const c=catOf(it.ic);const tm=(it.h||'').trim();
     const sub=it.t&&it.t!==tm?esc(it.t.replace(tm,'').trim().replace(/^출발\s*→\s*/,'→ ')):'';
     h+=`<div class="row cat-${c[0]}${k===nowIdx?' now':''}">
-      <div class="tm num">${tm||'—'}${sub?`<small>${sub}</small>`:''}</div>
+      <div class="tm num">${tm||'—'}${sub?`<small>${sub}</small>`:''}${typeof wxIcon==='function'?wxIcon(i,k):''}</div>
       <div class="bd">
         <div class="cat"><span>${c[1]}</span><span class="st ${it.s}">${stl[it.s]}</span>${k===nowIdx?'<span class="nowtag">지금</span>':''}</div>
         <h4>${esc(it.n)}</h4>
@@ -1092,6 +1095,35 @@ async function loadWx(){
       <div class="ic">${m[0]}</div><div class="wlb">${m[1]}</div><div class="tp num">${Math.round(x.hi)}°<small> / ${Math.round(x.lo)}°</small></div><div class="pr">${extra}</div></div>`}).join('');
 }
 loadWx();
+
+
+/* --- 일정 시간대별 날씨 아이콘 --- */
+let WXH=null;
+const wxCluster=(lat,lng)=>Math.round(lat*5)/5+','+Math.round(lng*5)/5;
+function itemLoc(di,it){const pl=PLACES[it.q];if(pl)return[pl[1],pl[2]];const w=WX_PLAN[di];return[w.lat,w.lng]}
+function wxIcon(di,k){
+  if(!WXH)return'';const it=days[di].items[k];if(!it||!it.h)return'';
+  const [la,lo]=itemLoc(di,it),c=WXH.d[wxCluster(la,lo)];if(!c)return'';
+  const key=days[di].date+'T'+it.h.slice(0,2);const x=c[key];if(!x)return'';
+  const hr=+it.h.slice(0,2),night=hr>=18||hr<6;let ic=WMO(x.c)[0];if(night&&x.c<=1)ic='🌙';else if(night&&x.c===2)ic='☁️';
+  return `<span class="wxi" title="${WMO(x.c)[1]}"><b>${ic}</b>${Math.round(x.t)}°</span>`;
+}
+function wxNote(){return WXH?`<span class="wxnote">${WXH.forecast?'날씨 아이콘: 일기예보':'날씨 아이콘: 작년 같은 날 기준 · 2주 전부터 예보'}</span>`:''}
+(async()=>{
+  const now=Date.now(),first=new Date('2026-12-18T00:00:00+09:00').getTime(),last=new Date('2026-12-22T23:59:00+09:00').getTime();
+  const forecast=first-now<15*864e5&&now<last;
+  const cl={};days.forEach((d,di)=>d.items.forEach(it=>{if(!it.h)return;const [la,lo]=itemLoc(di,it);cl[wxCluster(la,lo)]=[la,lo]}));
+  const out={};let ok=false;
+  await Promise.all(Object.entries(cl).map(async([k,[la,lo]])=>{
+    const url=forecast
+      ?`https://api.open-meteo.com/v1/forecast?latitude=${la}&longitude=${lo}&hourly=weather_code,temperature_2m&timezone=Asia%2FTokyo&start_date=2026-12-18&end_date=2026-12-22`
+      :`https://archive-api.open-meteo.com/v1/archive?latitude=${la}&longitude=${lo}&hourly=weather_code,temperature_2m&timezone=Asia%2FTokyo&start_date=2025-12-18&end_date=2025-12-22`;
+    try{const j=await fetch(url).then(r=>{if(!r.ok)throw 0;return r.json()});const m={};
+      j.hourly.time.forEach((t,i)=>{m[(forecast?t:t.replace('2025-','2026-')).slice(0,13)]={c:j.hourly.weather_code[i],t:j.hourly.temperature_2m[i]}});out[k]=m;ok=true}catch(e){}
+  }));
+  if(ok){WXH={d:out,forecast,at:Date.now()};ls.set('wxh',WXH)}else WXH=ls.get('wxh',null);
+  if(WXH)renderDay(cur);
+})();
 
 /* --- 환율 계산기 --- */
 let fxRate=null,fxDir='jk';
