@@ -162,6 +162,7 @@ button{font-family:inherit}
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 1h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2l1.5 2h-2L10 13H6l-1.5 2h-2L4 13a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 2v4h8V3H4zm1 6.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z'/%3E%3C/svg%3E") center/contain no-repeat}
 .lk{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
 .lk a{font-size:12.5px;text-decoration:none;color:var(--ai-2);border:1px solid var(--line);border-radius:999px;padding:3px 11px;background:var(--paper)}
+.lk a.tel{background:#eaf4ee;border-color:#cfe5d7;color:var(--cedar);font-weight:600}
 .lk a:hover{border-color:var(--ai-2)}
 .row.now .tm{color:var(--shu)}
 .row.now .bd{border-left-color:var(--shu)}
@@ -286,6 +287,59 @@ button{font-family:inherit}
 .pwa-how div>b:first-child{display:block;font-size:13px;color:var(--mute);font-weight:600;margin-bottom:2px}
 .pwa-how .ic{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:0 6px}
 @media (max-width:420px){.wx .ic{font-size:22px}.wx .tp{font-size:13px}}
+.lk-btns{display:flex;gap:6px;flex-wrap:wrap}
+.prep{display:grid;gap:6px}
+.pp{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;background:var(--snow);border-radius:10px;padding:10px 12px;cursor:pointer}
+.pp input{width:18px;height:18px;margin-top:2px;accent-color:var(--cedar)}
+.pp b{display:block;font-size:14px;font-weight:600}
+.pp small{display:block;font-size:12.5px;color:var(--mute);margin-top:1px}
+.pp em{font-style:normal;font-size:11.5px;color:var(--mute);white-space:nowrap;padding-top:2px}
+.pp.soon em{color:var(--shu);font-weight:600}
+.pp.on b{text-decoration:line-through;color:var(--mute)}.pp.on em{color:var(--cedar)}
+.ex-form{display:grid;gap:8px}
+.ex-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:stretch}
+.ex-row+.ex-row{grid-template-columns:minmax(0,1fr) auto auto}
+.ex-amt{min-width:0}
+.ex-amt input{min-width:0}
+.ex-row select,.ex-row input[type=text]{font:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--paper);min-width:0}
+.ex-cats{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.ex-cats span{font-size:12.5px;background:var(--snow);border-radius:999px;padding:3px 10px}
+.ex-g{margin-top:12px}
+.ex-gh{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;color:var(--ai-2);padding:0 2px 4px;border-bottom:1px solid var(--line)}
+.ex-it{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.ex-it .c{font-size:11.5px;background:var(--snow);border-radius:6px;padding:1px 7px;color:#4a5370;white-space:nowrap}
+.ex-it .m small,.ex-it .y small{display:block;font-size:11.5px;color:var(--mute);font-weight:400}
+.ex-it .y{text-align:right;font-weight:600}
+.ex-it .x{border:0;background:none;color:var(--mute);cursor:pointer;font-size:13px;padding:4px}
+.ex-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ex-mini{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer;color:var(--sumi)}
+.fold{padding:0}
+.fold summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;cursor:pointer;font-size:17px;font-weight:700}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary i{font-style:normal;font-size:12.5px;font-weight:500;color:var(--ai-2)}
+.fold summary i:after{content:" ▾"}.fold[open] summary i:after{content:" ▴"}
+.fold-b{padding:0 20px 18px}
+.steps{list-style:none;display:grid;gap:8px;counter-reset:s}
+.steps li{counter-increment:s;position:relative;background:var(--snow);border-radius:10px;padding:10px 12px 10px 42px;font-size:13.5px;color:#454c5c}
+.steps li:before{content:counter(s);position:absolute;left:12px;top:10px;width:20px;height:20px;border-radius:50%;background:var(--ai);color:#fff;font-size:12px;display:grid;place-items:center}
+.steps li>b:first-child{display:block;color:var(--sumi);font-size:14px;margin-bottom:2px}
+.hl{position:fixed;inset:0;z-index:65;background:#0c1220}
+.hl[hidden]{display:none}
+.hl-l{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s;overflow:hidden}
+.hl-l.on{opacity:1}
+.hl-l img{width:100%;height:100%;object-fit:contain}
+.hl-l img.kb{animation:kb2 5s ease-out forwards}
+@keyframes kb2{from{transform:scale(1)}to{transform:scale(1.1)}}
+.hl-l video{max-width:100%;max-height:100%}
+.hl-card{text-align:center;color:#fff;padding:24px}
+.hl-card em{display:block;font-style:normal;font-family:var(--f-mincho);font-weight:800;font-size:44px;color:var(--hida)}
+.hl-card b{display:block;font-size:26px;font-weight:700;margin-top:6px}
+.hl-card span{display:block;font-size:22px;color:var(--hida);margin-top:6px;white-space:pre-line}
+.hl-card small{display:block;font-size:14px;color:var(--ai-ink);margin-top:14px}
+.hl-cap{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom,0px));text-align:center;color:#fff;font-size:13.5px;text-shadow:0 1px 6px rgba(0,0,0,.7);padding:0 20px}
+.hl-bar{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.15);z-index:2}
+.hl-bar i{display:block;height:100%;width:0;background:var(--hida);transition:width .4s}
+.hl-pp{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:20px;padding:6px 16px;cursor:pointer;z-index:3}
 /* SHOP */
 .taxbox{background:#fbf4e2;border:1px solid #ecd9a5;border-radius:var(--r);padding:16px 18px}
 .taxbox h3{font-size:15.5px;font-weight:700}
@@ -641,7 +695,31 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
 
 
   <section class="sec" id="tools">
-    <div class="sec-h"><div><h2>여행 도구</h2><p>여행 중에 폰으로 바로 쓰는 것들</p></div></div>
+    <div class="sec-h"><div><h2>여행 도구</h2><p>출발 준비부터 여행 중 경비·환율·일본어까지</p></div></div>
+
+    <div class="tool panel" id="prep">
+      <div class="tool-h"><h3>출발 전 체크리스트</h3><span class="tool-s" id="prepSt"></span></div>
+      <div class="prep" id="prepList"></div>
+      <p class="tool-note">체크 표시는 이 폰에만 저장돼요.</p>
+    </div>
+
+    <div class="tool panel" id="exp">
+      <div class="tool-h"><h3>여행 경비 기록</h3><span class="tool-s" id="expSum">엔으로 적으면 원화로 바꿔서 합계를 내요</span></div>
+      <form class="ex-form" id="exF">
+        <div class="ex-row">
+          <label class="fx-in ex-amt"><span>금액 ¥</span><input id="exAmt" type="number" inputmode="numeric" placeholder="1200" required min="1"></label>
+          <select id="exCat" aria-label="항목"><option>식사</option><option>교통</option><option>쇼핑</option><option>숙소·입장료</option><option>간식·카페</option><option>기타</option></select>
+        </div>
+        <div class="ex-row">
+          <input id="exMemo" type="text" placeholder="메모 (가게 이름 등)" maxlength="40">
+          <select id="exPay" aria-label="결제"><option>카드</option><option>현금</option><option>교통카드</option></select>
+          <button class="lk-btn">추가</button>
+        </div>
+      </form>
+      <div class="ex-cats" id="exCats"></div>
+      <div class="ex-list" id="exList"></div>
+      <div class="ex-foot"><button type="button" class="ex-mini" id="exCopy">합계 복사해서 공유</button><span class="tool-s">기록은 이 폰에만 저장돼요</span></div>
+    </div>
 
     <div class="tool panel" id="fx">
       <div class="tool-h"><h3>엔 ↔ 원 계산기</h3><span id="fxRate" class="tool-s">환율 불러오는 중…</span></div>
@@ -652,6 +730,19 @@ footer b{font-family:var(--f-mincho);font-weight:800;color:var(--ai);font-size:1
       </div>
       <div class="fx-q" id="fxQ"></div>
     </div>
+
+    <details class="tool panel fold" id="ic">
+      <summary><span>교통카드 (아이폰 Suica)</span><i>자세히</i></summary>
+      <div class="fold-b">
+        <ol class="steps">
+          <li><b>지갑 앱에서 만들기</b>지갑 앱 → <b>＋</b> → 교통카드 → <b>Suica</b> 검색 → 충전 금액 선택 → Face ID로 결제. 실물 카드나 보증금 없이 바로 생겨요. 가족 각자 자기 아이폰에 하나씩 만들어요.</li>
+          <li><b>나고야에서도 그대로</b>지하철, 메이테츠(공항 열차), 시내 JR, 편의점·자판기·코인로커에서 휴대폰을 대기만 하면 돼요. 잠금 해제 없이 찍히는 '익스프레스 모드'가 기본이에요.</li>
+          <li><b>충전이 안 될 때</b>한국 카드 중에는 지갑 앱 충전이 거절되는 경우가 있어요. 그럴 땐 편의점 계산대에서 "스이카 차지 오네가이시마스"라고 하고 현금으로 충전하거나, 역 충전기에서 현금으로 충전해요.</li>
+          <li><b>교통카드로 못 타는 구간</b>게로행 <b>특급 히다</b>와 시라카와고 버스투어는 교통카드 대신 따로 산 표·투어로 타요.</li>
+        </ol>
+        <p class="tool-note">남은 잔액은 다음 일본 여행 때 그대로 쓸 수 있어요. 실물 카드를 원하면 공항의 여행자용 카드도 있지만, 아이폰이라면 지갑 앱이 가장 간단해요.</p>
+      </div>
+    </details>
 
     <div class="tool panel" id="jp">
       <div class="tool-h"><h3>일본어 한마디</h3><span class="tool-s">번역 검색 · 자주 쓰는 문장은 누르면 일본어로 읽어줘요</span></div>
@@ -749,10 +840,12 @@ const days=[
   {s:'rec',ic:'🛍️',t:'12:50',n:'게로역 앞 기념품 쇼핑',d:'커다란 마네키네코가 있는 가게 · 게로 한정 과자, 히다규 카레, 한정 히다규 주먹밥',q:'Yamakawa Gero',ph:'게로 야마카와 마네키네코',h:'12:50'},
   {s:'rec',ic:'🚄',t:'13시대 열차',n:'게로 → 나고야',q:'Nagoya Station',tr:'JR 특급 히다 약 1시간 40분',h:'13:10'},
   {s:'rec',ic:'🚇',t:'15:00',n:'나고야역 → 히사야오도리',tr:'지하철 사쿠라도리선 3정거장',h:'15:00'},
-  {s:'ok',ic:'🏨',t:'15:30 체크인',n:'Kuretake Inn Nagoya Hisayaodori',d:'2박 · 객실 1개',q:'Kuretake Inn Nagoya Hisayaodori',ph:'쿠레타케인 히사야오도리',h:'15:30'},
+  {s:'ok',ic:'🏨',t:'15:30 체크인',n:'Kuretake Inn Nagoya Hisayaodori',d:'2박 · 객실 1개 · 체크인 때 조식 시작 시간과 마지막 날 짐 보관 꼭 물어보기',q:'Kuretake Inn Nagoya Hisayaodori',ph:'쿠레타케인 히사야오도리',h:'15:30'},
   {s:'rec',ic:'✨',t:'17:00',n:'오스 상점가 + 일루미네이션',d:'사카에에서 오스까지 샴페인골드 조명 거리 · 길거리 간식 투어 · 오스칸논 절',tr:'히사야오도리 → 지하철 메이조선 → 가미마에즈역',q:'Osu Kannon',ph:'오스상점가 일루미네이션',h:'17:00'},
-  {s:'rec',ic:'🍱',t:'19:00',n:'저녁은 히쓰마부시',d:'그냥 → 양념 얹어서 → 오차즈케, 세 가지 방법으로 먹기 · 추천 가게: 아쓰타 호라이켄 마쓰자카야점 (대기 번호표 먼저 받기)',q:'Atsuta Horaiken Matsuzakaya',ph:'나고야 히쓰마부시',h:'19:00'}]},
+  {s:'rec',ic:'🍱',t:'19:00',n:'저녁은 히쓰마부시',d:'그냥 → 양념 얹어서 → 오차즈케, 세 가지 방법으로 먹기 · 추천 가게: 아쓰타 호라이켄 마쓰자카야점 (대기 번호표 먼저 받기)',q:'Atsuta Horaiken Matsuzakaya',ph:'나고야 히쓰마부시',h:'19:00'},
+  {s:'rec',ic:'🏪',t:'20:30',n:'편의점에서 내일 아침거리 사기',d:'내일 07:10 미팅이라 숙소 조식이 빠듯할 수 있어요 · 오니기리, 샌드위치, 따뜻한 음료',tr:'숙소 근처 편의점',h:'20:30'}]},
  {date:'2026-12-21',label:'4일차',dow:'월',title:'눈의 마을 시라카와고 ⛄',where:'나고야 → 시라카와고 · 다카야마',items:[
+  {s:'rec',ic:'🍙',t:'06:30',n:'간단히 아침 먹기',d:'어제 사둔 편의점 아침 · 조식이 6시 반 전에 열면 숙소 조식도 좋아요',h:'06:30'},
   {s:'ok',ic:'🚩',t:'07:10 ~ 07:25 미팅',n:'중부전력 미라이타워 1층 앞',d:'가이드가 아이트립 깃발을 들고 있어요',tr:'숙소에서 도보 · 6시 50분에 출발!',q:'Chubu Electric Power MIRAI TOWER',ph:'중부전력 미라이타워',h:'07:10'},
   {s:'ok',ic:'🚌',t:'07:30 정시 출발',n:'시라카와고 · 히다 다카야마 버스투어',ph:'나고야 출발 시라카와고 다카야마 버스투어',d:'한국어 가이드 · 무료 사진 촬영 · 3명',h:'07:30'},
   {s:'rec',ic:'🏔️',t:'낮',n:'시라카와고 합장마을',d:'눈 덮인 마을 가족사진 · 전망대 뷰 · 핫팩·방수 신발 필수',q:'Shirakawa-go',ph:'시라카와고 겨울 설경',h:'10:30'},
@@ -785,7 +878,7 @@ else{big.textContent='다녀왔어요';sub.textContent='또 가자, 우리 가�
 requestAnimationFrame(()=>setTimeout(()=>{document.getElementById('plane').style.left='calc('+(ratio*100)+'% - '+(ratio*18)+'px)'},300));
 
 /* 일정 */
-const catOf=ic=>/✈️|🚆|🚄|🚇|🚌|🚩/.test(ic)?['move','이동']:/🏨|👋|♨️|🧳|🧾/.test(ic)?['stay','숙소']:/🐷|☕|🍱|🥩|🍗|🍽️|🎁|🏪|🛍️|🧸/.test(ic)?['food','먹거리·쇼핑']:['see','구경'];
+const catOf=ic=>/✈️|🚆|🚄|🚇|🚌|🚩/.test(ic)?['move','이동']:/🏨|👋|♨️|🧳|🧾/.test(ic)?['stay','숙소']:/🐷|☕|🍱|🥩|🍗|🍽️|🎁|🏪|🛍️|🧸|🍙/.test(ic)?['food','먹거리·쇼핑']:['see','구경'];
 const stl={ok:'예약 확정',rec:'추천',tbd:'미정'};
 const tabsEl=document.getElementById('tabs'),dayEl=document.getElementById('day');
 let cur=Math.max(0,days.findIndex(d=>d.date===todayStr));
@@ -854,9 +947,9 @@ legs.onclick=e=>{const b=e.target.closest('.leg');if(!b)return;const d=b.dataset
 /* 예약 */
 const flights=[['가는 날','12.18 금','청주','CJJ','13:55','나고야','NGO','15:40','1시간 45분','RF342'],['오는 날','12.22 화','나고야','NGO','16:40','청주','CJJ','18:45','2시간 5분','RF341']];
 const stays=[
- {n:'Vessel Inn Sakae Station',w:'나고야 사카에',a:'12.18 금 14:00',b:'12.19 토 11:00',k:'1박',q:'Vessel Inn Sakae Station Nagoya',p:'베셀인 사카에역'},
- {n:'Ooedo Onsen Monogatari Gero Bekkan',w:'게로온천 · 올인클루시브',a:'12.19 토 15:00',b:'12.20 일 11:00',k:'1박',q:'Ooedo Onsen Monogatari Gero Bekkan',p:'오에도온센 게로벳칸',onsen:1},
- {n:'Kuretake Inn Nagoya Hisayaodori',w:'나고야 히사야오도리',a:'12.20 일 15:00',b:'12.22 화 10:00',k:'2박',q:'Kuretake Inn Nagoya Hisayaodori',p:'쿠레타케인 히사야오도리'}];
+ {n:'Vessel Inn Sakae Station',w:'나고야 사카에',a:'12.18 금 14:00',b:'12.19 토 11:00',k:'1박',q:'Vessel Inn Sakae Station Nagoya',p:'베셀인 사카에역',tel:'+81-52-955-3131'},
+ {n:'Ooedo Onsen Monogatari Gero Bekkan',w:'게로온천 · 올인클루시브',a:'12.19 토 15:00',b:'12.20 일 11:00',k:'1박',q:'Ooedo Onsen Monogatari Gero Bekkan',p:'오에도온센 게로벳칸',onsen:1,tel:'+81-50-3615-3456'},
+ {n:'Kuretake Inn Nagoya Hisayaodori',w:'나고야 히사야오도리',a:'12.20 일 15:00',b:'12.22 화 10:00',k:'2박',q:'Kuretake Inn Nagoya Hisayaodori',p:'쿠레타케인 히사야오도리',tel:'+81-52-962-1311'}];
 document.getElementById('bk').innerHTML=
  '<div class="bk-sub">항공 · 에어로케이 · 성인 3</div>'+
  flights.map(f=>`<div class="pass"><div class="m"><div class="lbl">${f[0]} · ${f[1]}</div><div class="rt2 num">
@@ -865,7 +958,7 @@ document.getElementById('bk').innerHTML=
  '<div class="bk-sub">숙소 · 4박</div>'+
  stays.map((s,i)=>`<div class="stay${s.onsen?' onsen':''}"><div class="n num">${i+1}</div><div><div class="where">${s.w} · ${s.k}</div><h3>${s.n}</h3>
    <div class="ci num"><div><b>체크인</b>${s.a}</div><div><b>체크아웃</b>${s.b}</div></div>
-   <div class="lk"><a href="${ph(s.p)}" target="_blank" rel="noopener">블로그 사진</a><a href="${gm(s.q)}" target="_blank" rel="noopener">지도 보기</a></div></div></div>`).join('')+
+   <div class="lk">${s.tel?`<a class="tel" href="tel:${s.tel.replace(/-/g,'')}">📞 ${s.tel.replace('+81-','0')}</a>`:''}<a href="${ph(s.p)}" target="_blank" rel="noopener">블로그 사진</a><a href="${gm(s.q)}" target="_blank" rel="noopener">지도 보기</a></div></div></div>`).join('')+
  `<div class="bk-sub">투어</div><div class="bk-tour" style="grid-column:1/-1"><h3>시라카와고 · 히다 다카야마 버스투어</h3>
    <p class="num">12.21 월 · 중부전력 미라이타워 1층 앞 07:10–07:25 미팅, 07:30 정시 출발 · 한국어 가이드 · 3명</p>
    <div class="lk"><a href="${gm('Chubu Electric Power MIRAI TOWER')}" target="_blank" rel="noopener">미팅 장소 지도</a></div></div>`;
@@ -1008,6 +1101,56 @@ vw.querySelector('.vw-x').onclick=closeVw;
 document.addEventListener('keydown',e=>{if(vw.hidden)return;if(e.key==='Escape')closeVw();if(e.key==='ArrowRight')vwS.scrollBy({left:vwS.clientWidth,behavior:'smooth'});if(e.key==='ArrowLeft')vwS.scrollBy({left:-vwS.clientWidth,behavior:'smooth'})});
 document.addEventListener('click',e=>{const b=e.target.closest('.gal-it');if(!b)return;const key=b.dataset.key;openVw(key==='none'?PHOTOS.filter(p=>!p.item):byKey(key),+b.dataset.i)});
 
+
+/* --- 여행 하이라이트 (추억 슬라이드쇼) --- */
+const hl=document.createElement('div');hl.className='hl';hl.hidden=true;
+hl.innerHTML='<div class="hl-l"></div><div class="hl-l"></div><div class="hl-bar"><i></i></div><button class="vw-x" aria-label="닫기">✕</button><button class="hl-pp">❚❚</button>';
+document.body.appendChild(hl);
+let hlQ=[],hlI=0,hlT=null,hlFlip=0,hlPause=false;
+function hlSummary(){
+  const nP=PHOTOS.filter(p=>p.type!=='video').length,nV=PHOTOS.filter(p=>p.type==='video').length;
+  let ex=[];try{ex=JSON.parse(localStorage.getItem('ngy_exp')||'[]')}catch(e){}
+  const tot=ex.reduce((a,b)=>a+b.y,0);
+  return `사진 ${nP}장${nV?` · 영상 ${nV}개`:''}${tot?`\n쓴 돈 ¥${tot.toLocaleString('ja-JP')}`:''}`;
+}
+function openHl(){
+  const list=PHOTOS.filter(p=>p.item).sort((a,b)=>(a.t||0)-(b.t||0));if(!list.length)return;
+  hlQ=[{card:'start'}];let last=null;
+  list.forEach(p=>{const di=+p.item.split('-')[0];if(di!==last){hlQ.push({card:'day',di});last=di}hlQ.push({p})});
+  hlQ.push({card:'end'});hlI=0;hlPause=false;hl.querySelector('.hl-pp').textContent='❚❚';
+  hl.hidden=false;document.body.style.overflow='hidden';hlNext();
+}
+async function hlShow(it){
+  hlFlip^=1;const L=hl.querySelectorAll('.hl-l'),on=L[hlFlip],off=L[hlFlip^1];on.innerHTML='';let dur=4500;
+  if(it.card){const d=document.createElement('div');d.className='hl-card';
+    if(it.card==='start')d.innerHTML='<b>나고야는 핑계고,</b><span>시라카와고에 눈 보러 갑니다</span><small>2026. 12. 18 – 22</small>';
+    else if(it.card==='end'){d.innerHTML='<b>또 가자, 우리 가족</b><span></span><small>また来ようね</small>';d.querySelector('span').textContent=hlSummary();dur=5000}
+    else{const x=days[it.di];d.innerHTML=`<em>${x.label}</em><b></b><small>${x.date.slice(5).replace('-','/')} · </small>`;d.querySelector('b').textContent=x.title;d.querySelector('small').textContent+=x.where;dur=3200}
+    on.appendChild(d);
+  }else{
+    const p=it.p;
+    try{const u=await mediaUrl(p,false);
+      if(p.type==='video'){const v=document.createElement('video');v.src=u;v.muted=true;v.playsInline=true;v.autoplay=true;on.appendChild(v);dur=8000;
+        v.onloadedmetadata=()=>{if(isFinite(v.duration)){clearTimeout(hlT);hlT=setTimeout(hlNext,Math.min(10000,v.duration*1000))}}}
+      else{const img=document.createElement('img');img.src=u;img.className='kb';img.style.transformOrigin=`${20+Math.random()*60}% ${20+Math.random()*60}%`;on.appendChild(img)}
+      if(p.t){const c=document.createElement('div');c.className='hl-cap';const d=new Date(p.t+9*3600e3);const it2=days[+p.item.split('-')[0]].items[+p.item.split('-')[1]];
+        c.textContent=(it2?it2.n+' · ':'')+(d.getUTCMonth()+1)+'/'+d.getUTCDate()+' '+String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0');on.appendChild(c)}
+    }catch(e){dur=10}
+  }
+  on.classList.add('on');off.classList.remove('on');setTimeout(()=>{if(!off.classList.contains('on'))off.innerHTML=''},900);
+  return dur;
+}
+async function hlNext(){
+  clearTimeout(hlT);if(hl.hidden||hlPause)return;
+  if(hlI>=hlQ.length){closeHl();return}
+  const i=hlI++;hl.querySelector('.hl-bar i').style.width=((i+1)/hlQ.length*100)+'%';
+  const dur=await hlShow(hlQ[i]);if(!hl.hidden&&!hlPause)hlT=setTimeout(hlNext,dur);
+}
+function closeHl(){clearTimeout(hlT);hl.hidden=true;document.body.style.overflow='';hl.querySelectorAll('.hl-l').forEach(l=>{l.innerHTML='';l.classList.remove('on')})}
+hl.querySelector('.vw-x').onclick=closeHl;
+hl.querySelector('.hl-pp').onclick=()=>{hlPause=!hlPause;hl.querySelector('.hl-pp').textContent=hlPause?'▶':'❚❚';const v=hl.querySelector('.hl-l.on video');
+  if(hlPause){clearTimeout(hlT);v&&v.pause()}else{v&&v.play().catch(()=>{});hlI--;hlNext()}};
+
 /* 잠금 상자 UI */
 const lockBox=document.getElementById('lock');
 function lockUI(html){if(lockBox){lockBox.innerHTML=html;lockBox.hidden=false}}
@@ -1021,7 +1164,8 @@ async function loadPhotos(priv){
     list.forEach(p=>PHOTOS.push(p))}catch(e){}}
   PHOTOS.forEach(p=>{p.item=matchItem(p)});
   fillGal(cur);
-  lockUI(`<div class="lk-row"><div><b>🔓 우리 사진이 열려 있어요</b><span>${PHOTOS.length?`사진·영상 ${PHOTOS.length}개가 일정 칸에 붙어 있어요`:'아직 올린 사진이 없어요'}</span></div><button class="lk-btn ghost" id="lkOut">이 기기에서 잠그기</button></div>`);
+  lockUI(`<div class="lk-row"><div><b>🔓 우리 사진이 열려 있어요</b><span>${PHOTOS.length?`사진·영상 ${PHOTOS.length}개가 일정 칸에 붙어 있어요`:'아직 올린 사진이 없어요'}</span></div><div class="lk-btns">${PHOTOS.some(p=>p.item)?'<button class="lk-btn" id="hlGo">▶ 여행 하이라이트</button>':''}<button class="lk-btn ghost" id="lkOut">이 기기에서 잠그기</button></div></div>`);
+  const hg=document.getElementById('hlGo');if(hg)hg.onclick=openHl;
   document.getElementById('lkOut').onclick=async()=>{await idbSet(null);location.reload()};
 }
 async function unlockWith(pw,pk){
@@ -1147,6 +1291,63 @@ document.getElementById('fxSw').onclick=()=>{fxDir=fxDir==='jk'?'kj':'jk';
   document.getElementById('fxFromL').textContent=fxDir==='jk'?'엔 ¥':'원 ₩';document.getElementById('fxToL').textContent=fxDir==='jk'?'원 ₩':'엔 ¥';
   document.getElementById('fxIn').value=fxDir==='jk'?1000:10000;drawFxQ();calcFx()};
 drawFxQ();loadFx();
+
+
+/* --- 출발 전 체크리스트 --- */
+const PREP=[
+ {d:'2026-11-30',t:'특급 히다 지정석 예매',s:'12/19 나고야→게로, 12/20 게로→나고야 · 셋이 나란히 앉으려면 미리'},
+ {d:'2026-12-04',t:'여행자 보험 가입',s:'가족 3명 모두'},
+ {d:'2026-12-04',t:'eSIM 또는 로밍 준비',s:'시라카와고·게로에서도 데이터가 필요해요'},
+ {d:'2026-12-08',t:'Visit Japan Web 등록',s:'공식 사이트 vjw.digital.go.jp는 무료 · 한 사람이 가족 모두 등록 가능 · QR 스크린샷 저장'},
+ {d:'2026-12-10',t:'엔화 준비',s:'현금 조금 + 트래블카드 충전'},
+ {d:'2026-12-10',t:'아이폰 지갑에 Suica 만들기',s:'도구 > 교통카드 안내 참고'},
+ {d:'2026-12-14',t:'버스투어 바우처 확인',s:'12/21 미팅 장소·시간과 나고야 복귀 시간'},
+ {d:'2026-12-16',t:'돼지코(일본 11자 플러그) 어댑터',s:'일본은 100V · 충전기는 대부분 그대로 쓸 수 있어요'},
+ {d:'2026-12-16',t:'방한 준비',s:'시라카와고는 눈길 · 방수 신발, 장갑, 핫팩'},
+ {d:'2026-12-17',t:'짐 싸기',s:'여권 3개, 상비약, 보조배터리, 온천용 머리끈·작은 수건'},
+ {d:'2026-12-18',t:'청주공항 11:55까지 도착',s:'13:55 출발 · 국제선 2시간 전'}];
+(function(){
+  const el=document.getElementById('prepList'),st=document.getElementById('prepSt');if(!el)return;
+  let done=ls.get('prep',[]);
+  const today=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);
+  function draw(){
+    el.innerHTML=PREP.map((p,i)=>{const on=done.includes(i);const left=Math.round((new Date(p.d)-new Date(today))/864e5);
+      const due=on?'완료':left<0?'지났어요':left===0?'오늘':`${p.d.slice(5).replace('-','/')}까지 · D-${left}`;
+      return `<label class="pp${on?' on':''}${!on&&left<=2?' soon':''}"><input type="checkbox" data-i="${i}" ${on?'checked':''}><span><b>${esc(p.t)}</b><small>${esc(p.s)}</small></span><em>${due}</em></label>`}).join('');
+    st.textContent=`${done.length} / ${PREP.length} 완료`;
+  }
+  el.onchange=e=>{const i=+e.target.dataset.i;done=e.target.checked?[...done,i]:done.filter(x=>x!==i);ls.set('prep',done);draw()};
+  draw();
+})();
+
+/* --- 여행 경비 기록 --- */
+(function(){
+  const F=document.getElementById('exF');if(!F)return;
+  let ex=ls.get('exp',[]);
+  const rate=()=>(typeof fxRate!=='undefined'&&fxRate&&fxRate.r)||(ls.get('fx',null)||{}).r||null;
+  const won=y=>{const r=rate();return r?Math.round(y*r).toLocaleString('ko-KR')+'원':''};
+  const dayOf=ts=>{const d=new Date(ts+9*3600e3).toISOString().slice(0,10);const i=days.findIndex(x=>x.date===d);return i<0?'여행 전·기타':`${days[i].label} · ${d.slice(5).replace('-','/')}`};
+  function draw(){
+    const tot=ex.reduce((a,b)=>a+b.y,0);
+    document.getElementById('expSum').textContent=ex.length?`합계 ¥${tot.toLocaleString('ja-JP')}${rate()?' ≈ '+won(tot):''}`:'엔으로 적으면 원화로 바꿔서 합계를 내요';
+    const cats={};ex.forEach(e=>cats[e.c]=(cats[e.c]||0)+e.y);
+    document.getElementById('exCats').innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([c,y])=>`<span><b>${esc(c)}</b> ¥${y.toLocaleString('ja-JP')}</span>`).join('');
+    const groups={};ex.slice().sort((a,b)=>b.ts-a.ts).forEach(e=>{const g=dayOf(e.ts);(groups[g]=groups[g]||[]).push(e)});
+    document.getElementById('exList').innerHTML=Object.entries(groups).map(([g,l])=>`<div class="ex-g"><div class="ex-gh"><span>${g}</span><span>¥${l.reduce((a,b)=>a+b.y,0).toLocaleString('ja-JP')}</span></div>`+
+      l.map(e=>`<div class="ex-it"><span class="c">${esc(e.c)}</span><span class="m">${esc(e.m||'')}<small>${e.p} · ${new Date(e.ts+9*3600e3).toISOString().slice(11,16)}</small></span><span class="y num">¥${e.y.toLocaleString('ja-JP')}<small>${won(e.y)}</small></span><button class="x" data-id="${e.id}" aria-label="삭제">✕</button></div>`).join('')+'</div>').join('');
+  }
+  F.onsubmit=e=>{e.preventDefault();const y=Math.round(+document.getElementById('exAmt').value);if(!y)return;
+    ex.push({id:Date.now().toString(36),ts:Date.now(),y,c:document.getElementById('exCat').value,m:document.getElementById('exMemo').value.trim(),p:document.getElementById('exPay').value});
+    ls.set('exp',ex);document.getElementById('exAmt').value='';document.getElementById('exMemo').value='';draw()};
+  let arm=null;
+  document.getElementById('exList').onclick=e=>{const b=e.target.closest('.x');if(!b)return;
+    if(arm!==b.dataset.id){arm=b.dataset.id;b.textContent='삭제?';setTimeout(()=>{if(arm===b.dataset.id){arm=null;draw()}},2500);return}
+    ex=ex.filter(x=>x.id!==b.dataset.id);ls.set('exp',ex);arm=null;draw()};
+  document.getElementById('exCopy').onclick=async()=>{const tot=ex.reduce((a,b)=>a+b.y,0);const cats={};ex.forEach(e=>cats[e.c]=(cats[e.c]||0)+e.y);
+    const txt=`나고야 여행 경비\n합계 ¥${tot.toLocaleString('ja-JP')}${rate()?' (약 '+won(tot)+')':''}\n`+Object.entries(cats).map(([c,y])=>`· ${c} ¥${y.toLocaleString('ja-JP')}`).join('\n');
+    try{await navigator.clipboard.writeText(txt);document.getElementById('exCopy').textContent='복사됨 ✓'}catch(err){}};
+  draw();setTimeout(draw,3000);
+})();
 
 /* --- 일본어 한마디 --- */
 const JP={

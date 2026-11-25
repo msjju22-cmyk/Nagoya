@@ -1,5 +1,5 @@
 /* 오프라인용: 페이지·사진(암호화된 그대로)·글꼴을 기기에 저장 */
-const V='ngy-v2';
+const V='ngy-v3';
 const CORE=['./','index.html','manifest.webmanifest','photokey.json','icon-192.png','apple-touch-icon.png','nagoya-trip.kml'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
